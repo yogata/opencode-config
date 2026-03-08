@@ -53,18 +53,12 @@ Issue確認: `gh issue view $ISSUE_NUMBER`
 
 ### 5. TDD実装
 
-| サイクル     | 内容                   |
-| ------------ | ---------------------- |
-| **RED**      | テスト作成（失敗確認） |
-| **GREEN**    | 最小実装（テスト成功） |
-| **REFACTOR** | コード整理             |
+`/start-work`（RED: テスト作成 → GREEN: 実装 → REFACTOR: 整理）
 
 **開発中（ウォッチモード）**:
 
-| 種別       | コマンド                      |
-| ---------- | ----------------------------- |
-| 型チェック | `npx tsc --noEmit --watch`    |
-| テスト     | `bun test --watch`            |
+- 型チェック: `npx tsc --noEmit --watch`
+- テスト: `bun test --watch`
 
 ### 6. docs/更新（パターンBのみ）
 
@@ -74,13 +68,11 @@ Issue確認: `gh issue view $ISSUE_NUMBER`
 
 ### 7. ローカル検証（必須）
 
-| 種別       | コマンド                 |
-| ---------- | ------------------------ |
-| 型チェック | `npx tsc --noEmit`       |
-| Lint       | `bun run lint`           |
-| ビルド     | `bun run build`          |
-| ユニット   | `bun test`               |
-| E2E        | `bun run test:e2e`       |
+- 型チェック: `npx tsc --noEmit`
+- Lint: `bun run lint`
+- ビルド: `bun run build`
+- ユニット: `bun test`
+- E2E: `bun run test:e2e`
 
 **失敗時**: 修正して再実行（手順8へ進まない）
 
