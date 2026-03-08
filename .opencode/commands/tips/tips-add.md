@@ -18,15 +18,11 @@ description: 学びをinbox.mdに追記する
 
 ### 1. 現在日時の取得
 
-```bash
-date +%Y-%m-%d
-```
+`Get-Date -Format "yyyy-MM-dd"`
 
 ### 2. inbox.mdの存在確認
 
-```bash
-ls docs/tips/inbox.md
-```
+`Test-Path docs/tips/inbox.md`
 
 - ファイルがない場合 → エラー終了。「先に `/tips-init` を実行してください」
 
@@ -55,11 +51,7 @@ ls docs/tips/inbox.md
 ---
 ```
 
-**追記コマンド例**:
-
-```bash
-# ファイルの内容を読み込み、ヘッダー直後に追記
-```
+**追記**: ヘッダー（最初の`---`で囲まれた部分）の直後に挿入
 
 ### 5. 完了報告
 
@@ -80,14 +72,8 @@ ls docs/tips/inbox.md
 
 ## 使用例
 
-```
-/tips-add "Supabase RLSポリシーのデバッグ方法" "supabase,rls,debug"
-```
-
+`/tips-add "Supabase RLSポリシーのデバッグ方法" "supabase,rls,debug"`
 → タイトルとタグを指定して学びを追記
 
-```
-/tips-add "Next.js App Routerのキャッシュ制御"
-```
-
+`/tips-add "Next.js App Routerのキャッシュ制御"`
 → タイトルのみ指定（タグなし）

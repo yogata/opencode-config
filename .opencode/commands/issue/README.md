@@ -194,7 +194,7 @@ PR作成後、ユーザーによるレビューが行われます：
 
 docs/の競合は通常のGit競合解決と同じです：
 
-```bash
+```
 # 競合発生時の対応
 git fetch origin
 git rebase origin/main  # または git merge origin/main
