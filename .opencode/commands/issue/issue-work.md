@@ -49,11 +49,22 @@ Issue確認: `gh issue view $ISSUE_NUMBER`
 
 ### 4. 計画立案
 
-`@plan Issue #$ISSUE_NUMBERの実装計画を立ててください。実装計画のファイル名はissue番号と関連付けてください。`
+`@plan Issue #$ISSUE_NUMBERの実装計画を立ててください。テストケースを含めてください。実装計画のファイル名はissue番号と関連付けてください。`
 
-### 5. 実装開始
+### 5. TDD実装
 
-`/start-work`
+| サイクル     | 内容                   |
+| ------------ | ---------------------- |
+| **RED**      | テスト作成（失敗確認） |
+| **GREEN**    | 最小実装（テスト成功） |
+| **REFACTOR** | コード整理             |
+
+**開発中（ウォッチモード）**:
+
+| 種別       | コマンド                      |
+| ---------- | ----------------------------- |
+| 型チェック | `npx tsc --noEmit --watch`    |
+| テスト     | `bun test --watch`            |
 
 ### 6. docs/更新（パターンBのみ）
 
@@ -61,9 +72,17 @@ Issue確認: `gh issue view $ISSUE_NUMBER`
 - LLD作成: `docs/implementation-guide.md` — テンプレート: `@.opencode/commands/issue/templates/doc_lld.md`
 - ADR更新: `docs/adr/NNN-xxx.md` の status を `proposed` → `accepted`
 
-### 7. テスト
+### 7. ローカル検証（必須）
 
-`/verification-before-completion`
+| 種別       | コマンド                 |
+| ---------- | ------------------------ |
+| 型チェック | `npx tsc --noEmit`       |
+| Lint       | `bun run lint`           |
+| ビルド     | `bun run build`          |
+| ユニット   | `bun test`               |
+| E2E        | `bun run test:e2e`       |
+
+**失敗時**: 修正して再実行（手順8へ進まない）
 
 ### 8. コミット
 

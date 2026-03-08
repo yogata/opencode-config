@@ -290,11 +290,11 @@ git push --force-with-lease
 
 1. Issue確認 + 文脈判定（feature/bug）
 2. Worktree作成: `git worktree add .worktrees/{N}-feature -b feature/issue-{N}`
-3. `@plan` による計画立案
-4. `/start-work` による実装
+3. `@plan` による計画立案（テストケース含む）
+4. TDD実装（RED → GREEN → REFACTOR）
 5. **specifications.md更新（パターンB）**
 6. **ADR status更新: proposed → accepted（パターンB）**
-7. テスト実施
+7. ローカル検証（型チェック / Lint / ビルド / ユニット / E2E）
 8. コミット: `git commit -m "feat/fix: ... (#{N})"`
 9. プッシュ
 10. PR作成
