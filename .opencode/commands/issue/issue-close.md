@@ -53,10 +53,13 @@ Issueクローズ: `gh issue close $ISSUE_NUMBER --reason completed`
 
 ### 6. クリーンアップ
 
-- mainに切り替え: `cd <project_root> && git checkout main && git pull`
-- worktree削除: `git worktree remove .worktrees/$ISSUE_NUMBER-<type>`
-- ブランチ削除: `git branch -d <type>/issue-$ISSUE_NUMBER`
-- prune: `git fetch --prune`
+**重要**: worktreeが存在する状態ではブランチ削除できないため、必ずこの順序で実行すること。
+
+1. mainに切り替え: `git checkout main && git pull`
+2. worktree削除: `git worktree remove --force .worktrees/$ISSUE_NUMBER-<type>`
+3. ローカルブランチ削除: `git branch -D <type>/issue-$ISSUE_NUMBER`
+4. リモートブランチ削除: `git push origin --delete <type>/issue-$ISSUE_NUMBER`
+5. prune: `git fetch --prune`
 
 ### 7. Planファイルのアーカイブ
 
