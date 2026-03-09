@@ -6,18 +6,17 @@ description: PRをマージし、対応記録を追記し、Issueをクローズ
 
 PRをマージし、GitHub Issueに記録を追記し、クローズ後にworktreeとブランチを削除します。
 
+## 前提
+
+`@issue-workflow` スキルを実行し、以下を取得してください：
+- パターン（A/B）判定
+- 現在のフェーズ確認
+
 ## 引数
 
 | 引数          | 説明                                                |
 | ------------- | --------------------------------------------------- |
 | `<Issue番号>`  | 単一:`101` / 複数:`101,102,103` / 省略時は直前のIssue |
-
-## パターン判定
-
-| ラベル                   | パターン | docs/コミット |
-| ------------------------ | -------- | ------------- |
-| `bug`, `critical`        | A（小）  | なし          |
-| `feature`, `enhancement` | B（中）  | あり          |
 
 ## 手順
 
@@ -63,25 +62,31 @@ Issueクローズ: `gh issue close $ISSUE_NUMBER --reason completed`
 
 `.sisyphus/archives` に plan、notepadsを含むファイル一式をアーカイブ
 
-### 8. 完了報告
-
-- マージしたPR番号
-- クローズしたIssue番号
-- 削除したworktree名・ブランチ名
-- docs/コミット内容（パターンBの場合）
-
 ## 複数Issueの場合
 
 各Issueに対して手順1〜5を実行後、まとめてクリーンアップ（手順6）を行います。
 
+## 完了時
+
+`@issue-workflow` スキルの「完了報告生成」と「次のステップ提案」を実行してください。
+
+現在のコンテキスト:
+- コマンド: issue-close
+- Issue番号: {N}
+- PR番号: {PR_N}
+- パターン: {判定結果}
+- 削除したworktree: {worktree名}
+- 削除したブランチ: {ブランチ名}
+
 ## エラーハンドリング
 
-| エラー           | 対処                                         |
-| ---------------- | -------------------------------------------- |
-| PRが存在しない   | エラー終了。「先に /issue-work を実行」      |
-| PRがDRAFT        | `gh pr ready` でreadyに変換してからマージ    |
-| PRがMERGED済み   | ブランチ削除のみ実行                         |
-| コンフリクト     | エラー終了。「手動でコンフリクト解決が必要」 |
-| worktree削除失敗 | 強制削除: `git worktree remove --force`      |
+エラーが発生した場合、`@issue-workflow` スキルのエラーハンドリングを呼び出してください。
 
-> 🎉 フローが完了しました。
+| 発生しうるエラー | エラーコード |
+| ---------------- | ------------- |
+| gh認証エラー | `GH_AUTH_ERROR` |
+| PR存在しない | `GH_NOT_FOUND` |
+| 権限エラー | `PERMISSION_DENIED` |
+| マージコンフリクト | `PR_MERGE_CONFLICT` |
+| worktree削除失敗 | `WORKTREE_REMOVE_FAILED` |
+| 検証失敗 | `VALIDATION_FAILED` |

@@ -26,7 +26,6 @@ description: 既存Issueの本文更新またはコメント追加を行う
 1. Issue確認: `gh issue view $ISSUE_NUMBER`
 2. 更新内容の整理: 追加・修正が必要な要件、変更理由
 3. Issue本文更新: `gh issue edit $ISSUE_NUMBER --body-file "temp/issue-body.md"`
-4. 次のステップ: `/issue-work` で再実装
 
 ### B. Issueへのコメント追加（実装バグ対応）
 
@@ -35,17 +34,23 @@ description: 既存Issueの本文更新またはコメント追加を行う
 3. コメント追加 — テンプレート: `@.opencode/commands/issue/templates/pr_comment_fix.md`
    - テンプレートから作成し、`temp/comment-body.md` に保存
    - コメント追加: `gh issue comment $ISSUE_NUMBER --body-file "temp/comment-body.md"`
-4. 次のステップ: `/issue-work` で再実装
 
-## 完了報告
+## 完了時
 
-- 本文更新: `✅ Issue #{N} を更新しました。次のステップ: /issue-work {N}`
-- コメント追加: `✅ Issue #{N} にコメントを追加しました。次のステップ: /issue-work {N}`
+`@issue-workflow` スキルの「完了報告生成」と「次のステップ提案」を実行してください。
+
+現在のコンテキスト:
+- コマンド: issue-update
+- Issue番号: {N}
+- 更新種別: {body/comment}
 
 ## エラーハンドリング
 
-| エラー            | 対処                                  |
-| ----------------- | ------------------------------------- |
-| Issueが存在しない | エラー終了。「Issueが見つかりません」 |
-| 権限がない        | エラー終了。「編集権限がありません」  |
-| 更新内容が空      | エラー終了。「更新内容を入力」        |
+エラーが発生した場合、`@issue-workflow` スキルのエラーハンドリングを呼び出してください。
+
+| 発生しうるエラー | エラーコード |
+| ---------------- | ------------- |
+| gh認証エラー | `GH_AUTH_ERROR` |
+| Issue存在しない | `GH_NOT_FOUND` |
+| 権限エラー | `PERMISSION_DENIED` |
+| 検証失敗 | `VALIDATION_FAILED` |
