@@ -70,9 +70,9 @@ Issueクローズ: `gh issue close $ISSUE_NUMBER --reason completed`
 1. mainに切り替え: `git checkout main`
 2. 最新を取得: `git pull`
 3. worktree削除: `git worktree remove --force .worktrees/$ISSUE_NUMBER-<type>`
-3. ローカルブランチ削除: `git branch -D <type>/issue-$ISSUE_NUMBER`
-4. リモートブランチ削除: `git push origin --delete <type>/issue-$ISSUE_NUMBER`
-5. prune: `git fetch --prune`
+4. ローカルブランチ削除: `git branch -D <type>/issue-$ISSUE_NUMBER`
+5. リモートブランチ削除: `git push origin --delete <type>/issue-$ISSUE_NUMBER`
+6. prune: `git fetch --prune`
 
 ### 7. Planファイルのアーカイブ
 
