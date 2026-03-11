@@ -38,17 +38,19 @@ Issue番号省略が可能なのは以下の場合のみ：
 
 ## 手順
 
-### 1. Issue確認
+### フェーズ1: 準備
+
+#### 1. Issue確認
 
 Issue確認: `gh issue view $ISSUE_NUMBER`
 
-### 2. Worktree作成
+#### 2. Worktree作成
 
 - 機能追加: `git worktree add .worktrees/$ISSUE_NUMBER-feature -b feature/issue-$ISSUE_NUMBER`
 - バグ修正: `git worktree add .worktrees/$ISSUE_NUMBER-fix -b fix/issue-$ISSUE_NUMBER`
 - 作業ブランチ確認: `git branch --show-current`
 
-### 3. worktree作業ルール（重要）
+#### 3. worktree作業ルール（重要）
 
 **すべてのファイル操作・コマンド実行はworktree内で行うこと。**
 
@@ -61,11 +63,13 @@ Issue確認: `gh issue view $ISSUE_NUMBER`
 - メインディレクトリ直下でのファイル作成・編集
 - `cd .worktrees/... && command` パターン（セッションが独立のため無効）
 
-### 4. 計画立案
+### フェーズ2: 実装
+
+#### 4. 計画立案
 
 `@plan Issue #$ISSUE_NUMBERの実装計画を立ててください。テストケースを含めてください。実装計画のファイル名はissue番号と関連付けてください。`
 
-### 5. TDD実装
+#### 5. TDD実装
 
 `/start-work`（RED: テスト作成 → GREEN: 実装 → REFACTOR: 整理）
 
@@ -74,13 +78,19 @@ Issue確認: `gh issue view $ISSUE_NUMBER`
 - 型チェック: `npx tsc --noEmit --watch`
 - テスト: `bun test --watch`
 
-### 6. docs/更新（パターンBのみ）
+### フェーズ3: ドキュメント更新（パターンBのみ）
 
-- HLD更新: `docs/specifications.md` — テンプレート: `@.opencode/commands/issue/templates/doc_hld.md`
-- LLD作成: `docs/implementation-guide.md` — テンプレート: `@.opencode/commands/issue/templates/doc_lld.md`
+#### 6. docs/更新
+
+- HLD更新: `docs/specifications.md`
+  — テンプレート: `@.opencode/commands/issue/templates/doc_hld.md`
+- LLD作成: `docs/implementation-guide.md`
+  — テンプレート: `@.opencode/commands/issue/templates/doc_lld.md`
 - ADR更新: `docs/adr/NNN-xxx.md` の status を `proposed` → `accepted`
 
-### 7. ローカル検証（必須）
+### フェーズ4: 検証・完了
+
+#### 7. ローカル検証（必須）
 
 - 型チェック: `npx tsc --noEmit`
 - Lint: `bun run lint`
@@ -88,9 +98,9 @@ Issue確認: `gh issue view $ISSUE_NUMBER`
 - ユニット: `bun test`
 - E2E: `bun run test:e2e`
 
-**失敗時**: 修正して再実行（手順8へ進まない）
+**失敗時**: 修正して手順7を再実行（手順8へ進まない）
 
-### 8. コミット
+#### 8. コミット
 
 - 変更ファイル確認: `git diff --name-only HEAD`
 - ステージング: `git add -A`
@@ -100,7 +110,7 @@ Issue確認: `gh issue view $ISSUE_NUMBER`
 
 **注意**: docs/のコミットは `/issue-close` で行う
 
-### 9. PR作成
+#### 9. PR作成
 
 **テンプレート**: `@.opencode/commands/issue/templates/pr_desc.md`
 
@@ -109,11 +119,23 @@ Issue確認: `gh issue view $ISSUE_NUMBER`
 - 変数置換: `$templateContent -replace "#\{ISSUE_NUMBER\}", $ISSUE_NUMBER | Out-File -FilePath "temp/pr-body.md" -Encoding utf8`
 - PR作成: `gh pr create --base main --title "feat/fix: {要約} (#$ISSUE_NUMBER)" --body-file "temp/pr-body.md"`
 
+#### 10. デプロイ検証（必須）
+
+PR作成後、デプロイプラットフォームでのビルドが正常に完了したことを確認します。
+
+- CI/CDパイプラインのステータス確認: `gh pr checks $PR_NUMBER`
+- デプロイプラットフォームのダッシュボードでビルドログを確認
+- ビルドエラーがないことを検証
+
+**失敗時**: エラー原因を特定し、修正後に手順8（コミット）から再実行
+
+**注意**: プレビュー環境へのデプロイが完了するまで待機し、実際の動作確認が可能な状態であることを確認
+
 ## 複数Issueの場合
 
 1. 各Issueの影響ファイルを予測
 2. 競合なし → 並列実行 / 競合あり → 直列実行
-3. 各worktreeで手順1-9を実行
+3. 各worktreeで手順1-10を実行
 
 ## 中断時の対応
 
@@ -126,12 +148,10 @@ Issue確認: `gh issue view $ISSUE_NUMBER`
 現在のコンテキスト:
 
 - コマンド: issue-work
-- Issue番号: {N}
-- PR番号: {PR_N}
-- PR URL: {PR_URL}
-- パターン: {判定結果}
-
-## エラーハンドリング
+- Issue番号: $ISSUE_NUMBER
+- PR番号: $PR_NUMBER
+- PR URL: $PR_URL
+- パターン: $PATTERN
 
 ## エラーハンドリング
 

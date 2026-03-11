@@ -84,7 +84,7 @@ Issueクローズ: `gh issue close $ISSUE_NUMBER --reason completed`
 
 ## 完了時
 
-`@issue-workflow` スキルの「完了報告生成」と「次のステップ提案」を実行してください。
+`@issue-workflow` スキルの「完了報告生成」を実行してください。
 
 現在のコンテキスト:
 
