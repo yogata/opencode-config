@@ -43,9 +43,4 @@ description: 既存Issueの本文更新またはコメント追加を行う
 
 ## エラーハンドリング
 
-エラーが発生した場合、`@issue-workflow` スキルのエラーハンドリングを呼び出してください。
-
-- **gh認証エラー** — `GH_AUTH_ERROR`
-- **Issue存在しない** — `GH_NOT_FOUND`
-- **権限エラー** — `PERMISSION_DENIED`
-- **検証失敗** — `VALIDATION_FAILED`
+`@issue-workflow` スキルのエラーハンドリングを参照してください。

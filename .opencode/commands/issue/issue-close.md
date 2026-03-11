@@ -97,11 +97,4 @@ Issueクローズ: `gh issue close $ISSUE_NUMBER --reason completed`
 
 ## エラーハンドリング
 
-エラーが発生した場合、`@issue-workflow` スキルのエラーハンドリングを呼び出してください。
-
-- **gh認証エラー** — `GH_AUTH_ERROR`
-- **PR存在しない** — `GH_NOT_FOUND`
-- **権限エラー** — `PERMISSION_DENIED`
-- **マージコンフリクト** — `PR_MERGE_CONFLICT`
-- **worktree削除失敗** — `WORKTREE_REMOVE_FAILED`
-- **検証失敗** — `VALIDATION_FAILED`
+`@issue-workflow` スキルのエラーハンドリングを参照してください。

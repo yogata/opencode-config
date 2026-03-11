@@ -42,8 +42,4 @@ description: /issue-req の結果をもとにGitHub Issueを作成する
 
 ## エラーハンドリング
 
-エラーが発生した場合、`@issue-workflow` スキルのエラーハンドリングを呼び出してください。
-
-- **gh認証エラー** — `GH_AUTH_ERROR`
-- **権限エラー** — `PERMISSION_DENIED`
-- **検証失敗** — `VALIDATION_FAILED`
+`@issue-workflow` スキルのエラーハンドリングを参照してください。

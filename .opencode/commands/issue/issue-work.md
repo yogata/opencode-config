@@ -133,12 +133,6 @@ Issue確認: `gh issue view $ISSUE_NUMBER`
 
 ## エラーハンドリング
 
-エラーが発生した場合、`@issue-workflow` スキルのエラーハンドリングを呼び出してください。
+## エラーハンドリング
 
-- **gh認証エラー** — `GH_AUTH_ERROR`
-- **worktree作成失敗** — `WORKTREE_CREATE_FAILED`
-- **worktree既存** — `WORKTREE_EXISTS`
-- **ブランチ名競合** — `BRANCH_NAME_CONFLICT`
-- **並列一部失敗** — `PARALLEL_PARTIAL_FAILURE`
-- **PR作成失敗** — `PR_CREATE_FAILED`
-- **検証失敗** — `VALIDATION_FAILED`
+`@issue-workflow` スキルのエラーハンドリングを参照してください。
