@@ -58,8 +58,7 @@ PRマージ: `gh pr merge $PR_NUMBER --squash --delete-branch`
 - **パターンA（小）** — `@.opencode/commands/issue/templates/issue_comment_bug_record.md`
 - **パターンB（中）** — `@.opencode/commands/issue/templates/issue_comment_feature_implementation.md`
 
-- テンプレート読込: `$templateContent = Get-Content -Path ".opencode/commands/issue/templates/issue_comment_bug_record.md" -Raw`
-- 変数置換: `$templateContent -replace "YYYY-MM-DD", (Get-Date -Format "yyyy-MM-dd") | Out-File -FilePath "temp/comment-body.md" -Encoding utf8`
+- テンプレートから記録を作成し、`temp/comment-body.md` に保存（日付等の変数を置換）
 - コメント追加: `gh issue comment $ISSUE_NUMBER --body-file "temp/comment-body.md"`
 
 ### 5. Issueクローズ
@@ -68,8 +67,9 @@ Issueクローズ: `gh issue close $ISSUE_NUMBER --reason completed`
 
 ### 6. クリーンアップ
 
-1. mainに切り替え: `git checkout main && git pull`
-2. worktree削除: `git worktree remove --force .worktrees/$ISSUE_NUMBER-<type>`
+1. mainに切り替え: `git checkout main`
+2. 最新を取得: `git pull`
+3. worktree削除: `git worktree remove --force .worktrees/$ISSUE_NUMBER-<type>`
 3. ローカルブランチ削除: `git branch -D <type>/issue-$ISSUE_NUMBER`
 4. リモートブランチ削除: `git push origin --delete <type>/issue-$ISSUE_NUMBER`
 5. prune: `git fetch --prune`

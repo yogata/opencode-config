@@ -17,7 +17,7 @@ description: /issue-req の結果をもとにGitHub Issueを作成する
 
 ### 共通
 
-1. **temp/ディレクトリ作成**: `New-Item -ItemType Directory -Path "temp" -Force`（存在しない場合）
+1. **temp/ディレクトリ作成** — 存在しない場合のみ作成
 2. **Issue本文作成**: 判定したパターンのテンプレートから作成し、`temp/issue-body.md` に保存
    - パターンA: `@.opencode/commands/issue/templates/issue_desc_bug.md`
    - パターンB: `@.opencode/commands/issue/templates/issue_desc_feature.md`

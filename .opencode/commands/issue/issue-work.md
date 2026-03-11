@@ -75,8 +75,7 @@ Issue確認: `gh issue view $ISSUE_NUMBER`
 
 **開発中（ウォッチモード）**:
 
-- 型チェック: `npx tsc --noEmit --watch`
-- テスト: `bun test --watch`
+- 型チェック・テストは各プロジェクトの構成に合わせて実行
 
 ### フェーズ3: ドキュメント更新（パターンBのみ）
 
@@ -114,9 +113,7 @@ Issue確認: `gh issue view $ISSUE_NUMBER`
 
 **テンプレート**: `@.opencode/commands/issue/templates/pr_desc.md`
 
-- temp/作成: `New-Item -ItemType Directory -Path "temp" -Force`（存在しない場合）
-- テンプレート読込: `$templateContent = Get-Content -Path ".opencode/commands/issue/templates/pr_desc.md" -Raw`
-- 変数置換: `$templateContent -replace "#\{ISSUE_NUMBER\}", $ISSUE_NUMBER | Out-File -FilePath "temp/pr-body.md" -Encoding utf8`
+- テンプレートからPR本文を生成し、`temp/pr-body.md` に保存
 - PR作成: `gh pr create --base main --title "feat/fix: {要約} (#$ISSUE_NUMBER)" --body-file "temp/pr-body.md"`
 
 #### 10. デプロイ検証（必須）
