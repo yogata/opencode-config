@@ -6,6 +6,23 @@ description: PRをマージし、対応記録を追記し、Issueをクローズ
 
 PRをマージし、GitHub Issueに記録を追記し、クローズ後にworktreeとブランチを削除します。
 
+---
+
+## 入力（SSoT）
+
+- **GitHub Issue** — open状態
+- **GitHub PR** — merged状態
+
+## 出力（SSoT）
+
+- なし（完了）
+
+## 完了後のフェーズ
+
+`done` — 完了
+
+---
+
 ## 前提
 
 `@issue-workflow` スキルを実行し、以下を取得してください：

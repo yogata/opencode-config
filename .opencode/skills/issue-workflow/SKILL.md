@@ -1,19 +1,52 @@
 ---
 name: issue-workflow
-description: issue-req、issue-create、issue-work、issue-update、issue-closeコマンドから明示的に呼び出される。パターン判定、状態判定、完了報告生成、次のステップ提案、エラーハンドリングを担当。
+description: 開発ワークフローの知識ベース。フェーズ定義、SSoT遷移、パターン判定基準、コマンド関連を提供。issue-*コマンドおよびissue-orchから参照される。
 ---
 
 # Issue Workflow スキル
 
-issue-\*コマンド群から呼び出され、状態管理と報告を一元管理する。
+開発ワークフローの**知識ベース**として機能する。
+
+- **コマンド（手順）**は具体的な実行ステップ
+- **このスキル（知識）**はコンテキスト強化・判断基準・関連情報
+
+---
+
+## 全体像
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  issue-orch（指揮者）                                         │
+│  - コンテキスト収集・フェーズ推論                              │
+│  - 適切なコマンド選択・実行                                   │
+└─────────────────────────────────────────────────────────────┘
+                           │
+                           │ 参照
+                           ▼
+┌─────────────────────────────────────────────────────────────┐
+│  このスキル（知識）                                           │
+│  - フェーズ定義・SSoT定義                                     │
+│  - パターン判定基準                                           │
+│  - コマンド関連図                                             │
+│  - エラーコード・ラベルマッピング                              │
+└─────────────────────────────────────────────────────────────┘
+                           │
+                           │ 参照
+                           ▼
+┌─────────────────────────────────────────────────────────────┐
+│  issue-* コマンド（手順）                                     │
+│  issue-req → issue-create → issue-work → issue-close        │
+│  （issue-update は随時）                                     │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
 
 ## 基本原則
 
-- **SSoT（フェーズ依存）**:
-  - `issue-req`: ユーザー入力、要望ドキュメント、エラーログ
-  - `issue-create` 以降: GitHub Issue/PR
-- **ローカル状態を持たない**: 並列実行対応のため、状態はGitHub側で管理
-- **明示呼び出し**: 各コマンドから `@issue-workflow` として参照される
+- **SSoT（Single Source of Truth）**: フェーズごとに信頼できる情報源が異なる
+- **ローカル状態を持たない**: 並列実行対応のため、状態は外部で管理
+- **宣言的定義**: 判断ロジックは含まず、基準・定義のみを提供
 
 ---
 
@@ -28,21 +61,150 @@ issue-\*コマンド群から呼び出され、状態管理と報告を一元管
 
 ---
 
-## 2. 状態判定
+## 2. フェーズ定義
 
-`gh issue` から現在のフェーズを推論する。
+開発ワークフローの7つのフェーズを定義する。
 
-### フェーズ定義
+### フェーズ一覧
 
-- `none`: Issue存在しない → 未作成
-- `created`: Issue open, PRなし, コメント少 → 作成直後
-- `review`: Issue open, PR open → レビュー待ち
-- `ready_to_close`: Issue open, PR merged → クローズ可能
-- `done`: Issue closed → 完了
+| フェーズ | 状態 | SSoT | 次のアクション |
+|---|---|---|---|
+| `requirement` | 要件定義中 | セッション会話、エラーログ | `/issue-req` |
+| `analyzed` | 分析完了・Issue未作成 | `temp/*.md` | `/issue-create` |
+| `created` | Issue作成済み・作業前 | GitHub Issue | `/issue-work {N}` |
+| `in_progress` | 実装中 | GitHub Issue + worktree | `/issue-work {N}` 継続 |
+| `review` | PR作成済み・レビュー中 | GitHub PR | レビュー結果待ち |
+| `ready_to_close` | PRマージ済み | GitHub Issue | `/issue-close {N}` |
+| `done` | 完了 | なし | - |
+
+### SSoT遷移ルール
+
+```
+requirement          SSoT: セッション会話
+    │
+    │ /issue-req 完了
+    ▼
+analyzed             SSoT: temp/bug_analysis.md または temp/feature_technical.md
+    │
+    │ /issue-create 完了
+    ▼
+created              SSoT: GitHub Issue
+    │
+    │ /issue-work 開始
+    ▼
+in_progress          SSoT: GitHub Issue + worktree + ブランチ
+    │
+    │ PR作成完了
+    ▼
+review               SSoT: GitHub PR
+    │
+    │ PR merged
+    ▼
+ready_to_close       SSoT: GitHub Issue
+    │
+    │ /issue-close 完了
+    ▼
+done                 SSoT: なし（完了）
+```
+
+### フェーズ判定基準（指揮者用）
+
+指揮者（issue-orch）は以下の優先順位でフェーズを推論する：
+
+1. **done**: Issue closed
+2. **ready_to_close**: Issue open + PR merged
+3. **review**: Issue open + PR open
+4. **in_progress**: worktree存在 + 作業ブランチ（`feature/issue-*` または `bugfix/issue-*`）
+5. **created**: Issue open + worktreeなし + PRなし
+6. **analyzed**: `temp/bug_analysis.md` または `temp/feature_technical.md` 存在 + Issueなし
+7. **requirement**: 上記以外 + ユーザー要望あり
 
 ---
 
-## 3. 完了報告生成
+## 3. コマンド関連図
+
+### コマンド一覧
+
+| コマンド | 役割 | 入力SSoT | 出力SSoT | 完了後フェーズ |
+|---|---|---|---|---|
+| `/issue-req` | 要件定義・分析 | セッション会話 | `temp/*.md` | `analyzed` |
+| `/issue-create` | Issue作成 | `temp/*.md` | GitHub Issue | `created` |
+| `/issue-work` | 実装・PR作成 | GitHub Issue | GitHub PR | `review` |
+| `/issue-update` | Issue更新 | GitHub Issue | GitHub Issue | 変更なし |
+| `/issue-close` | 完了処理 | GitHub Issue | なし | `done` |
+| `/issue-orch` | 指揮者（自動判定） | 複数 | 適切なコマンド実行 | - |
+
+### コマンドフロー
+
+```
+                    ┌─────────────────┐
+                    │  /issue-req     │
+                    │  (要件定義)      │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │ /issue-create   │
+                    │ (Issue作成)      │
+                    └────────┬────────┘
+                             │
+                             ▼
+┌──────────┐        ┌─────────────────┐        ┌──────────┐
+│ /issue-  │ ◄────  │  /issue-work    │  ────► │ /issue-  │
+│ update   │        │  (実装・PR作成)  │        │ update   │
+└──────────┘        └────────┬────────┘        └──────────┘
+        │                    │                    │
+        │     NG             │                   NG
+        └────────────────────┤                    │
+                             ▼                    │
+                    ┌─────────────────┐           │
+                    │   レビュー       │ ◄─────────┘
+                    └────────┬────────┘
+                             │ OK
+                             ▼
+                    ┌─────────────────┐
+                    │  /issue-close   │
+                    │  (完了処理)      │
+                    └────────┬────────┘
+                             │
+                             ▼
+                          完了
+```
+
+### /issue-orch の自動判定
+
+```
+/issue-orch 実行
+       │
+       ▼
+┌─────────────────────────┐
+│  コンテキスト収集         │
+│  - セッション会話         │
+│  - Git状態               │
+│  - temp/*.md 有無        │
+│  - GitHub Issue/PR      │
+└───────────┬─────────────┘
+            │
+            ▼
+┌─────────────────────────┐
+│  フェーズ推論             │
+│  （このスキルの判定基準    │
+│   を参照）               │
+└───────────┬─────────────┘
+            │
+            ▼
+┌─────────────────────────┐
+│  適切なコマンド実行       │
+│  requirement → /issue-req │
+│  analyzed → /issue-create │
+│  created → /issue-work    │
+│  ...                     │
+└─────────────────────────┘
+```
+
+---
+
+## 4. 完了報告生成
 
 コマンド完了時に統一フォーマットで報告を生成する。
 
@@ -103,7 +265,7 @@ issue-\*コマンド群から呼び出され、状態管理と報告を一元管
 
 ---
 
-## 4. エラーハンドリング
+## 5. エラーハンドリング
 
 全コマンド共通のエラー対処を定義する。
 
@@ -146,7 +308,7 @@ issue-\*コマンド群から呼び出され、状態管理と報告を一元管
 
 ---
 
-## 5. ラベル選定
+## 6. ラベル選定
 
 パターンと種別から適切なラベルを決定する。
 
