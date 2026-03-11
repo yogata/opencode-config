@@ -9,6 +9,7 @@ description: /issue-req の結果をもとにGitHub Issueを作成する
 ## 前提
 
 `@issue-workflow` スキルを実行し、以下を取得してください：
+
 - パターン（A/B）判定
 - ラベル選定
 
@@ -34,6 +35,7 @@ description: /issue-req の結果をもとにGitHub Issueを作成する
 `@issue-workflow` スキルの「完了報告生成」と「次のステップ提案」を実行してください。
 
 現在のコンテキスト:
+
 - コマンド: issue-create
 - Issue番号: {N}
 - パターン: {判定結果}
@@ -42,8 +44,6 @@ description: /issue-req の結果をもとにGitHub Issueを作成する
 
 エラーが発生した場合、`@issue-workflow` スキルのエラーハンドリングを呼び出してください。
 
-| 発生しうるエラー | エラーコード |
-| ---------------- | ------------- |
-| gh認証エラー | `GH_AUTH_ERROR` |
-| 権限エラー | `PERMISSION_DENIED` |
-| 検証失敗 | `VALIDATION_FAILED` |
+- **gh認証エラー** — `GH_AUTH_ERROR`
+- **権限エラー** — `PERMISSION_DENIED`
+- **検証失敗** — `VALIDATION_FAILED`
