@@ -6,6 +6,23 @@ description: /issue-req の結果をもとにGitHub Issueを作成する
 
 `@issue-workflow` スキルで判定したパターンに基づき、GitHub Issueを作成します。
 
+---
+
+## 入力（SSoT）
+
+- **`temp/bug_analysis.md`** — パターンA（バグ修正）
+- **`temp/feature_technical.md`** — パターンB（機能追加）
+
+## 出力（SSoT）
+
+- **GitHub Issue** — open状態
+
+## 完了後のフェーズ
+
+`created` — Issue作成済み・作業前
+
+---
+
 ## 前提
 
 `@issue-workflow` スキルを実行し、以下を取得してください：
