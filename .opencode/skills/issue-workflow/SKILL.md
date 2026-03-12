@@ -86,7 +86,7 @@ requirement          SSoT: セッション会話
     ▼
 analyzed             SSoT: temp/bug_analysis.md または temp/feature_technical.md
     │
-    │ /issue-create 完了
+    │ /issue-create 完了（temp/*削除）
     ▼
 created              SSoT: GitHub Issue
     │
@@ -94,7 +94,7 @@ created              SSoT: GitHub Issue
     ▼
 in_progress          SSoT: GitHub Issue + worktree + ブランチ
     │
-    │ PR作成完了
+    │ 全チェックボックス完了 + PR作成
     ▼
 review               SSoT: GitHub PR
     │
@@ -282,6 +282,7 @@ done                 SSoT: なし（完了）
 - `PR_CREATE_FAILED`: PR作成失敗 → コミット保持、手動PR作成手順を案内
 - `PR_MERGE_CONFLICT`: マージコンフリクト → 手動解決手順を案内
 - `VALIDATION_FAILED`: 検証失敗 → エラー内容を報告、修正手順を案内
+- `CHECKBOX_INCOMPLETE`: チェックボックス未完了 → 未完了タスクを報告、完了後に再実行
 
 ### 使用方法
 

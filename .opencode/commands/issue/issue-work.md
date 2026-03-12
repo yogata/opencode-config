@@ -82,13 +82,47 @@ Issue確認: `gh issue view $ISSUE_NUMBER`
 
 ### フェーズ2: 実装
 
-#### 4. 計画立案
+#### 4. 計画立案（SSoT → Plan）
 
-`@plan Issue #$ISSUE_NUMBERの実装計画を立ててください。テストケースを含めてください。実装計画のファイル名はissue番号と関連付けてください。`
+**前提**: Issue本文のチェックボックスが実装タスクのSSoT（Single Source of Truth）です。
+
+1. **SSoT確認**: Issue本文のチェックボックスを確認
+   ```bash
+   gh issue view $ISSUE_NUMBER --json body -q .body
+   # チェックボックス一覧を把握
+   ```
+
+2. **実行計画**: SSoTの内容を入力として @plan を実行
+   ```
+   @plan Issue #$ISSUE_NUMBERの実装計画を立ててください。テストケースを含めてください。
+   
+   **SSoT（必須）**: Issue本文のチェックボックスが実装タスクのSSoTです。
+   以下のチェックボックスをすべて完了させることが目標です：
+   [チェックボックス一覧を貼り付け]
+   
+   計画はこのSSoTと整合している必要があります。
+   ```
+
+**原則**:
+- SSoT（チェックボックス）= WHAT（何をやるか）
+- Plan（@planの出力）= HOW（どうやるか）
+- 作業実施は Plan に従う
 
 #### 5. TDD実装
 
 `/start-work`（RED: テスト作成 → GREEN: 実装 → REFACTOR: 整理）
+
+**各タスク完了時**:
+1. Issue本文の該当チェックボックスを `[ ]` → `[x]` に更新
+2. 更新方法: Issue本文を取得し、該当箇所を置換して更新
+   ```bash
+   # 現在の本文を取得
+   body=$(gh issue view $ISSUE_NUMBER --json body -q .body)
+   # チェックボックスを更新（該当行の [ ] を [x] に置換）
+   updated_body=$(echo "$body" | sed 's/- \[ \] <完了したタスク>/- [x] <完了したタスク>/')
+   # Issue本文を更新
+   gh issue edit $ISSUE_NUMBER --body "$updated_body"
+   ```
 
 **開発中（ウォッチモード）**:
 
