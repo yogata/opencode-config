@@ -70,7 +70,7 @@ Issue番号省略が可能なのは以下の場合のみ：
 
 ### 3. PRマージ
 
-PRマージ: `gh pr merge $PR_NUMBER --squash --delete-branch`
+PRマージ: `gh pr merge $PR_NUMBER --merge`
 
 ### 4. 記録追記
 
