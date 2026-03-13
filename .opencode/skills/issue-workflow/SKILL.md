@@ -1,6 +1,6 @@
 ---
 name: issue-workflow
-description: 開発ワークフローの知識ベース。フェーズ定義、SSoT遷移、パターン判定基準、コマンド関連を提供。issue-*コマンドおよびissue-orchから参照される。
+description: 開発ワークフローの知識ベース。フェーズ定義、SSoT遷移、パターン判定基準、コマンド関連を提供。issue-*コマンドおよびissue-nextから参照される。
 ---
 
 # Issue Workflow スキル
@@ -16,7 +16,7 @@ description: 開発ワークフローの知識ベース。フェーズ定義、S
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  issue-orch（指揮者）                                         │
+│  issue-next（指揮者）                                         │
 │  - コンテキスト収集・フェーズ推論                              │
 │  - 適切なコマンド選択・実行                                   │
 └─────────────────────────────────────────────────────────────┘
@@ -63,7 +63,7 @@ description: 開発ワークフローの知識ベース。フェーズ定義、S
 
 ## 2. フェーズ定義
 
-開発ワークフローの7つのフェーズを定義する。
+開発ワークフローの6つのフェーズを定義する。
 
 ### フェーズ一覧
 
@@ -74,7 +74,6 @@ description: 開発ワークフローの知識ベース。フェーズ定義、S
 | `created` | Issue作成済み・作業前 | GitHub Issue | `/issue-work {N}` |
 | `in_progress` | 実装中 | GitHub Issue + worktree | `/issue-work {N}` 継続 |
 | `review` | PR作成済み・レビュー中 | GitHub PR | レビュー結果待ち |
-| `ready_to_close` | PRマージ済み | GitHub Issue | `/issue-close {N}` |
 | `done` | 完了 | なし | - |
 
 ### SSoT遷移ルール
@@ -98,26 +97,21 @@ in_progress          SSoT: GitHub Issue + worktree + ブランチ
     ▼
 review               SSoT: GitHub PR
     │
-    │ PR merged
-    ▼
-ready_to_close       SSoT: GitHub Issue
-    │
-    │ /issue-close 完了
+    │ PR merged + /issue-close 完了
     ▼
 done                 SSoT: なし（完了）
 ```
 
 ### フェーズ判定基準（指揮者用）
 
-指揮者（issue-orch）は以下の優先順位でフェーズを推論する：
+指揮者（issue-next）は以下の優先順位でフェーズを推論する：
 
 1. **done**: Issue closed
-2. **ready_to_close**: Issue open + PR merged
-3. **review**: Issue open + PR open
-4. **in_progress**: worktree存在 + 作業ブランチ（`feature/issue-*` または `bugfix/issue-*`）
-5. **created**: Issue open + worktreeなし + PRなし
-6. **analyzed**: `temp/bug_analysis.md` または `temp/feature_technical.md` 存在 + Issueなし
-7. **requirement**: 上記以外 + ユーザー要望あり
+2. **review**: Issue open + PR open
+3. **in_progress**: worktree存在 + 作業ブランチ（`feature/issue-*` または `bugfix/issue-*`）
+4. **created**: Issue open + worktreeなし + PRなし
+5. **analyzed**: `temp/bug_analysis.md` または `temp/feature_technical.md` 存在 + Issueなし
+6. **requirement**: 上記以外 + ユーザー要望あり
 
 ---
 
@@ -132,7 +126,7 @@ done                 SSoT: なし（完了）
 | `/issue-work` | 実装・PR作成 | GitHub Issue | GitHub PR | `review` |
 | `/issue-update` | Issue更新 | GitHub Issue | GitHub Issue | 変更なし |
 | `/issue-close` | 完了処理 | GitHub Issue | なし | `done` |
-| `/issue-orch` | 指揮者（自動判定） | 複数 | 適切なコマンド実行 | - |
+| `/issue-next` | 指揮者（自動判定） | 複数 | 適切なコマンド実行 | - |
 
 ### コマンドフロー
 
@@ -171,35 +165,35 @@ done                 SSoT: なし（完了）
                           完了
 ```
 
-### /issue-orch の自動判定
+### /issue-next の自動判定
 
 ```
-/issue-orch 実行
+/issue-next 実行
        │
        ▼
-┌─────────────────────────┐
-│  コンテキスト収集         │
-│  - セッション会話         │
-│  - Git状態               │
-│  - temp/*.md 有無        │
-│  - GitHub Issue/PR      │
-└───────────┬─────────────┘
-            │
-            ▼
-┌─────────────────────────┐
-│  フェーズ推論             │
-│  （このスキルの判定基準    │
-│   を参照）               │
-└───────────┬─────────────┘
-            │
-            ▼
-┌─────────────────────────┐
-│  適切なコマンド実行       │
-│  requirement → /issue-req │
-│  analyzed → /issue-create │
-│  created → /issue-work    │
-│  ...                     │
-└─────────────────────────┘
+ ┌─────────────────────────┐
+ │  コンテキスト収集         │
+ │  - セッション会話         │
+ │  - Git状態               │
+ │  - temp/*.md 有無        │
+ │  - GitHub Issue/PR      │
+ └───────────┬─────────────┘
+             │
+             ▼
+ ┌─────────────────────────┐
+ │  フェーズ推論             │
+ │  （このスキルの判定基準    │
+ │   を参照）               │
+ └───────────┬─────────────┘
+             │
+             ▼
+ ┌─────────────────────────┐
+ │  適切なコマンド実行       │
+ │  requirement → /issue-req │
+ │  analyzed → /issue-create │
+ │  created → /issue-work    │
+ │  ...                     │
+ └─────────────────────────┘
 ```
 
 ---
