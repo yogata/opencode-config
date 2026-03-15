@@ -38,7 +38,7 @@ PRをマージし、GitHub Issueに記録を追記し、クローズ後にworktr
 
 Issue番号省略が可能なのは以下の場合のみ：
 
-- 同一セッション内で `/issue-create` により Issue が作成されている
+- 同一セッション内で `/issue/issue-create` により Issue が作成されている
 - かつ、その Issue 番号がセッションコンテキストに保持されている
 
 **【禁止事項】**
