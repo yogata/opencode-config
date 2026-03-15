@@ -1,5 +1,5 @@
 ---
-description: /issue-req の結果をもとにGitHub Issueを作成する
+description: /issue/issue-req の結果をもとにGitHub Issueを作成する
 ---
 
 # Issue登録
