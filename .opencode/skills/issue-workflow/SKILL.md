@@ -69,10 +69,10 @@ description: 開発ワークフローの知識ベース。フェーズ定義、S
 
 | フェーズ | 状態 | SSoT | 次のアクション |
 |---|---|---|---|
-| `requirement` | 要件定義中 | セッション会話、エラーログ | `/issue-req` |
-| `analyzed` | 分析完了・Issue未作成 | `temp/*.md` | `/issue-create` |
-| `created` | Issue作成済み・作業前 | GitHub Issue | `/issue-work {N}` |
-| `in_progress` | 実装中 | GitHub Issue + worktree | `/issue-work {N}` 継続 |
+| `requirement` | 要件定義中 | セッション会話、エラーログ | `/issue/issue-req` |
+| `analyzed` | 分析完了・Issue未作成 | `temp/*.md` | `/issue/issue-create` |
+| `created` | Issue作成済み・作業前 | GitHub Issue | `/issue/issue-work {N}` |
+| `in_progress` | 実装中 | GitHub Issue + worktree | `/issue/issue-work {N}` 継続 |
 | `review` | PR作成済み・レビュー中 | GitHub PR | レビュー結果待ち |
 | `done` | 完了 | なし | - |
 
@@ -81,15 +81,15 @@ description: 開発ワークフローの知識ベース。フェーズ定義、S
 ```
 requirement          SSoT: セッション会話
     │
-    │ /issue-req 完了
+    │ /issue/issue-req 完了
     ▼
 analyzed             SSoT: temp/bug_analysis.md または temp/feature_technical.md
     │
-    │ /issue-create 完了（temp/*削除）
+    │ /issue/issue-create 完了（temp/*削除）
     ▼
 created              SSoT: GitHub Issue
     │
-    │ /issue-work 開始
+    │ /issue/issue-work 開始
     ▼
 in_progress          SSoT: GitHub Issue + worktree + ブランチ
     │
@@ -97,7 +97,7 @@ in_progress          SSoT: GitHub Issue + worktree + ブランチ
     ▼
 review               SSoT: GitHub PR
     │
-    │ PR merged + /issue-close 完了
+    │ PR merged + /issue/issue-close 完了
     ▼
 done                 SSoT: なし（完了）
 ```
@@ -122,30 +122,30 @@ done                 SSoT: なし（完了）
 
 | コマンド | 役割 | 入力SSoT | 出力SSoT | 完了後フェーズ |
 |---|---|---|---|---|
-| `/issue-req` | 要件定義・分析 | セッション会話 | `temp/*.md` | `analyzed` |
-| `/issue-create` | Issue作成 | `temp/*.md` | GitHub Issue | `created` |
-| `/issue-work` | 実装・PR作成 | GitHub Issue | GitHub PR + worktree + ブランチ | `review` |
-| `/issue-update` | Issue更新 | GitHub Issue | GitHub Issue | 変更なし |
-| `/issue-close` | 完了処理 | GitHub Issue + GitHub PR (open) | なし | `done` |
-| `/issue-next` | 指揮者（自動判定） | 複数 | 適切なコマンド実行 | - |
+| `/issue/issue-req` | 要件定義・分析 | セッション会話 | `temp/*.md` | `analyzed` |
+| `/issue/issue-create` | Issue作成 | `temp/*.md` | GitHub Issue | `created` |
+| `/issue/issue-work` | 実装・PR作成 | GitHub Issue | GitHub PR + worktree + ブランチ | `review` |
+| `/issue/issue-update` | Issue更新 | GitHub Issue | GitHub Issue | 変更なし |
+| `/issue/issue-close` | 完了処理 | GitHub Issue + GitHub PR (open) | なし | `done` |
+| `/issue/issue-next` | 指揮者（自動判定） | 複数 | 適切なコマンド実行 | - |
 
 ### コマンドフロー
 
 ```
                     ┌─────────────────┐
-                    │  /issue-req     │
+                    │  /issue/issue-req     │
                     │  (要件定義)      │
                     └────────┬────────┘
                              │
                              ▼
                     ┌─────────────────┐
-                    │ /issue-create   │
+                    │ /issue/issue-create   │
                     │ (Issue作成)      │
                     └────────┬────────┘
                              │
                              ▼
 ┌──────────┐        ┌─────────────────┐        ┌──────────┐
-│ /issue-  │ ◄────  │  /issue-work    │  ────► │ /issue-  │
+│ /issue/  │ ◄────  │  /issue/issue-work    │  ────► │ /issue/  │
 │ update   │        │  (実装・PR作成)  │        │ update   │
 └──────────┘        └────────┬────────┘        └──────────┘
         │                    │                    │
@@ -158,7 +158,7 @@ done                 SSoT: なし（完了）
                              │ OK
                              ▼
                     ┌─────────────────┐
-                    │  /issue-close   │
+                    │  /issue/issue-close   │
                     │  (完了処理)      │
                     └────────┬────────┘
                              │
@@ -166,10 +166,10 @@ done                 SSoT: なし（完了）
                           完了
 ```
 
-### /issue-next の自動判定
+### /issue/issue-next の自動判定
 
 ```
-/issue-next 実行
+/issue/issue-next 実行
        │
        ▼
  ┌─────────────────────────┐
@@ -190,9 +190,9 @@ done                 SSoT: なし（完了）
              ▼
  ┌─────────────────────────┐
  │  適切なコマンド実行       │
- │  requirement → /issue-req │
- │  analyzed → /issue-create │
- │  created → /issue-work    │
+ │  requirement → /issue/issue-req │
+ │  analyzed → /issue/issue-create │
+ │  created → /issue/issue-work    │
  │  ...                     │
  └─────────────────────────┘
 ```
@@ -210,7 +210,7 @@ done                 SSoT: なし（完了）
 ```
 ✅ パターン{X}（{規模}）と判定しました。
   Issue状態: {フェーズ}
-  次のステップ: /issue-create
+  次のステップ: /issue/issue-create
 ```
 
 #### issue-create 完了時
@@ -218,7 +218,7 @@ done                 SSoT: なし（完了）
 ```
 ✅ Issue #{N} を作成しました（パターン{X}）。
   {パターンBの場合: docs/にIssue番号を紐付けました。}
-  次のステップ: /issue-work {N}
+  次のステップ: /issue/issue-work {N}
 ```
 
 #### issue-work 完了時
@@ -229,23 +229,23 @@ done                 SSoT: なし（完了）
   現在の状態: review（レビュー待ち）
 
   レビュー結果:
-  - OK → /issue-close {N}
-  - NG（仕様バグ）→ /issue-update {N} → /issue-work {N}
-  - NG（実装バグ）→ /issue-update {N} --comment → /issue-work {N}
+  - OK → /issue/issue-close {N}
+  - NG（仕様バグ）→ /issue/issue-update {N} → /issue/issue-work {N}
+  - NG（実装バグ）→ /issue/issue-update {N} --comment → /issue/issue-work {N}
 ```
 
 #### issue-update 完了時
 
 ```
 ✅ Issue #{N} を更新しました。
-  次のステップ: /issue-work {N}
+  次のステップ: /issue/issue-work {N}
 ```
 
 または
 
 ```
 ✅ Issue #{N} にコメントを追加しました。
-  次のステップ: /issue-work {N}
+  次のステップ: /issue/issue-work {N}
 ```
 
 #### issue-close 完了時
@@ -270,7 +270,7 @@ done                 SSoT: なし（完了）
 - `GH_AUTH_ERROR`: gh認証エラー → `gh auth login` 手順を案内
 - `GH_NOT_FOUND`: Issue/PR存在しない → 対象が存在することを確認
 - `PERMISSION_DENIED`: 権限エラー → リポジトリ権限を確認
-- `ISSUE_NUMBER_REQUIRED`: Issue番号が必要 → 明示的な番号指定または `/issue-create` 実行を促す
+- `ISSUE_NUMBER_REQUIRED`: Issue番号が必要 → 明示的な番号指定または `/issue/issue-create` 実行を促す
 - `WORKTREE_CREATE_FAILED`: worktree作成失敗 → 既存worktree削除またはパス確認
 - `WORKTREE_EXISTS`: 同一worktree存在 → 既存削除またはスキップの選択肢提示
 - `BRANCH_NAME_CONFLICT`: ブランチ名競合 → 既存ブランチ削除またはスキップ
