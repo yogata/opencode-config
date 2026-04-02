@@ -83,7 +83,7 @@ requirement          SSoT: セッション会話
     │
     │ /issue/issue-req 完了
     ▼
-analyzed             SSoT: temp/bug_analysis.md または temp/feature_technical.md
+analyzed             SSoT: $1/bug_analysis.md または $1/feature_technical.md（デフォルト: temp/）
     │
     │ /issue/issue-create 完了（temp/*削除）
     ▼
@@ -110,7 +110,7 @@ done                 SSoT: なし（完了）
 2. **review**: Issue open + PR open
 3. **in_progress**: worktree存在 + 作業ブランチ（`feature/issue-*` または `bugfix/issue-*`）
 4. **created**: Issue open + worktreeなし + PRなし
-5. **analyzed**: `temp/bug_analysis.md` または `temp/feature_technical.md` 存在 + Issueなし
+5. **analyzed**: `$1/bug_analysis.md` または `$1/feature_technical.md` 存在 + Issueなし
 6. **requirement**: 上記以外 + ユーザー要望あり
 7. **unknown**: 上記に該当しない — エラーまたは手動判定
 
@@ -122,8 +122,8 @@ done                 SSoT: なし（完了）
 
 | コマンド | 役割 | 入力SSoT | 出力SSoT | 完了後フェーズ |
 |---|---|---|---|---|
-| `/issue/issue-req` | 要件定義・分析 | セッション会話 | `temp/*.md` | `analyzed` |
-| `/issue/issue-create` | Issue作成 | `temp/*.md` | GitHub Issue | `created` |
+| `/issue/issue-req` | 要件定義・分析 | セッション会話 | `$1/*.md`（デフォルト: `temp/*.md`） | `analyzed` |
+| `/issue/issue-create` | Issue作成 | `$1/*.md`（デフォルト: `temp/*.md`） | GitHub Issue | `created` |
 | `/issue/issue-work` | 実装・PR作成 | GitHub Issue | GitHub PR + worktree + ブランチ | `review` |
 | `/issue/issue-update` | Issue更新 | GitHub Issue | GitHub Issue | 変更なし |
 | `/issue/issue-close` | 完了処理 | GitHub Issue + GitHub PR (open) | なし | `done` |
@@ -176,7 +176,7 @@ done                 SSoT: なし（完了）
  │  コンテキスト収集         │
  │  - セッション会話         │
  │  - Git状態               │
- │  - temp/*.md 有無        │
+  │  - $1/*.md 有無（デフォルト: temp/*.md）│
  │  - GitHub Issue/PR      │
  └───────────┬─────────────┘
              │
