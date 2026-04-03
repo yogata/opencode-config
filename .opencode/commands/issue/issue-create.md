@@ -44,10 +44,7 @@ description: /issue/issue-req の結果をもとにGitHub Issueを作成する
    - パターンB: `@.opencode/commands/issue/templates/issue_desc_feature.md`
 3. **Issue作成**: `gh issue create --title "<タイトル>" --body-file "$1/issue-body.md" --label "<ラベル>"`
 4. **コメント追加**: テンプレートから作成し、`$1/comment-body.md` に保存後、`gh issue comment $ISSUE_NUMBER --body-file "$1/comment-body.md"`
-5. **一時ファイル削除**: Issue作成成功後、`$1/*` を削除
-   ```bash
-   rm -rf $1/*
-   ```
+5. **一時ファイル削除**: Issue作成成功後、`$1/issue-body.md` と `$1/comment-body.md` を個別に削除
    - パターンA: `@.opencode/commands/issue/templates/issue_comment_bug_analysis.md`
    - パターンB: `@.opencode/commands/issue/templates/issue_comment_feature_technical.md`
 
