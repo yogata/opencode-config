@@ -4,7 +4,7 @@ description: /issue/issue-req の結果をもとにGitHub Issueを作成する
 
 # Issue登録
 
-`@issue-guide` スキルで判定したパターンに基づき、GitHub Issueを作成します。
+`issue-guide` スキルで判定したパターンに基づき、GitHub Issueを作成します。
 
 ---
 
@@ -25,7 +25,7 @@ description: /issue/issue-req の結果をもとにGitHub Issueを作成する
 
 ## 前提
 
-`@issue-guide` スキルを実行し、以下を取得してください：
+`issue-guide` スキルを実行し、以下を取得してください：
 
 - パターン（A/B）判定
 - ラベル選定
@@ -40,13 +40,13 @@ description: /issue/issue-req の結果をもとにGitHub Issueを作成する
 
 1. **ディレクトリ作成** — `$1` が存在しない場合のみ作成
 2. **Issue本文作成**: テンプレートから作成し、`$1/issue-body.md` に保存
-   - パターンA: `@.opencode/commands/issue/templates/issue_desc_bug.md`
-   - パターンB: `@.opencode/commands/issue/templates/issue_desc_feature.md`
+   - パターンA: `@templates/issue_desc_bug.md`
+    - パターンB: `@templates/issue_desc_feature.md`
 3. **Issue作成**: `gh issue create --title "<タイトル>" --body-file "$1/issue-body.md" --label "<ラベル>"`
 4. **コメント追加**: テンプレートから作成し、`$1/comment-body.md` に保存後、`gh issue comment $ISSUE_NUMBER --body-file "$1/comment-body.md"`
 5. **一時ファイル削除**: Issue作成成功後、`$1/issue-body.md` と `$1/comment-body.md` を個別に削除
-   - パターンA: `@.opencode/commands/issue/templates/issue_comment_bug_analysis.md`
-   - パターンB: `@.opencode/commands/issue/templates/issue_comment_feature_technical.md`
+   - パターンA: `@templates/issue_comment_bug_analysis.md`
+    - パターンB: `@templates/issue_comment_feature_technical.md`
 
 ### パターンBのみ
 
@@ -62,7 +62,7 @@ description: /issue/issue-req の結果をもとにGitHub Issueを作成する
 
 ## 完了時
 
-`@issue-guide` スキルの「完了報告生成」と「次のステップ提案」を実行してください。
+`issue-guide` スキルの「完了報告生成」と「次のステップ提案」を実行してください。
 
 現在のコンテキスト:
 
@@ -73,4 +73,4 @@ description: /issue/issue-req の結果をもとにGitHub Issueを作成する
 
 ## エラーハンドリング
 
-`@issue-guide` スキルのエラーハンドリングを参照してください。
+`issue-guide` スキルのエラーハンドリングを参照してください。

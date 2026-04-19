@@ -285,7 +285,7 @@ done                 SSoT: なし（完了）
 コマンドでエラーが発生した場合、以下の形式で呼び出す：
 
 ```
-@issue-workflow スキルの「エラーハンドリング」を実行してください。
+issue-guide スキルの「エラーハンドリング」を実行してください。
 エラーコード: {ERROR_CODE}
 コンテキスト: {追加情報（Issue番号、エラーメッセージ等）}
 ```
@@ -325,7 +325,7 @@ done                 SSoT: なし（完了）
 ```markdown
 ## 完了時
 
-`@issue-workflow` スキルの「完了報告生成」と「次のステップ提案」を実行してください。
+`issue-guide` スキルの「完了報告生成」と「次のステップ提案」を実行してください。
 現在のコンテキスト:
 
 - コマンド: issue-work
@@ -337,7 +337,7 @@ done                 SSoT: なし（完了）
 ### エラー時の呼び出し
 
 ```markdown
-`@issue-workflow` スキルの「エラーハンドリング」を実行してください。
+`issue-guide` スキルの「エラーハンドリング」を実行してください。
 エラーコード: WORKTREE_CREATE_FAILED
 コンテキスト: Issue #101, パス .worktrees/101-feature
 ```
