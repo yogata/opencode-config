@@ -83,9 +83,9 @@ requirement          SSoT: セッション会話
     │
     │ /issue/issue-req 完了
     ▼
-analyzed             SSoT: $1/bug_analysis.md または $1/feature_technical.md（デフォルト: temp/）
+analyzed             SSoT: $1/bug_analysis.md または $1/feature_technical.md
     │
-    │ /issue/issue-create 完了（temp/*削除）
+    │ /issue/issue-create 完了（$1/*削除）
     ▼
 created              SSoT: GitHub Issue
     │
@@ -122,8 +122,8 @@ done                 SSoT: なし（完了）
 
 | コマンド              | 役割               | 入力SSoT                             | 出力SSoT                             | 完了後フェーズ |
 | --------------------- | ------------------ | ------------------------------------ | ------------------------------------ | -------------- |
-| `/issue/issue-req`    | 要件定義・分析     | セッション会話                       | `$1/*.md`（デフォルト: `temp/*.md`） | `analyzed`     |
-| `/issue/issue-create` | Issue作成          | `$1/*.md`（デフォルト: `temp/*.md`） | GitHub Issue                         | `created`      |
+| `/issue/issue-req`    | 要件定義・分析     | セッション会話                       | `$1/*.md`                            | `analyzed`     |
+| `/issue/issue-create` | Issue作成          | `$1/*.md`                            | GitHub Issue                         | `created`      |
 | `/issue/issue-work`   | 実装・PR作成       | GitHub Issue                         | GitHub PR + worktree + ブランチ      | `review`       |
 | `/issue/issue-update` | Issue更新          | GitHub Issue                         | GitHub Issue                         | 変更なし       |
 | `/issue/issue-close`  | 完了処理           | GitHub Issue + GitHub PR (open)      | なし                                 | `done`         |

@@ -77,8 +77,9 @@ PRマージ: `gh pr merge $PR_NUMBER --merge`
 - **パターンA（小）** — `@.opencode/commands/issue/templates/issue_comment_bug_record.md`
 - **パターンB（中）** — `@.opencode/commands/issue/templates/issue_comment_feature_implementation.md`
 
-- テンプレートから記録を作成し、`temp/comment-body.md` に保存（日付等の変数を置換）
-- コメント追加: `gh issue comment $ISSUE_NUMBER --body-file "temp/comment-body.md"`
+- ※ $1 は issue-req で指定された出力先ディレクトリ（セッションコンテキスト経由で参照）
+- テンプレートから記録を作成し、`$1/comment-body.md` に保存（日付等の変数を置換）
+- コメント追加: `gh issue comment $ISSUE_NUMBER --body-file "$1/comment-body.md"`
 
 ### 5. Issueクローズ
 
