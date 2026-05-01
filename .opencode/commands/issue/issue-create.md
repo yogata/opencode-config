@@ -50,7 +50,7 @@ description: /issue/issue-req の結果をもとにGitHub Issueを作成する
 
 ### パターンBのみ
 
-5. **docs/紐付け**: `docs/requirements.md` と `docs/adr/NNN-xxx.md` にIssue番号を追記
+5. **docs/紐付け**: `docs/requirements/REQ-NNNN.md`（要件ファイルのissueフィールドを更新）および `docs/adr/NNN-xxx.md` にIssue番号を追記。併せて `docs/requirements.md` のサマリーテーブルstatus列を更新する
 
 ## 完了検証
 
