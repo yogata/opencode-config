@@ -164,8 +164,9 @@ Issue確認: `gh issue view $ISSUE_NUMBER`
 
 **テンプレート**: `@.opencode/commands/issue/templates/pr_desc.md`
 
-- テンプレートからPR本文を生成し、`temp/pr-body.md` に保存
-- PR作成: `gh pr create --base main --title "feat/fix: {要約} (#$ISSUE_NUMBER)" --body-file "temp/pr-body.md"`
+- ※ $1 は issue-req で指定された出力先ディレクトリ（セッションコンテキスト経由で参照）
+- テンプレートからPR本文を生成し、`$1/pr-body.md` に保存
+- PR作成: `gh pr create --base main --title "feat/fix: {要約} (#$ISSUE_NUMBER)" --body-file "$1/pr-body.md"`
 
 #### 10. デプロイ検証（必須・ブロッキング）
 
