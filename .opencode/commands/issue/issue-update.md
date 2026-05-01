@@ -35,17 +35,19 @@ description: 既存Issueの本文更新またはコメント追加を行う
 
 ### A. Issue本文の更新（仕様バグ対応）
 
+- ※ $1 は issue-req で指定された出力先ディレクトリ（セッションコンテキスト経由で参照）
+
 1. Issue確認: `gh issue view $ISSUE_NUMBER`
 2. 更新内容の整理: 追加・修正が必要な要件、変更理由
-3. Issue本文更新: `gh issue edit $ISSUE_NUMBER --body-file "temp/issue-body.md"`
+3. Issue本文更新: `gh issue edit $ISSUE_NUMBER --body-file "$1/issue-body.md"`
 
 ### B. Issueへのコメント追加（実装バグ対応）
 
 1. Issue確認: `gh issue view $ISSUE_NUMBER`
 2. コメント内容の整理: 問題点、期待される動作、修正方針
 3. コメント追加 — テンプレート: `@.opencode/commands/issue/templates/pr_comment_fix.md`
-   - テンプレートから作成し、`temp/comment-body.md` に保存
-   - コメント追加: `gh issue comment $ISSUE_NUMBER --body-file "temp/comment-body.md"`
+   - テンプレートから作成し、`$1/comment-body.md` に保存
+   - コメント追加: `gh issue comment $ISSUE_NUMBER --body-file "$1/comment-body.md"`
 
 ## 完了検証
 
