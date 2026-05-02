@@ -4,6 +4,7 @@ load_skills:
   - decision-log
   - issue-guide
   - gh-cli-best-practices
+  - git-worktree
 ---
 
 # 完了処理
