@@ -5,6 +5,7 @@ load_skills:
   - decision-log
   - deviation-check
   - issue-guide
+  - git-worktree
 ---
 
 # 実装パイプライン
@@ -26,7 +27,7 @@ Issueに対して計画立案から実装・コミットまでを一気通貫で
 ## Steps
 
 1. Issue本文から要件docと受け入れ基準を抽出 → `req-analysis` のチェックボックス品質基準で検証
-2. Worktree作成・ブランチ準備（`feature/issue-N` or `fix/issue-N`）
+2. Worktree作成・ブランチ準備 → `git-worktree` スキルに従って実行
 3. work planを生成（@plan）→ 実行（/start-work）→ TDD実装
 4. パターンB（機能追加）の場合、HLD/LLD ドキュメントを生成 → テンプレート: `templates/doc_hld.md`, `templates/doc_lld.md`
 5. 実行中に技術判断が発生 → `decision-log` に従って決定エントリ作成
