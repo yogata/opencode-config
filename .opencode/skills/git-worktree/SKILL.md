@@ -1,46 +1,124 @@
 ---
 name: git-worktree
-description: Windows環境でのgit worktree操作を安全に実行するための手順。issue-work/issue-closeコマンドから参照される。
+description: GitHub Issue 番号に基づいた git worktree の作成・管理・削除を標準化するスキル。issue-work/issue-close コマンドから使用される。
 ---
 
 # git-worktree
 
 ## 動作指針
 
-Windows環境でのgit worktree操作を安全に実行するための手順。issue-work/issue-closeコマンドから参照される。
+GitHub Issue 番号に基づいて、安全かつ一貫性のある方法で git worktree を作成・管理・削除する。
 
 ## 命名規則
 
-- worktreeディレクトリ: `.worktrees/{N}-{type}` （例: `.worktrees/516-fix`, `.worktrees/1-feature`）
-- ブランチ名: `{type}/issue-{N}` （例: `fix/issue-516`, `feature/issue-1`）
-- `{type}` の取り得る値: `feature`（機能追加・enhancement） / `fix`（バグ修正・bug）
-- `{N}` は GitHub Issue 番号（数値）
-- この命名規則は `issue-guide` の完了報告フォーマットと一貫性を持つ
+worktree とブランチの命名規則を統一する。
 
-## 標準手順
+| 項目             | 命名パターン            | 例                          |
+| ---------------- | ----------------------- | --------------------------- |
+| worktreeディレクトリ | `.worktrees/{N}-{type}` | `.worktrees/516-fix`        |
+| ブランチ名         | `{type}/issue-{N}`      | `fix/issue-516`             |
 
-### worktree作成
+### `{type}` の定義
 
-1. ベースブランチの特定: `main` または `master` を自動検出
-2. 作成コマンド: `git worktree add ".worktrees/{N}-{type}" -b "{type}/issue-{N}"`
-3. Windows環境: パスにスペースが含まれる可能性があるためダブルクォート必須
-4. 作成後の確認: `git worktree list` で正しく追加されたことを検証
-5. **絶対パス指定の義務付け**: `workdir` パラメータには絶対パスを使用（相対パスはメインリポジトリの誤編集リスクあり。`docs/tips/inbox.md` の既知バグを反映）
+| 値        | 使用条件                   |
+| --------- | -------------------------- |
+| `feature` | 機能追加・enhancement      |
+| `fix`     | バグ修正・bug              |
 
-### 既存worktree衝突時の対応
+### `{N}` の定義
 
-- 同名worktreeが既に存在する場合: `git worktree list` で確認 → 既存worktreeを再利用
-- ブランチのみ既存でworktreeがない場合: `git worktree add ".worktrees/{N}-{type}" "{type}/issue-{N}"`（既存ブランチをcheckout）
-- ダーティなworktreeの削除は禁止（未コミット変更がある場合はエラー停止、ユーザーに判断を委ねる）
+- GitHub Issue 番号（数値）
 
-### worktree削除
+## worktree作成手順
 
-1. 削除コマンド: `git worktree remove ".worktrees/{N}-{type}"`
-2. 削除後のクリーンアップ: `git worktree prune`（手動削除されたディレクトリの残存参照を消去）
-3. ブランチ削除: `git branch -d "{type}/issue-{N}"`（マージ済みの場合のみ。未マージなら `-D` は使わずエラー停止）
+### 1. ベースブランチの特定
+
+`main` または `master` ブランチを自動検出し、ベースとして使用する。
+
+### 2. worktree作成コマンド
+
+```bash
+git worktree add ".worktrees/{N}-{type}" -b "{type}/issue-{N}"
+```
+
+### 3. 重要事項
+
+- **絶対パス指定の義務付け**: `workdir` パラメータには絶対パスを使用すること（相対パスはメインリポジトリの誤編集リスクあり）
+- Windows環境: パスにスペースが含まれる可能性があるためダブルクォート必須
+- 作成後の確認: `git worktree list` で正しく追加されたことを検証する
+
+### 4. 作成例
+
+```bash
+# issue-516 を fix パターンで処理
+git worktree add ".worktrees/516-fix" -b "fix/issue-516"
+
+# 確認
+git worktree list
+```
+
+## 既存worktree衝突時の対応
+
+### 1. 同名worktreeが既に存在する場合
+
+```bash
+# 既存worktreeを確認
+git worktree list
+
+# 既存worktreeを再利用（作成コマンドは実行しない）
+```
+
+### 2. ブランチのみ既存でworktreeがない場合
+
+```bash
+# 既存ブランチをworktreeとしてcheckout
+git worktree add ".worktrees/{N}-{type}" "{type}/issue-{N}"
+```
+
+### 3. ダーティなworktreeの扱い
+
+- ダーティなworktreeの削除は禁止
+- 未コミット変更がある場合はエラー停止し、ユーザーに判断を委ねる
+
+## worktree削除手順
+
+### 1. worktreeの削除
+
+```bash
+git worktree remove ".worktrees/{N}-{type}"
+```
+
+### 2. クリーンアップ
+
+```bash
+# 手動削除されたディレクトリの残存参照を消去
+git worktree prune
+```
+
+### 3. ブランチの削除
+
+```bash
+# マージ済みの場合のみ削除
+git branch -d "{type}/issue-{N}"
+```
+
+**注意**: 未マージブランチの強制削除（`-D`）は禁止。未マージの場合はエラー停止し、ユーザーに判断を委ねる。
 
 ## 禁止事項
 
 - 相対パスでのworktreeファイル操作禁止（絶対パス必須）
 - `--force` によるダーティworktreeの強制削除禁止
 - メインリポジトリ（非worktree）内でのファイル編集禁止（issue-work中）
+
+## 重要: git worktreeコマンドの実行方法
+
+- worktree 内で作業する場合、`workdir` パラメータに worktree の絶対パスを指定して Bash ツールを実行する
+- 絶対に `cd` によるディレクトリ移動は行わない
+
+```bash
+# 正しい例
+bash(command="git status", workdir="C:\path\to\repo\.worktrees\516-fix")
+
+# 禁止例
+bash(command="cd .worktrees/516-fix && git status")
+```
