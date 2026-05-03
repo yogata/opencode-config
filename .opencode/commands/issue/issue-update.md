@@ -32,4 +32,3 @@ load_skills:
 - SSoTの整合性を維持（Issue本文と要件docの不整合を防ぐ）
 - `gh-cli-best-practices` に従って `--body-file` 使用
 - フェーズは変更なし（現在のフェーズを維持）
-- 出力先: `$1` 引数で指定
