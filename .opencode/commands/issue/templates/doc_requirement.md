@@ -1,19 +1,14 @@
 ---
 id: REQ-NNNN
 title: ""
-classification: FR|NFR
-category: scraping|ui|api|performance|reliability|maintainability
 status: planned|in-progress|implemented|deprecated
-adr: null
 created: "YYYY-MM-DD"
 updated: "YYYY-MM-DD"
 tags: []
-related_to: []
-depends_on: []
 ---
 
 <!--
-必須フィールド: id, title, classification, status, created, updated
+必須フィールド: id, title, status, created, updated
 
 ステータス遷移ルール:
 planned → in-progress → implemented
