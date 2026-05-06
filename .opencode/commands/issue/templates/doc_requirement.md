@@ -9,7 +9,25 @@ adr: null
 created: "YYYY-MM-DD"
 updated: "YYYY-MM-DD"
 tags: []
+related_to: []
+depends_on: []
 ---
+
+<!--
+必須フィールド: id, title, classification, status, created, updated
+
+ステータス遷移ルール:
+planned → in-progress → implemented
+implemented → deprecated
+planned → deprecated
+禁止: implemented → planned, deprecated → *
+
+ステータス正規化マッピング:
+open → planned
+done → implemented
+analyzed → planned
+created → planned
+-->
 
 > このドキュメントは①バイブス壁打ちフェーズで作成されます。
 

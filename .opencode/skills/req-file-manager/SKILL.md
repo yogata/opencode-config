@@ -85,16 +85,152 @@ docs/requirements/
 ---
 id: REQ-{NNNN}
 title: 要件タイトル
-classification: feature | bug
+classification: FR | NFR
 category: 機能カテゴリ
-status: draft | active | completed
+status: planned | in-progress | implemented | deprecated
 issue: {Issue番号}
 adr: {ADR番号}（該当する場合）
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 tags: [タグ1, タグ2]
+related_to: [REQ-XXXX]
+depends_on: [REQ-YYYY]
 ---
 ```
+
+---
+
+## バリデーションルール
+
+### frontmatter必須フィールド
+
+| フィールド | 型 | 許容値 |
+|-----------|-----|--------|
+| id | string | `REQ-{NNNN}`（4桁ゼロ埋め） |
+| title | string | 空文字不可 |
+| classification | enum | `FR`（機能要件）\| `NFR`（非機能要件） |
+| status | enum | `planned` \| `in-progress` \| `implemented` \| `deprecated` |
+| created | date | `YYYY-MM-DD` |
+| updated | date | `YYYY-MM-DD` |
+
+### IDとファイル名の一致確認
+
+- `REQ-0001.md` → frontmatter `id: REQ-0001`（必須）
+- 不一致の場合はエラーとして扱う
+
+### 日付フォーマット検証
+
+- `created` / `updated` は `YYYY-MM-DD` 形式であること
+- `updated` ≥ `created` であること
+
+---
+
+## ステータス遷移ルール
+
+### 許容遷移
+
+```
+planned → in-progress
+in-progress → implemented
+implemented → deprecated
+planned → deprecated
+```
+
+### 禁止遷移
+
+| 遷移 | 理由 |
+|------|------|
+| implemented → planned | 完了要件の再利用は禁止（新規REQを作成） |
+| implemented → in-progress | 完了要件の差し戻しは禁止 |
+| deprecated → * | 廃止済みは遷移不可 |
+
+### 初期値制約
+
+- 新規作成時は `planned` または `in-progress` に設定
+- `未指定 → implemented` は禁止（必ず planned または in-progress を経由）
+
+### ステータス正規化マッピング
+
+外部入力（Issue等）のステータスをREQステータスに正規化:
+
+| 入力 | 正規化先 |
+|------|---------|
+| open | planned |
+| done | implemented |
+| analyzed | planned |
+| created | planned |
+
+---
+
+## 整合性チェック
+
+### Issue ↔ REQ
+
+- frontmatterの `issue` フィールドに指定されたIssue番号がGitHub上に存在するか確認
+- REQファイルが存在するが対応Issueが閉じている場合、status を `implemented` に更新すべきか判定
+
+### ADR ↔ REQ
+
+- frontmatterの `adr` フィールドに指定されたADR番号が `docs/adr/` に存在するか確認
+- ADRが存在しない場合、ADR作成を推奨（要件がアーキテクチャ判断を含む場合）
+
+### README.md ↔ REQ
+
+- `docs/requirements/README.md` のインデックスに全REQが記載されているか確認
+- インデックスに記載されているがファイルが存在しないREQを検出
+- ファイルが存在するがインデックスに未記載のREQを検出
+
+---
+
+## 依存関係管理
+
+### フィールド定義
+
+| フィールド | 意味 | 方向性 |
+|-----------|------|--------|
+| related_to | 関連要件（参照・影響） | 双方向 |
+| depends_on | 前提要件（先に完了が必要） | 単方向（依存先 → 依存元） |
+
+### 参照先存在確認
+
+- `related_to` / `depends_on` に指定されたREQが `docs/requirements/` に存在するか検証
+- 存在しないREQ番号が指定された場合は警告
+
+### 循環依存検知
+
+- `depends_on` の依存グラフで閉路（A→B→C→A 等）がないか検証
+- 閉路が検出された場合はエラーとして扱う
+
+### 更新時の影響範囲
+
+- REQ更新時に `related_to` / `depends_on` で関連するREQを特定し、影響を通知
+- `depends_on` 先が `deprecated` になった場合、依存元に警告
+
+---
+
+## APPEND/UPDATE判定基準
+
+### 判定フロー
+
+```
+操作対象は既存REQファイルか？
+  ├── NO → CREATE
+  └── YES → 既存セクションの「内容」を変更するか？
+              ├── NO（新規セクション・チェックボックス追加） → APPEND
+              └── YES（テキスト置換・ステータス変更・フィールド更新） → UPDATE
+```
+
+### APPEND条件
+
+- 既存セクションへの内容追加（サブアイテム・メモの追記）
+- 新規セクションの追加（チェックボックス追加、非機能要件セクション追加等）
+- 新規タグ・関連情報の追加
+
+### UPDATE条件
+
+- 既存セクションの内容修正（テキスト置換・表現変更）
+- frontmatter フィールドの変更（status変更、title変更等）
+- チェックボックスの ON/OFF 切り替え
 
 ---
 
