@@ -21,7 +21,7 @@ load_skills:
 ## Steps
 
 1. 要件docからIssue本文を生成:
-   - `docs/requirements/REQ-{NNNN}-{slug}.md` が存在する場合: REQ内容を読み取り、Issue本文に反映
+   - `docs/requirements/REQ-{NNNN}.md` が存在する場合: REQ内容を読み取り、Issue本文に反映
    - 存在しない場合: セッション内の要件docから直接生成
    - テンプレート: `.opencode/commands/issue/templates/issue_desc_feature.md` または `.opencode/commands/issue/templates/issue_desc_bug.md` を Read tool で読み込む
 2. ラベル付与 → `issue-guide` のラベル体系に従って選定
