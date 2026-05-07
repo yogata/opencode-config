@@ -91,7 +91,29 @@ REQ → Issue → Work Plan（動的）→ TDD実装 → specs更新
 ```
 
 - **Work Plan**: issue-work で生成・実行。Issue単位で動的に変化する。
-- **specs更新**: issue-close で実装完了後に system.md/patterns.md を更新。
+- **specs更新**: issue-work で実装中に system.md/patterns.md を更新し、issue-close で更新内容を検証する。
+
+### 参照フロー
+
+各コマンドがどのアーティファクトをREAD/WRITEするかの明示的なマトリクス。
+
+| コマンド | specs | ADR | REQ |
+|----------|-------|-----|-----|
+| `issue-req` | — | — | WRITE |
+| `issue-create` | READ | READ | READ |
+| `issue-work` | READ+WRITE | READ | READ |
+| `issue-close` | — | — | READ |
+
+#### データフロー図
+
+```
+REQ(WRITE) → Issue(specs READ, ADR READ) → Work Plan(specs READ+WRITE, ADR READ) → TDD実装 → specs更新 → issue-close(VERIFY)
+```
+
+- **issue-req**: REQファイルを新規作成・追記・更新する（WRITE）
+- **issue-create**: specs・ADRを読み込んでIssue本文に反映する（READ）
+- **issue-work**: specs・ADRを読み込んで実装計画を立て、実装後にspecsを更新する（READ+WRITE）
+- **issue-close**: REQを参照して完了確認・クリーンアップを行う（READ）
 
 ---
 
@@ -110,8 +132,8 @@ REQ → Issue → Work Plan（動的）→ TDD実装 → specs更新
 | コマンド              | 入力SSoT               | 出力SSoT                          | 完了後マクロフェーズ |
 | --------------------- | ---------------------- | --------------------------------- | -------------------- |
 | `issue-req`           | セッション会話         | 要件doc                           | ①バイブス壁打ち     |
-| `issue-create`        | 要件doc                | GitHub Issue                      | ②構造的実行         |
-| `issue-work`          | GitHub Issue           | GitHub PR + worktree + ブランチ   | ③レビュー完了       |
+| `issue-create`        | 要件doc, specs READ, ADR READ | GitHub Issue                      | ②構造的実行         |
+| `issue-work`          | GitHub Issue, specs READ+WRITE, ADR READ | GitHub PR + worktree + ブランチ   | ③レビュー完了       |
 | `issue-update`        | GitHub Issue           | GitHub Issue + REQファイル（APPEND/UPDATE対応） | 変更なし            |
 | `issue-close`         | GitHub Issue + PR      | なし                              | ③レビュー完了       |
 | `issue-next`          | 複数                   | 適切なコマンド実行                 | 依存                |
@@ -268,7 +290,7 @@ issue-*ワークフローで操作する docs/ の5区分構造。
 | guides/ | 開発ガイド（参照のみ） | setup.md, api-reference.md, testing-and-debugging.md | — |
 | requirements/ | 要件管理 | README.md + REQ-{NNNN}.md | issue-req(CREATE), issue-create(READ), issue-update(UPDATE) |
 | adr/ | ADR | README.md + ADR-{NNNN}.md | adr-guidelines(CREATE) |
-| specs/ | システム仕様 | system.md, patterns.md | issue-close(UPDATE) |
+| specs/ | システム仕様 | system.md, patterns.md | issue-work(READ+WRITE), issue-close(VERIFY) |
 | tips/ | 学び | inbox.md + *.md | tips-add(UPDATE), tips-refactor(CREATE) |
 
 ---
