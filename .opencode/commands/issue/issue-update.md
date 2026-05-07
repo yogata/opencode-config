@@ -5,6 +5,8 @@ load_skills:
   - issue-guide
   - gh-cli-best-practices
   - req-file-manager
+  - req-analysis
+  - deviation-check
 ---
 
 # Issue更新

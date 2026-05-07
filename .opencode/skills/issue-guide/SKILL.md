@@ -104,6 +104,8 @@ REQ → Issue → Work Plan（動的）→ TDD実装 → specs更新
 | `issue-create` | READ | READ | READ |
 | `issue-work` | READ+WRITE | READ | READ |
 | `issue-close` | — | — | READ |
+| `issue-update` | — | — | READ+WRITE |
+| `issue-next` | READ | READ | READ |
 
 #### データフロー図
 
@@ -344,5 +346,18 @@ issue-guideはハブスキルとして、他の専門スキルが提供する知
 | ------------------ | -------------------------------------------------------------- |
 | `req-analysis`     | 要件分析手法（機能/非機能要件の展開観点、壁打ちメソッドロジー）   |
 | `deviation-check`  | 乖離検出（実装と要件の乖離基準、ループバック判定）              |
+| `adr-file-manager` | ADRファイルの作成・追記・更新操作とバリデーション               |
+| `adr-guidelines`   | ADR作成の必要性判定基準・ライフサイクル定義                     |
+| `req-file-manager` | REQファイルの作成・追記・更新操作とバリデーション               |
 
 **注意**: issue-guideはハブとして他スキルを参照するが、他スキルからissue-guideを参照しない（一方向依存）。
+
+---
+
+## See Also
+
+- **adr-file-manager**: ADRファイルの作成・追記・更新操作とバリデーション
+- **adr-guidelines**: ADR作成の必要性判定基準・ライフサイクル定義
+- **req-file-manager**: REQファイルの作成・追記・更新操作とバリデーション
+- **req-analysis**: 要件分析手法（機能/非機能要件の展開観点、壁打ちメソッドロジー）
+- **deviation-check**: 乖離検出（実装と要件の乖離基準、ループバック判定）
