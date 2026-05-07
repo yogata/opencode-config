@@ -1,4 +1,13 @@
-# ADR-NNN: {タイトル}
+---
+id: ADR-{NNNN}
+title: ""
+status: proposed
+created: "YYYY-MM-DD"
+updated: "YYYY-MM-DD"
+tags: []
+---
+
+# ADR-{NNNN}: {タイトル}
 
 ## Context
 
@@ -15,7 +24,3 @@
 ## Consequences
 
 {結果・影響}
-
-## Status
-
-proposed | accepted | deprecated | superseded
