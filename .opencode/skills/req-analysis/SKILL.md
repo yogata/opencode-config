@@ -164,3 +164,12 @@ Issue本文のチェックボックスが満たすべき品質条件。
 ### ADR参照
 
 ADRが必要と判定された場合 → `adr-guidelines` スキルを参照し、ADRを作成する。
+
+---
+
+## See Also
+
+- **req-file-manager**: REQファイルの作成・追記・更新操作とバリデーション
+- **adr-guidelines**: ADR作成の必要性判定基準・ライフサイクル定義
+- **issue-guide**: issue-*ワークフロー統括ハブ
+- **deviation-check**: 乖離検出（影響REQ番号の特定）
