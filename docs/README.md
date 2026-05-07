@@ -10,6 +10,7 @@
   - [REQ-0003: issue-*コマンドのagent変更と壁打ち結論ハイライト追加](requirements/REQ-0003.md)
   - [REQ-0004: issue-reqワークフローの再設計](requirements/REQ-0004.md)
   - [REQ-0005: issue-*コマンドのサブエージェント最終出力のverbatim出力](requirements/REQ-0005.md)
+  - [REQ-0006: issue-*コマンド完了報告フォーマットのシンプル化](requirements/REQ-0006.md)
 
 ## Specifications
 
