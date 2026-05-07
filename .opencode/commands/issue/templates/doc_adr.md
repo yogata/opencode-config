@@ -4,7 +4,6 @@ title: ""
 status: proposed
 created: "YYYY-MM-DD"
 updated: "YYYY-MM-DD"
-tags: []
 ---
 
 # ADR-{NNNN}: {タイトル}
