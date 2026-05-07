@@ -6,6 +6,8 @@ load_skills:
   - deviation-check
   - issue-guide
   - git-worktree
+  - req-file-manager
+  - adr-file-manager
 ---
 
 # 実装パイプライン

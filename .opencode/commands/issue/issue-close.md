@@ -5,6 +5,7 @@ load_skills:
   - issue-guide
   - gh-cli-best-practices
   - git-worktree
+  - req-file-manager
 ---
 
 # 完了処理

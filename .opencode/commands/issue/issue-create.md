@@ -4,6 +4,9 @@ agent: sisyphus
 load_skills:
   - issue-guide
   - gh-cli-best-practices
+  - req-file-manager
+  - req-analysis
+  - adr-file-manager
 ---
 
 # Issue登録

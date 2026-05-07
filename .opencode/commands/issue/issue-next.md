@@ -4,6 +4,7 @@ agent: sisyphus
 load_skills:
   - issue-guide
   - deviation-check
+  - req-analysis
 ---
 
 # issue-next
