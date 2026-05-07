@@ -173,3 +173,11 @@ description: Detects deviations between implementation and requirements as a qua
 ### 重要事項
 
 自動ループバックはしない。エージェントが推奨アクションを提案し、ユーザーが決定する。
+
+---
+
+## See Also
+
+- **req-analysis**: 要件分析手法（乖離検出の基準となる品質基準）
+- **req-file-manager**: REQファイル管理（乖離対象の要件doc参照）
+- **issue-guide**: issue-*ワークフロー統括ハブ（レビューNG対応フロー）
