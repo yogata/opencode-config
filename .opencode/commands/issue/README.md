@@ -24,8 +24,10 @@ description: issue コマンドセットの使用ガイド
 |---|---|
 | `issue-guide` | ワークフロー統括ハブ（フェーズ・パターン・検証） |
 | `req-analysis` | 要件分析手法（機能・非機能の分析・品質基準） |
+| `req-file-manager` | REQファイル管理（作成・追記・更新・バリデーション） |
 | `deviation-check` | 乖離検出（要件とのズレ検知・ループバック判定） |
 | `adr-guidelines` | ADR閾値判定（アーキテクチャ級の決定） |
+| `adr-file-manager` | ADRファイル管理（作成・追記・更新・バリデーション） |
 
 ## コマンド一覧
 
@@ -33,12 +35,12 @@ L2薄化形式（Input/Output/Steps+スキル参照/Guardrails）。詳細は各
 
 | コマンド | 役割 | スキル参照 |
 |---|---|---|
-| `/issue/issue-req` | 要件定義（壁打ち） | req-analysis, adr-guidelines |
-| `/issue/issue-create` | Issue登録 | issue-guide |
-| `/issue/issue-work` | 実装パイプライン | req-analysis, deviation-check |
-| `/issue/issue-update` | Issue更新 | issue-guide |
-| `/issue/issue-close` | 完了処理 | issue-guide |
-| `/issue/issue-next` | 次コマンド推論 | deviation-check |
+| `/issue/issue-req` | 要件定義（壁打ち） | req-analysis, adr-guidelines, issue-guide, req-file-manager |
+| `/issue/issue-create` | Issue登録 | issue-guide, gh-cli-best-practices, req-file-manager, req-analysis, adr-file-manager |
+| `/issue/issue-work` | 実装パイプライン | req-analysis, deviation-check, issue-guide, git-worktree, req-file-manager, adr-file-manager |
+| `/issue/issue-update` | Issue更新 | issue-guide, gh-cli-best-practices, req-file-manager, req-analysis, deviation-check |
+| `/issue/issue-close` | 完了処理 | issue-guide, gh-cli-best-practices, git-worktree, req-file-manager |
+| `/issue/issue-next` | 次コマンド推論 | issue-guide, deviation-check, req-analysis |
 
 ## 基本フロー
 
