@@ -66,3 +66,9 @@ L2薄化形式（Input/Output/Steps+スキル参照/Guardrails）。詳細は各
 ## テンプレート
 
 `templates/` ディレクトリに配置。詳細は `issue-guide-phases` スキルを参照。
+
+| テンプレート | 用途 | ラベル |
+|---|---|---|
+| `issue_desc_feature.md` | 機能追加 | `enhancement`, `feature` |
+| `issue_desc_bug.md` | バグ修正 | `bug` |
+| `issue_desc_spike.md` | 技術調査・スパイク | `spike`, `research` |
