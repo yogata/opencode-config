@@ -163,10 +163,10 @@ Issueに対して計画立案から実装・コミットまでを一気通貫で
 
 **べき等性**: PRが既に存在する場合、Steps 8-11をスキップしてStep 12のみ実行（完了報告）。
 
-**Step 8**: 実装完了後、乖離検出 → `deviation-check` の検出観点に従ってチェック
+**Step 8**: 実装完了後、乖離検出 → `deviation-check` の検出観点に従ってチェック。報告時は `.opencode/commands/issue/templates/report_deviation.md` テンプレートを使用
 - 乖離検出でエラーが発生した場合、検出済みの結果を保持し、ユーザーに再試行またはスキップの選択を提示
 
-**Step 9**: 乖離があれば報告 → `deviation-check` の報告フォーマットに従ってユーザーに提示
+**Step 9**: 乖離があれば報告 → `deviation-check` の報告フォーマット + `.opencode/commands/issue/templates/report_deviation.md` テンプレートでユーザーに提示
 - 乖離がある場合、ユーザーの指示を待機（自動修正禁止）
 - ユーザーが「継続」を選択した場合のみ次Stepへ進む
 
@@ -180,7 +180,7 @@ Issueに対して計画立案から実装・コミットまでを一気通貫で
 
 **Step 11**: ローカル検証（型チェック・Lint・ビルド・テスト）→ PR作成
 - **検証失敗時**: エラー内容を報告し、Phase Bへ戻ることを提案（ユーザー判断）
-- 検証成功時のみPR作成 → `gh pr create` を `gh-cli-best-practices` に従って `--body-file` で実行
+- 検証成功時のみPR作成 → `gh pr create` を `gh-cli-best-practices` に従って `--body-file` で実行。PR本文は `.opencode/commands/issue/templates/pr_desc.md` テンプレートに従って生成
 - **べき等チェック**: PRが既に存在する場合、作成をスキップ
 
 **Step 11（多重Issueモード）**: 各Issueについて親エージェントがworktree内で `gh pr create` を実行
