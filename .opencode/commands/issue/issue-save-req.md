@@ -34,8 +34,11 @@ issue-req（Prometheus）で壁打ちした成果物をREQ/ADRファイルとし
    - **CREATE**: テンプレート適用、最大REQ番号+1で採番、`docs/requirements/REQ-{NNNN}.md` に保存
    - **APPEND**: 既存REQファイルにセクション追記、frontmatter updated 更新
    - **UPDATE**: 既存REQファイルの該当セクション更新、frontmatter updated 更新
-5. インデックス更新: `docs/requirements/README.md` のインデックスに新規REQを追加、`docs/README.md` のドキュメントハブにリンク追加（CREATE の場合のみ）
-6. ADR ファイル作成（`draft-meta` の `adr-required: true` の場合のみ）→ `adr-file-manager` に従って ADR ファイルを作成
+5. インデックス・ハブ更新:
+   - **docs/requirements/README.md**: CREATE時は新規行を追加、APPEND/UPDATE時は該当REQのtitle/status列をfrontmatter値に合わせて更新
+   - **docs/README.md**: CREATE時は新規リンクをREQ番号順の正しい位置に挿入、APPEND/UPDATE時は該当REQのリンクテキスト（タイトル変更時のみ）を更新
+   - 両ファイルの更新後、`req-file-manager` の整合性チェック自動修正手順に従って検証
+6. ADR ファイル作成（`draft-meta` の `adr-required: true` の場合のみ）→ `adr-file-manager` に従って ADR ファイルを作成。作成後、`docs/README.md` にADRセクションが存在しない場合は追加し、ADRエントリを記載
 7. docs 変更整合性検証: REQ番号の連続性確認、frontmatter の `id` とファイル名の一致を確認
 8. 変更範囲検証: `git diff --name-only` で変更ファイル一覧を取得し、`docs/` 以外の変更が含まれていれば即座に取り消し（`git checkout -- <file>`）、ユーザーに警告
 9. コミット・プッシュ → `conventional-commits` に従ってコミットメッセージを生成し、mainブランチに push

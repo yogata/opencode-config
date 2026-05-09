@@ -177,6 +177,41 @@ planned → deprecated
 - インデックスに記載されているがファイルが存在しないREQを検出
 - ファイルが存在するがインデックスに未記載のREQを検出
 
+### 整合性チェック自動修正手順
+
+REQファイル・docs/requirements/README.md・docs/README.md間の整合性を検証し、自動修正する手順。
+
+#### 検証項目
+
+| チェック対象 | 検証内容 | 自動修正 |
+|-------------|---------|---------|
+| docs/requirements/ 配下のファイル | 全REQファイルが存在するか | 欠落ファイルは警告のみ（自動作成しない） |
+| docs/requirements/README.md インデックス | 全REQファイルがテーブルに記載されているか | 未記載のREQをテーブルに追加 |
+| docs/requirements/README.md インデックス | テーブルに記載されたREQのファイルが存在するか | 存在しないエントリをテーブルから削除 |
+| docs/README.md ドキュメントハブ | 全REQファイルがリンクとして記載されているか | 未記載のREQをリンクとして追加 |
+| docs/README.md ドキュメントハブ | リンク先のREQファイルが存在するか | 存在しないエントリを削除 |
+| REQ frontmatter id | ファイル名と一致するか | エラーとして報告（自動修正しない） |
+| REQ frontmatter status | docs/requirements/README.mdのStatusと一致するか | テーブル側をREQ frontmatterに合わせる |
+
+#### 自動修正の実行手順
+
+1. `docs/requirements/REQ-*.md` ファイル一覧を取得
+2. 各REQファイルのfrontmatterから `id`, `title`, `status` を読み取り
+3. `docs/requirements/README.md` のテーブルと照合:
+   - ファイルが存在するがテーブルにない → テーブルに追加
+   - テーブルにあるがファイルが存在しない → テーブルから削除
+   - title または status が不一致 → テーブルを frontmatter 値で更新
+4. `docs/README.md` の Requirements セクションと照合:
+   - ファイルが存在するがリンクがない → リンクを追加（REQ番号順の正しい位置に挿入）
+   - リンクがあるがファイルが存在しない → リンクを削除
+5. 変更があった場合は `docs/requirements/README.md` と `docs/README.md` を更新
+
+#### 実行タイミング
+
+この整合性チェックは以下のタイミングで実行する:
+- `issue-save-req` の Step 7（docs変更整合性検証）で実行
+- `issue-close` の Step 3（docs検証）で実行
+
 ---
 
 ## 関連情報管理
