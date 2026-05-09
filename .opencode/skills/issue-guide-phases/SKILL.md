@@ -154,6 +154,7 @@ Issueラベルの定義と自動付与ルールを定義する。
 
 - `bug`, `critical` → パターンA（小）: バグ修正・軽微変更、docs/更新なし
 - `feature`, `enhancement` → パターンB（中）: 新機能追加、docs/更新あり
+- `spike`, `research` → パターンS（調査）: 技術調査・研究、ADR出力のみ
 
 ### ラベルマッピング
 
@@ -163,6 +164,7 @@ Issueラベルの定義と自動付与ルールを定義する。
 | バグ修正（緊急）   | `bug`, `critical`                                         |
 | 機能追加           | `enhancement`, `feature`                                  |
 | 機能追加（要検討） | `enhancement`, `feature`, `needs-discussion`              |
+| 技術調査・スパイク | `spike`, `research`                                       |
 
 ---
 
