@@ -177,6 +177,41 @@ planned → deprecated
 - インデックスに記載されているがファイルが存在しないREQを検出
 - ファイルが存在するがインデックスに未記載のREQを検出
 
+## ステータス同期
+
+### Issue close → REQ status 更新
+
+Issue close 時に、関連REQの status を自動更新する。`issue-close` Step 5 で実行。
+
+**更新手順**:
+
+1. Issue本文からREQ番号を抽出（`REQ-{NNNN}` パターンを検索）
+2. 各REQファイルの frontmatter `status` を確認
+3. 以下のルールで更新:
+   - `planned` → `implemented`（要件が実装完了）
+   - `in-progress` → `implemented`（実装中要件が完了）
+   - `implemented` → スキップ（既に完了済み）
+   - `deprecated` → 警告表示してスキップ（廃止済みは更新不可）
+4. frontmatter `updated` フィールドを現在日時に更新
+5. `docs/requirements/README.md` テーブルの該当行の Status を `implemented` に更新
+
+**遷移ルール**: 本スキルの「ステータス遷移ルール」に準拠。禁止遷移に該当する場合は警告表示してスキップ。
+
+### 不整合検出
+
+REQ status と Issue status の不整合を検出する。
+
+**検出手順**:
+
+1. `docs/requirements/` 配下の全REQファイルの frontmatter `status` を取得
+2. 各REQ番号が記載されたIssue（`gh issue list --search "REQ-{NNNN}"`）の状態を取得
+3. 以下の不整合パターンを検出:
+   - **Issue closed + REQ `planned`/`in-progress`** → 不整合（Issue完了だがREQ未更新）
+   - **Issue open + REQ `implemented`** → 要確認（実装済みだがIssue未クローズ）
+4. 検出結果を報告（修正は手動または `issue-update --req` で対応）
+
+**実行タイミング**: `issue-close` Step 5 での自動実行、または手動確認
+
 ---
 
 ## 関連情報管理
