@@ -163,8 +163,9 @@ Issueに対して計画立案から実装・コミットまでを一気通貫で
 
 **べき等性**: PRが既に存在する場合、Steps 8-11をスキップしてStep 12のみ実行（完了報告）。
 
-**Step 8**: 実装完了後、乖離検出 → `deviation-check` の検出観点に従ってチェック。報告時は `.opencode/commands/issue/templates/report_deviation.md` テンプレートを使用
+**Step 8**: 実装完了後、乖離検出 → `deviation-check` の検出観点に従ってチェック。品質メトリクス収集も併せて実行（`docs/specs/quality-specs.md` 参照）。報告時は `.opencode/commands/issue/templates/report_deviation.md` テンプレートを使用
 - 乖離検出でエラーが発生した場合、検出済みの結果を保持し、ユーザーに再試行またはスキップの選択を提示
+- 品質メトリクス収集結果は乖離検出報告に併記する
 
 **Step 9**: 乖離があれば報告 → `deviation-check` の報告フォーマット + `.opencode/commands/issue/templates/report_deviation.md` テンプレートでユーザーに提示
 - 乖離がある場合、ユーザーの指示を待機（自動修正禁止）
