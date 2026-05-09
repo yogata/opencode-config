@@ -154,29 +154,27 @@ Issueラベルの定義、パターン判定、およびパターン固有の動
 |---------|------|-----------|------|-----------|----------------|
 | A | バグ修正・軽微変更 | `bug`, `critical` | 小 | なし | issue-req → issue-create → issue-work → issue-close |
 | B | 機能追加 | `enhancement`, `feature` | 中 | あり | issue-req → issue-save-req → issue-create → issue-work → issue-close |
-| S | 技術調査 | `spike`, `research` | 調査 | ADR出力のみ | issue-req → issue-create → issue-work → issue-close |
 
 ### Pattern 判定ルール
 
 - `bug`, `critical` → Pattern A
 - `enhancement`, `feature` → Pattern B
-- `spike`, `research` → Pattern S
 - `needs-discussion` は任意のPatternに付与可能（判定には影響しない）
 
 ### Pattern 固有の動作ルール
 
-| 項目 | Pattern A | Pattern B | Pattern S |
-|------|-----------|-----------|-----------|
-| REQ ファイル | 作成しない | `issue-save-req` で作成 | 作成しない |
-| ADR ファイル | 必要に応じて | `issue-save-req` で作成 | 出力のみ |
-| specs 更新 | スキップ | `issue-work` で更新 | スキップ |
-| ドラフト保存 | しない | `.sisyphus/drafts/` に保存 | しない |
-| issue-save-req | 実行不可 | 実行する | 実行不可 |
-| ブランチ type | `fix` | `feature` | `feature` |
-| Issue テンプレート | `issue_desc_bug.md` | `issue_desc_feature.md` | `issue_desc_spike.md` |
-| コメントテンプレート | `issue_comment_bug_analysis.md` | `issue_comment_feature_technical.md` | — |
-| close テンプレート | `issue_comment_bug_record.md` | `issue_comment_feature_implementation.md` | — |
-| docs 検証 (close) | スキップ | 実行する | スキップ |
+| 項目 | Pattern A | Pattern B |
+|------|-----------|-----------|
+| REQ ファイル | 作成しない | `issue-save-req` で作成 |
+| ADR ファイル | 必要に応じて | `issue-save-req` で作成 |
+| specs 更新 | スキップ | `issue-work` で更新 |
+| ドラフト保存 | しない | `.sisyphus/drafts/` に保存 |
+| issue-save-req | 実行不可 | 実行する |
+| ブランチ type | `fix` | `feature` |
+| Issue テンプレート | `issue_desc_bug.md` | `issue_desc_feature.md` |
+| コメントテンプレート | `issue_comment_bug_analysis.md` | `issue_comment_feature_technical.md` |
+| close テンプレート | `issue_comment_bug_record.md` | `issue_comment_feature_implementation.md` |
+| docs 検証 (close) | スキップ | 実行する |
 
 ### ラベルマッピング
 
@@ -186,7 +184,6 @@ Issueラベルの定義、パターン判定、およびパターン固有の動
 | バグ修正（緊急）   | `bug`, `critical`                                         |
 | 機能追加           | `enhancement`, `feature`                                  |
 | 機能追加（要検討） | `enhancement`, `feature`, `needs-discussion`              |
-| 技術調査・スパイク | `spike`, `research`                                       |
 
 ---
 
