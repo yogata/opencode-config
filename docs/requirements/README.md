@@ -18,3 +18,4 @@
 | REQ-0014 | issue-close コマンドの学び抽出ステップ修正（tips-capture 整合性）                     | planned     |
 | REQ-0015 | 定期的残課題バックログ抽出ワークフローの策定（issue-backlog コマンド）                         | planned     |
 | REQ-0016 | gh CLI読み取り安全性の追加（文字化け対策）                                               | planned     |
+| REQ-0017 | issue-work 複数Issue並列実行機能                                                          | planned     |

@@ -18,6 +18,7 @@
   - [REQ-0014: issue-close コマンドの学び抽出ステップ修正](requirements/REQ-0014.md)
   - [REQ-0015: 定期的残課題バックログ抽出ワークフローの策定](requirements/REQ-0015.md)
   - [REQ-0016: gh CLI読み取り安全性の追加（文字化け対策）](requirements/REQ-0016.md)
+  - [REQ-0017: issue-work 複数Issue並列実行機能](requirements/REQ-0017.md)
 
 ## Specifications
 
