@@ -21,4 +21,4 @@
 | REQ-0017 | issue-work 複数Issue並列実行機能                                                          | planned     |
 | REQ-0018 | issue-close Epic自動クローズ機能                                                          | implemented     |
 | REQ-0019 | issue-backlog: バックログ抽出済みマーキングによる再抽出防止                              | implemented |
-| REQ-0020 | Epic Issueステータス追跡の自動化                                                        | planned     |
+| REQ-0020 | Epic Issueステータス追跡の自動化                                                        | implemented     |
