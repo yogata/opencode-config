@@ -28,3 +28,4 @@
 | REQ-0024 | 全スキル品質改善: skill-authoring-best-practices 準拠                                 | implemented     |
 | REQ-0025 | スキル品質改善: skill-authoring-best-practices準拠のトリガー・一貫性修正 | implemented |
 | REQ-0026 | epic-status-tracker 未着手ステータスの表記統一（アイコン＋テキスト） | implemented |
+| REQ-0027 | 要件管理体制の再構築：領域別総体管理と仕様体系の確立 | planned |
