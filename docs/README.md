@@ -24,6 +24,7 @@
   - [REQ-0017: issue-work 複数Issue並列実行機能](requirements/REQ-0017.md)
   - [REQ-0018: issue-close Epic自動クローズ機能](requirements/REQ-0018.md)
   - [REQ-0019: issue-backlog: バックログ抽出済みマーキングによる再抽出防止](requirements/REQ-0019.md)
+  - [REQ-0020: Epic Issueステータス追跡の自動化](requirements/REQ-0020.md)
 
 ## Specifications
 
