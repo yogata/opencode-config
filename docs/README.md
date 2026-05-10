@@ -32,6 +32,15 @@
   - [REQ-0025: スキル品質改善: skill-authoring-best-practices準拠のトリガー・一貫性修正](requirements/REQ-0025.md)
   - [REQ-0026: epic-status-tracker 未着手ステータスの表記統一（アイコン＋テキスト）](requirements/REQ-0026.md)
   - [REQ-0027: 要件管理体制の再構築：領域別総体管理と仕様体系の確立](requirements/REQ-0027.md)
+  - [REQ-0028: Issue Workflow Architecture](requirements/REQ-0028.md)
+  - [REQ-0029: Issue Command Protocol](requirements/REQ-0029.md)
+  - [REQ-0030: Issue Parallel Execution](requirements/REQ-0030.md)
+  - [REQ-0031: Requirements & ADR Document System](requirements/REQ-0031.md)
+  - [REQ-0032: Epic Issue Management](requirements/REQ-0032.md)
+  - [REQ-0033: Sisyphus Plan Infrastructure](requirements/REQ-0033.md)
+  - [REQ-0034: Knowledge Pipeline](requirements/REQ-0034.md)
+  - [REQ-0035: Skill Quality Framework](requirements/REQ-0035.md)
+  - [REQ-0036: Template System](requirements/REQ-0036.md)
 
 ## Specifications
 
