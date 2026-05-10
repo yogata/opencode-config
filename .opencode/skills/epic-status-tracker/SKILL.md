@@ -5,7 +5,7 @@ description: Updates parent Epic Issue status tracking tables across issue-work 
 
 # Epic Status Tracker
 
-親Epic Issueのステータス追跡テーブル（☐ / 🔄 進行中 / ✅ 完了 / ❌ 対処不要）を更新する知識ベース。
+親Epic Issueのステータス追跡テーブル（☐ 未着手 / 🔄 進行中 / ✅ 完了 / ❌ 対処不要）を更新する知識ベース。
 
 - **参照元**: `issue-work`（Phase A: 進行中更新）、`issue-close`（Step 8: 完了更新）
 - **特性**: 宣言的定義のみ提供。手順・手続きは各コマンド定義に委ねる
@@ -14,7 +14,7 @@ description: Updates parent Epic Issue status tracking tables across issue-work 
 
 | 値 | 意味 | 設定タイミング | 終了状態 |
 |---|---|---|---|
-| `☐` | 子Issue未着手 | Epic作成時（初期値） | いいえ |
+| `☐ 未着手` | 子Issue未着手 | Epic作成時（初期値） | いいえ |
 | `🔄 進行中` | 子Issue作業中 | `issue-work` Phase A | いいえ |
 | `✅ 完了 ([PR#N](URL))` | 子Issue完了 | `issue-close` Step 8 | はい |
 | `❌ 対処不要` | 対処不要（手動設定） | ユーザー手動 | はい |
@@ -35,7 +35,7 @@ description: Updates parent Epic Issue status tracking tables across issue-work 
 2. 親Epicが存在しない → スキップ
 3. `gh issue view {N}` でEpic本文を取得（`gh-cli-best-practices` 準拠）
 4. 正規表現で該当子Issue行を特定・置換（後述「正規表現パターン」の新4列/旧4列形式に対応）:
-   - 新4列: `(\| \d+-\d+ \| #{child_issue} \| )☐(\|)` → `$1🔄 進行中$2`
+   - 新4列: `(\| \d+-\d+ \| #{child_issue} \| )☐ 未着手(\|)` → `$1🔄 進行中$2`
    - 旧4列: `(\| \d+ \| #{child_issue} \| [^|]* \| )☐ 未着手(\|)` → `$1🔄 進行中$2`
 5. 既に `🔄 進行中`、`✅ 完了`、または `❌ 対処不要` の場合 → スキップ（べき等性）
 6. `gh issue edit {N} --body-file {temp}` でEpic本文を更新
@@ -61,7 +61,7 @@ Epic本文のステータス追跡テーブルは以下の2形式をサポート
 ```markdown
 | # | Issue | ステータス | 内容 |
 |---|-------|-----------|------|
-| 1-1 | #42 | ☐ | 子Issueの概要 |
+| 1-1 | #42 | ☐ 未着手 | 子Issueの概要 |
 | 1-2 | #43 | 🔄 進行中 | 子Issueの概要 |
 | 1-3 | #44 | ✅ 完了 ([PR#100](https://...)) | 子Issueの概要 |
 | 1-4 | #45 | ❌ 対処不要 | 子Issueの概要 |
@@ -81,14 +81,14 @@ Epic本文のステータス追跡テーブルは以下の2形式をサポート
 ### 新4列形式: 未着手 → 進行中
 
 ```
-検索: (\| \d+-\d+ \| #{child_issue} \| )☐(\|)
+検索: (\| \d+-\d+ \| #{child_issue} \| )☐ 未着手(\|)
 置換: $1🔄 進行中$2
 ```
 
 ### 新4列形式: 進行中/未着手 → 完了
 
 ```
-検索: (\| \d+-\d+ \| #{child_issue} \| )(☐|🔄 進行中)(\|)
+検索: (\| \d+-\d+ \| #{child_issue} \| )(☐ 未着手|🔄 進行中)(\|)
 置換: $1✅ 完了 ([PR#{pr_number}]({pr_url}))$3
 ```
 
@@ -112,7 +112,11 @@ Epic本文のステータス追跡テーブルは以下の2形式をサポート
 べき等性確認時は `✅ 完了` で前方一致させる:
 
 ```
+旧4列形式:
 検索: \| \d+ \| #{child_issue} \|[^|]*\| ✅ 完了
+
+新4列形式:
+検索: \| \d+-\d+ \| #{child_issue} \| ✅ 完了
 ```
 
 ### べき等性確認
