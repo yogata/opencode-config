@@ -26,9 +26,9 @@ load_skills:
 ## Steps
 
 1. ユーザーとの壁打ち対話を開始 → `req-analysis` の壁打ちメソッドロジーに従って深掘り
-2. 機能要件/非機能要件を展開 → `req-analysis` の分析観点に従って網羅
+2. 要件を展開 → `req-analysis` の分析観点に従って網羅
 3. ADR閾値以上の技術判断が発生した場合 → `adr-guidelines` に従ってADR判断を記録（ADRファイルの作成は issue-save-req で実行）
-4. 要件doc形式で生成 → テンプレート: `.opencode/commands/issue/templates/doc_requirement.md` を Read tool で読み込み、内容を構造化
+4. 要件doc形式で生成 → テンプレート: `.opencode/commands/issue/templates/doc_requirement.md` を Read tool で読み込み、目的/要件/適用範囲の構造に従って内容を構造化
 5. パターン判定:
     - ラベルに基づいて Pattern 判定: `bug`, `critical` → Pattern A, `enhancement`, `feature` → Pattern B
 6. スケール判断（Pattern B のみ実行）:
@@ -44,7 +44,7 @@ load_skills:
       - スケール判断結果と分解計画をユーザーに提示し、承認を求める
     - **standard と判定された場合**: 分解不要、そのまま単一Issueで進むことを提示し承認を求める
 7. ドラフト保存:
-    - **パターンB（機能追加）**: `.sisyphus/drafts/req-draft-{topic-slug}.md` にドラフトを保存。ドラフトは doc_requirement.md テンプレート構造に以下のメタデータセクションを追加:
+    - **パターンB（機能追加）**: `.sisyphus/drafts/req-draft-{topic-slug}.md` にドラフトを保存。ドラフトは doc_requirement.md テンプレート構造（目的/要件/適用範囲）に以下のメタデータセクションを追加:
       ```markdown
       ## draft-meta（issue-save-req 用）
 
