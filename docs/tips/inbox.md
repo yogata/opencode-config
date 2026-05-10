@@ -5,6 +5,15 @@
 
 ---
 
+## 2026-05-10: issue-backlog由来Issueの不明確さへの対処方針
+
+- **事象**: issue-backlogで抽出した子Issue（例: staff-schedule#739）が、元issue/PRの「対象外」1行文のみを出典とするため、概要がタイトルの再述に過ぎず極めて不明確になった
+- **原因**: issue-backlogは①バイブス壁打ちフェーズのショートカット経路であり、構造的抽出のみを行う設計。元ソースに情報が少ない場合、深掘り能力がない（設計上の制約）
+- **対策**: 方針C — backlog Issueは「まだらな未整理リスト（プレースホルダー）」として許容し、着手時にissue-reqで壁打ち深掘りする。フロー: issue-backlog（粗いIssue作成）→ 着手時にissue-req（壁打ち）→ issue-save-req（docs保存）→ issue-update（既存Issue更新）→ issue-work（実装）。既存Issue更新はissue-createではなくissue-updateを使用する点に注意。
+- **タグ**: #ワークフロー #issue-backlog #要件定義 #プロセス設計
+
+---
+
 ## ADR管理スキルの設計パターン
 
 **状況**: adr-file-manager スキルの新規作成と adr-guidelines の更新を行った
