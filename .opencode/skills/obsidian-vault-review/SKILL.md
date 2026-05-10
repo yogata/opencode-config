@@ -28,6 +28,31 @@ Obsidian Vaultの定期レビューを行う際に使用：
 | 四半期レビュー | 3ヶ月毎 | 四半期目標達成状況 | `references/quarterly-review.md` |
 | 年次レビュー | 1年毎 | 年間振り返り、次年計画 | `references/yearly-review.md` |
 
+## Review Types
+
+### Daily Review
+Quick inbox triage and daily accomplishments. Move notes from `00_inbox` to appropriate folders, tag unprocessed items, and record key achievements. Target: 5-10 minutes.
+
+### Weekly Review
+Reflect on the past week's progress and plan the next. Review project status, process remaining inbox items, and update weekly objectives. Target: 20-30 minutes.
+
+### Monthly Review
+Assess monthly achievements and project milestones. Review goal progress, identify stalled projects, and re-prioritize tasks. Target: 30-60 minutes.
+
+### Quarterly Review
+Evaluate quarterly objective completion and adjust long-term goals. Analyze trends across months, identify systemic patterns, and set next quarter's OKRs. Target: 1-2 hours.
+
+### Yearly Review
+Comprehensive annual reflection and next-year planning. Review all quarters, archive completed projects, and define annual themes and objectives. Target: 2-4 hours.
+
 ## Implementation
 
-レビュー実施時は、適切な参照ファイルを確認し、手順に従って進めてください。各参照ファイルには具体的なDataviewクエリとチェックリストが含まれています。
+各レビュー種別の具体的なDataviewクエリとチェックリストは、対応する参照ファイルに記載されています:
+
+- 日次: [references/daily-review.md](references/daily-review.md)
+- 週次: [references/weekly-review.md](references/weekly-review.md)
+- 月次: [references/monthly-review.md](references/monthly-review.md)
+- 四半期: [references/quarterly-review.md](references/quarterly-review.md)
+- 年次: [references/yearly-review.md](references/yearly-review.md)
+
+レビュー実施時は、上記の対応する参照ファイルを読み込み、手順に従ってください。

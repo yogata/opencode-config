@@ -1,6 +1,6 @@
 ---
 name: epic-status-tracker
-description: 親Epic Issueのステータス追跡テーブルを更新するプロトコル。issue-work Phase A（🔄 進行中）と issue-close Step 8（✅ 完了）から参照される。
+description: Updates parent Epic Issue status tracking tables across issue-work and issue-close workflows. USE FOR: updating Epic status to in-progress or completed, tracking child Issue progress in parent Epics, detecting parent-child relationships via Parent: #N patterns. DO NOT USE FOR: creating Epics, managing non-Epic Issues, or general Issue operations.
 ---
 
 # Epic Status Tracker

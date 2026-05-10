@@ -1,6 +1,6 @@
 ---
 name: issue-guide-phases
-description: 開発ワークフローのフェーズ定義・SSoT遷移・パターン判定基準・コマンド関連・docs構造を提供。issue-*コマンドのフェーズ判定フェーズで参照される知識ベース。
+description: Provides development workflow phase definitions, SSoT transitions, pattern matching criteria, command mappings, and docs structure for the issue-* command pipeline. USE FOR: determining workflow phases, Pattern A/B classification, scale assessment, resolving command dependencies, or understanding docs/ directory layout. DO NOT USE FOR: specific command execution logic, requirement analysis, or compliance checking.
 ---
 
 # Issue Guide Phases スキル

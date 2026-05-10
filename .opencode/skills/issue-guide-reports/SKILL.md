@@ -1,6 +1,6 @@
 ---
 name: issue-guide-reports
-description: 各コマンドの完了報告フォーマット・チェックボックス更新ルール・サブエージェント出力ポリシーを提供。issue-*コマンドの完了報告時とサブエージェント利用時に参照される。
+description: Defines completion report formats, checkbox update rules, and sub-agent verbatim output policies for issue-* commands. USE FOR: generating command completion reports, updating Issue checkboxes, formatting sub-agent output, or applying report templates. DO NOT USE FOR: workflow phase definitions, pattern classification, or architecture decisions.
 ---
 
 # Issue Guide Reports スキル
