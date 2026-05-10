@@ -24,3 +24,4 @@
 | REQ-0020 | Epic Issueステータス追跡の自動化                                                        | implemented     |
 | REQ-0021 | skill-authoring-best-practices 再構成 — Waza品質概念マージ                              | implemented     |
 | REQ-0022 | Epic Issueテンプレートのepic-status-tracker互換化とバックログ専用テンプレート新設         | implemented     |
+| REQ-0023 | epic-status-tracker ステータス追跡テーブルフォーマット改善                              | planned         |
