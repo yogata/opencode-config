@@ -449,8 +449,8 @@
 
 | 機能 | コマンド | 判定 | 根拠 |
 |------|----------|------|------|
-| 壁打ち対話（Step 1-2） | issue-req | ✅ 使用中 | すべてのフローの起点。REQ-0001〜0005で基本設計完了 |
-| 承認ゲート（Step 6） | issue-req | ✅ 使用中 | REQ-0004で承認ゲートが追加された |
+| 壁打ち対話（Step 1-2） | issue-req | ✅ 使用中 | すべてのフローの起点。REQ-0001〜0002（旧REQ-0001〜0005）で基本設計完了 |
+| 承認ゲート（Step 6） | issue-req | ✅ 使用中 | REQ-0001（旧REQ-0004）で承認ゲートが追加された |
 | ドラフト保存（Step 5B） | issue-req | ✅ 使用中 | パターンBの標準フロー |
 | draft-meta セクション | issue-req/issue-save-req | ✅ 使用中 | issue-save-reqの入力SSoT |
 | ADR閾値判定（Step 3） | issue-req | ⚠️ 条件付き使用 | ADR閾値以上の技術判断が発生した場合のみ |
@@ -539,9 +539,9 @@ docs/ 検証（パターンBの場合）:
 
 ## Requirements
 - [Requirements Index](requirements/README.md)
-  - [REQ-0001: ...](requirements/REQ-0001.md)
+  - [REQ-0001: Issue Workflow Architecture](requirements/REQ-0001.md)
   ...
-  - [REQ-0015: ...](requirements/REQ-0015.md)
+  - [REQ-0009: Template System](requirements/REQ-0009.md)
 
 ## Specifications
 - [System Specification](specs/system.md)
