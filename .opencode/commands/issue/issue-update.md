@@ -38,12 +38,11 @@ load_skills:
    - **`--comment`**: テンプレート `.opencode/commands/issue/templates/issue_comment_update.md` を Read tool で読み込み → `gh issue comment`
    - **`--req`**: REQファイル更新（詳細フロー以下）:
       1. Issue番号から関連REQファイルを特定（Issue本文のREQ番号参照 or `docs/requirements/` から該当ファイル検索）
-      2. 更新タイプの判定（APPEND vs UPDATE）:
-         - **APPEND**: 既存セクションへの内容追加、新規セクション追加
-         - **UPDATE**: 既存セクションの内容修正（テキスト置換、ステータス変更等）
-      3. frontmatter `updated` フィールドを現在日時に更新
-      4. ステータス変更時は `req-file-manager` の遷移ルールを検証
-      5. ファイル書き出し → `gh issue edit` でIssue本文の該当箇所も同期
+       2. 更新タイプの判定（APPEND vs UPDATE）:
+          - **APPEND**: 要件テーブルへの行追加、適用範囲の拡張
+          - **UPDATE**: 既存セクション（目的/要件/適用範囲）の内容修正
+       3. frontmatter `updated` フィールドを現在日時に更新
+       4. ファイル書き出し → `gh issue edit` でIssue本文の該当箇所も同期
    - **`--review-ng`**: レビューNG時の専用フロー:
       1. `spec-compliance` の乖離報告をパース（影響度・対象・内容・推奨アクション・理由を抽出）
       2. 乖離タイプに基づく自動分岐:
@@ -58,14 +57,14 @@ load_skills:
 4. 完了報告 → `issue-guide-reports` の完了報告フォーマットで結果出力
    - 更新種別（`--body` / `--comment` / `--req` / `--review-ng`）に対応するフォーマットを使用
    - `--req` の場合: APPEND/UPDATEの区別と対象REQ番号・更新セクション名を報告に含める
-   - `--review-ng` の場合: 乖離タイプ・影響REQ番号・推奨アクションを報告に含める
+    - `--review-ng` の場合: 乖離タイプ・対象要件番号・推奨アクションを報告に含める
 
 ## APPEND vs UPDATE 判定基準
 
 | 判定 | 条件 | 例 |
 |------|------|----|
-| APPEND | 既存セクションへの追加、新規セクション追加 | 受け入れ基準の追加、新規機能要件セクション |
-| UPDATE | 既存セクションの内容修正 | テキスト置換、ステータス変更、要件の文言修正 |
+| APPEND | 要件テーブルへの行追加、適用範囲の拡張 | 受け入れ基準の追加、新規要件の追加 |
+| UPDATE | 既存セクションの内容修正 | テキスト置換、要件の文言修正、適用範囲の変更 |
 
 ## Guardrails
 
@@ -74,7 +73,6 @@ load_skills:
 - Issue番号の解決に gh issue list / gh issue status 等、gh/gitコマンドでopen issue一覧を取得することは禁止。番号はユーザー入力またはセッション内会話からのみ取得可能
 - フェーズは変更なし（現在のフェーズを維持）
 - `--review-ng` 時は必ず spec-compliance 結果を引用すること
-- `--req` のステータス変更時は `req-file-manager` の遷移ルールに従うこと
 - サブエージェントの最終出力はverbatimで出力する（再フォーマット禁止）
 - gh CLI出力を読み取る際は `gh-cli-best-practices` の安全な読み取り手順に従うこと（一時ファイル経由でRead tool使用）
 - Pattern分岐の判定基準と固有ルールは `issue-guide-phases` → Pattern Registry を参照

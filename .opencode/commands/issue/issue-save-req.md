@@ -31,11 +31,11 @@ issue-req（Prometheus）で壁打ちした成果物をREQ/ADRファイルとし
 2. ドラフト読込: `.sisyphus/drafts/req-draft-*.md` を読み込む → 最新の1件を対象とする。見つからない場合はエラーで中止: `壁打ちドラフトが見つかりません。先に /issue/issue-req を実行してください。`
 3. ドラフト検証: `draft-meta` セクションの必須フィールド（pattern, req-operation, topic-slug）が存在することを確認。欠損時はエラーで中止
 4. REQ ファイル操作 → `req-file-manager` の判定ロジックと採番ルールに従って実行:
-   - **CREATE**: テンプレート適用、最大REQ番号+1で採番、`docs/requirements/REQ-{NNNN}.md` に保存
-   - **APPEND**: 既存REQファイルにセクション追記、frontmatter updated 更新
-   - **UPDATE**: 既存REQファイルの該当セクション更新、frontmatter updated 更新
+   - **CREATE**: テンプレート適用（目的/要件/適用範囲構造）、最大REQ番号+1で採番、`docs/requirements/REQ-{NNNN}.md` に保存
+   - **APPEND**: 既存REQファイルの要件テーブルに行を追加、frontmatter updated 更新
+   - **UPDATE**: 既存REQファイルの該当セクション（目的/要件/適用範囲）を更新、frontmatter updated 更新
 5. インデックス・ハブ更新:
-   - **docs/requirements/README.md**: CREATE時は新規行を追加、APPEND/UPDATE時は該当REQのtitle/status列をfrontmatter値に合わせて更新
+   - **docs/requirements/README.md**: CREATE時は新規行を追加、APPEND/UPDATE時は該当REQのtitle列をfrontmatter値に合わせて更新
    - **docs/README.md**: CREATE時は新規リンクをREQ番号順の正しい位置に挿入、APPEND/UPDATE時は該当REQのリンクテキスト（タイトル変更時のみ）を更新
    - 両ファイルの更新後、`req-file-manager` の整合性チェック自動修正手順に従って検証
 6. ADR ファイル作成（`draft-meta` の `adr-required: true` の場合のみ）→ `adr-file-manager` に従って ADR ファイルを作成。作成後、`docs/README.md` にADRセクションが存在しない場合は追加し、ADRエントリを記載

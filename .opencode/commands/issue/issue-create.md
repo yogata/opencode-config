@@ -26,7 +26,7 @@ load_skills:
 
 1. `docs/specs/system.md` と `docs/specs/patterns.md` を読み込み、現在のシステム仕様と実装パターンを把握する
 2. 要件docからIssue本文を生成:
-   - `docs/requirements/REQ-{NNNN}.md` が存在する場合: REQ内容を読み取り、Issue本文に反映
+   - `docs/requirements/REQ-{NNNN}.md` が存在する場合: REQ内容（目的/要件/適用範囲）を読み取り、Issue本文に反映
    - 存在しない場合: セッション内の要件docから直接生成
    - テンプレート: `.opencode/commands/issue/templates/issue_desc_feature.md` または `.opencode/commands/issue/templates/issue_desc_bug.md` を Read tool で読み込む
 3. **規模判定によるフロー分岐**（Step 2の直後に実行）:
