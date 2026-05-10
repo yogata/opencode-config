@@ -49,7 +49,7 @@ tags: [{tag1}, {tag2}]
 ```
 
 - フィールドは `id`, `title`, `created`, `updated`, `tags` のみ。`status` および `scale` フィールドは持たない
-- `id` と `tags` 内の要件IDは `REQ-{NNNN}-{NNN}` 形式（例: `REQ-0028-001`）
+- `id` と `tags` 内の要件IDは `REQ-{NNNN}-{NNN}` 形式（例: `REQ-0001-001`）
 
 ### REQセクション構成
 
