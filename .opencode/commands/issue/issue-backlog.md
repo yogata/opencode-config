@@ -81,6 +81,7 @@ load_skills:
 8. **Epic Issue作成**: 承認された結果をもとに、`issue_desc_backlog_epic.md` テンプレートを適用してEpic Issueを作成する:
    - テンプレート: `.opencode/commands/issue/templates/issue_desc_backlog_epic.md`
    - テンプレート変数を分類結果で置換して本文を生成
+   **テンプレート準拠要件**: テンプレートの `【必須】` セクションが全てEpic Issue本文に含まれること。必須セクションが欠落している場合、生成をやり直すこと。
    - タイトル: `バックログ: {期間} の残課題（{N}件）`
    - ラベル: `enhancement`, `epic`
    - `gh-cli-best-practices` に従って `--body-file` で作成
@@ -88,6 +89,7 @@ load_skills:
 9. **子Issue作成**: 各残課題をEpic配下の子Issueとして作成する:
    - テンプレート: `.opencode/commands/issue/templates/issue_desc_backlog_child.md`
    - テンプレート変数を各残課題の内容で置換して本文を生成
+   **テンプレート準拠要件**: テンプレートの `【必須】` セクションが全て子Issue本文に含まれること。必須セクションが欠落している場合、生成をやり直すこと。
    - `Parent: #{epic_number}` でEpicとの親子関係を記載
    - 出典セクションに元issue/PRへのリンクを記載
    - ラベル: `enhancement`
@@ -125,3 +127,4 @@ load_skills:
 - サブエージェントの最終出力はverbatimで出力する（再フォーマット禁止）
 - レポートはMarkdownテーブル形式で構造化して提示する
 - Pattern分岐の判定基準と固有ルールは `issue-guide-phases` → Pattern Registry を参照
+- テンプレートの【必須】セクションが全てIssue本文に含まれていることを確認してからgh issue createを実行すること。欠落セクションがある場合は再生成すること

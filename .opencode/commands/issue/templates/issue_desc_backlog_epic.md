@@ -5,20 +5,24 @@ labels: enhancement, epic
 ---
 
 ## 概要
+<!-- 【必須】 -->
 
 {summary}
 
 ## 対象期間
+<!-- 【必須】 -->
 
 {period}
 
 ## 抽出元
+<!-- 【必須】 -->
 
 | 出典 | タイプ | 概要 |
 |------|--------|------|
 | {source_1_ref} | {source_1_type} | {source_1_summary} |
 
 ## 分類別残課題
+<!-- 【必須】 -->
 
 ### {category_1_name}（優先度: {category_1_priority}）
 
@@ -34,6 +38,7 @@ labels: enhancement, epic
 | #{N} | ☐ 未着手 | {child_3_title} |
 
 ## ステータス追跡
+<!-- 【必須】 -->
 
 | 状態 | 件数 |
 |------|------|
@@ -42,5 +47,6 @@ labels: enhancement, epic
 | ✅ 完了 | 0 |
 
 ## Additional Context
+<!-- 【任意】 -->
 
 {additional_context}

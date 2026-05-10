@@ -34,8 +34,9 @@ load_skills:
    - 検出できない場合はユーザーに番号の指定を求めて停止
 2. 現在のIssue状態を取得 → `issue-guide-phases` のフェーズ体系で現在フェーズを判定
 3. 更新内容に応じて分岐:
-   - **`--body`**: テンプレートに従って更新 → `gh issue edit`
+   - **`--body`**: Issue作成時に使用されたテンプレート（`issue_desc_bug.md` / `issue_desc_feature.md` / `issue_desc_epic.md` / `issue_desc_child.md` / `issue_desc_backlog_*.md`）に従って更新。該当テンプレートの【必須】セクションが全て本文に含まれること → `gh issue edit`
    - **`--comment`**: テンプレート `.opencode/commands/issue/templates/issue_comment_update.md` を Read tool で読み込み → `gh issue comment`
+     - **テンプレート準拠要件**: テンプレートの `【必須】` セクションが全てコメント本文に含まれること。必須セクションが欠落している場合、生成をやり直すこと。
    - **`--req`**: REQファイル更新（詳細フロー以下）:
       1. Issue番号から関連REQファイルを特定（Issue本文のREQ番号参照 or `docs/requirements/` から該当ファイル検索）
        2. 更新タイプの判定（APPEND vs UPDATE）:
@@ -51,6 +52,7 @@ load_skills:
          - `scope-creep`（スコープ外逸脱）→ REQ UPDATE（スコープ明確化）+ レビューNGコメント投稿
          - テスト不足・品質基準未達 → レビューNGコメント投稿のみ
       3. テンプレート `.opencode/commands/issue/templates/issue_comment_review_ng.md` を Read tool で読み込み・適用
+         **テンプレート準拠要件**: テンプレートの `【必須】` セクションが全てコメント本文に含まれること。必須セクションが欠落している場合、生成をやり直すこと。
       4. spec-compliance結果をテンプレートの「Deviation Check 結果」セクションに展開
       5. NG理由分類のチェックボックスを自動選択
       6. `gh-cli-best-practices` に従い `--body-file` 経由でコメント投稿
@@ -75,4 +77,6 @@ load_skills:
 - `--review-ng` 時は必ず spec-compliance 結果を引用すること
 - サブエージェントの最終出力はverbatimで出力する（再フォーマット禁止）
 - gh CLI出力を読み取る際は `gh-cli-best-practices` の安全な読み取り手順に従うこと（一時ファイル経由でRead tool使用）
-- Pattern分岐の判定基準と固有ルールは `issue-guide-phases` → Pattern Registry を参照
+ - Pattern分岐の判定基準と固有ルールは `issue-guide-phases` → Pattern Registry を参照
+ - `--body` 更新時はIssue作成時と同じテンプレート構造を維持すること。【必須】セクションが欠落しないよう確認すること
+ - コメント/レビューNGコメントのテンプレート【必須】セクションが全て含まれていることを確認してから投稿すること

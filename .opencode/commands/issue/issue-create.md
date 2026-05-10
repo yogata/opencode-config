@@ -29,11 +29,13 @@ load_skills:
    - `docs/requirements/REQ-{NNNN}.md` が存在する場合: REQ内容（目的/要件/適用範囲）を読み取り、Issue本文に反映
    - 存在しない場合: セッション内の要件docから直接生成
    - テンプレート: `.opencode/commands/issue/templates/issue_desc_feature.md` または `.opencode/commands/issue/templates/issue_desc_bug.md` を Read tool で読み込む
+   **テンプレート準拠要件**: テンプレートの `【必須】` セクションが全てIssue本文に含まれること。`【任意】` セクションは内容がある場合のみ含める。必須セクションが欠落している場合、生成をやり直すこと。
 3. **規模判定によるフロー分岐**（Step 2の直後に実行）:
    - draft-metaの `scale` フィールドを確認
    - `scale: large` の場合 → **Epic flow**（Step 3a〜3e）へ進む
    - `scale: standard` または `scale` フィールドなしの場合 → **Standard flow**（Step 4〜）へ進む
 4. **[Epic flow] Step 3a**: テンプレート `issue_desc_epic.md` を Read tool で読み込む
+   **テンプレート準拠要件**: テンプレートの `【必須】` セクションが全てEpic Issue本文に含まれること。必須セクションが欠落している場合、生成をやり直すこと。
 5. **[Epic flow] Step 3b**: Epic Issue本文を生成:
    - REQ内容から `{summary}`, `{problem}`, `{solution}` を埋める
    - draft-metaの `decomposition` から分解テーブルを生成（子Issue番号は後で更新するためプレースホルダー `#{TBD}`）
@@ -45,6 +47,7 @@ load_skills:
    - 作成されたIssue番号を `{epic_number}` として記録
 7. **[Epic flow] Step 3d**: 各子Issueを作成（decompositionの順に処理）:
    - テンプレート `issue_desc_child.md` を Read tool で読み込む
+    **テンプレート準拠要件**: テンプレートの `【必須】` セクションが全て子Issue本文に含まれること。必須セクションが欠落している場合、生成をやり直すこと。
    - 子Issue本文を生成: `Parent: #{epic_number}` を先頭行に配置
    - `{summary}`, `{scope}`, `{solution}`, `{test_strategy}` をdecomposition内容から生成
    - ラベル: `enhancement`, `feature`（`epic` は付与しない）
@@ -58,6 +61,7 @@ load_skills:
 10. **[Standard flow]** ラベル付与 → `issue-guide-phases` のラベル体系に従って選定
 11. **[Standard flow]** GitHub Issueを作成（`gh issue create`） → `gh-cli-best-practices` に従って `--body-file` 使用
 12. Issue作成後にコメント追加 → テンプレート: `.opencode/commands/issue/templates/issue_comment_bug_analysis.md`（パターンA）または `.opencode/commands/issue/templates/issue_comment_feature_technical.md`（パターンB）を Read tool で読み込む（Epic flowではEpic Issueにコメント追加）
+   **テンプレート準拠要件**: テンプレートの `【必須】` セクションが全てコメント本文に含まれること。必須セクションが欠落している場合、生成をやり直すこと。
 13. 完了報告 → `issue-guide-reports` の完了報告フォーマットで結果出力:
     - **Standard flow**: 作成したIssue番号を報告、次ステップ: `/issue/issue-work {issue_number}`
     - **Epic flow**: Epic # + 全子Issue番号を報告、次ステップ: `/issue/issue-work {child1} {child2} ...`（子Issue番号をスペース区切りで列挙）
@@ -77,3 +81,4 @@ load_skills:
   - 全子Issueの作成完了後にEpic本文のステータス追跡テーブルを更新する（部分更新は禁止）
   - 子Issueは最大10件まで（Epic 1件あたり）
   - Standard flowの動作・出力形式はEpic flow追加による影響を受けない
+- テンプレートの【必須】セクションが全てIssue本文に含まれていることを確認してからgh issue createを実行すること。欠落セクションがある場合は再生成すること
