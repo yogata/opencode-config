@@ -23,6 +23,7 @@
   - [REQ-0016: gh CLI読み取り安全性の追加（文字化け対策）](requirements/REQ-0016.md)
   - [REQ-0017: issue-work 複数Issue並列実行機能](requirements/REQ-0017.md)
   - [REQ-0018: issue-close Epic自動クローズ機能](requirements/REQ-0018.md)
+  - [REQ-0019: issue-backlog: バックログ抽出済みマーキングによる再抽出防止](requirements/REQ-0019.md)
 
 ## Specifications
 
