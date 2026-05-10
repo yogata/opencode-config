@@ -26,6 +26,7 @@
   - [REQ-0019: issue-backlog: バックログ抽出済みマーキングによる再抽出防止](requirements/REQ-0019.md)
   - [REQ-0020: Epic Issueステータス追跡の自動化](requirements/REQ-0020.md)
   - [REQ-0021: skill-authoring-best-practices 再構成 — Waza品質概念マージ](requirements/REQ-0021.md)
+  - [REQ-0022: Epic Issueテンプレートのepic-status-tracker互換化とバックログ専用テンプレート新設](requirements/REQ-0022.md)
 
 ## Specifications
 
