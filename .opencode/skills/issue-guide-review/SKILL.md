@@ -1,6 +1,6 @@
 ---
 name: issue-guide-review
-description: レビューNG時の対応フロー・issue-next推論ルールを提供。レビュー完了フェーズのNG対応と次コマンド推論で参照される。
+description: Provides review rejection handling flows and issue-next inference rules for post-review scenarios. USE FOR: handling review NG results, determining next command after review rejection, classifying rejection types (spec-bug, impl-bug, scope-creep), or resolving Epic-related command inference. DO NOT USE FOR: general command execution, requirement analysis, or implementation planning.
 ---
 
 # Issue Guide Review スキル

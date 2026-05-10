@@ -1,6 +1,6 @@
 ---
 name: skill-authoring-best-practices
-description: SKILL.mdの作成・改善時に参照するベストプラクティスガイド。USE FOR: スキル新規作成、既存スキル改善、スキル品質レビュー、スキル構造設計、トリガーdescription執筆、progressive disclosure設計。DO NOT USE FOR: コマンド定義の作成、一般的なコーディング作業、ドキュメントの単純修正。
+description: Provides quality criteria and best practices for authoring OpenCode SKILL.md files across five evaluation axes and four check protocols. USE FOR: creating new skills, improving existing skills, reviewing skill quality, designing skill structure, writing trigger descriptions, or planning progressive disclosure. DO NOT USE FOR: creating command definitions, general coding tasks, or simple documentation fixes.
 ---
 
 # Skill Authoring Best Practices

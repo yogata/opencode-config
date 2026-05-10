@@ -1,6 +1,6 @@
 ---
 name: gh-cli-best-practices
-description: Windows環境(cmd/PS)で GitHub CLI (gh issue/pr/release) を使用する際、複数行の本文(--body)によるエスケープエラーを回避し、一時ファイル(--body-file)経由の実行を強制する。
+description: Enforces safe GitHub CLI usage on Windows (PowerShell/cmd) by routing all multi-line body content through temporary files to prevent encoding and escaping errors. USE FOR: running gh issue/pr/release commands with --body or --body-file, reading gh command output safely on Windows, or writing Issue/PR content. DO NOT USE FOR: basic gh commands without body content, non-Windows environments, or general git operations.
 ---
 
 # gh-cli-best-practices

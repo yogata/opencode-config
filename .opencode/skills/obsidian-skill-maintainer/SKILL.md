@@ -1,6 +1,6 @@
 ---
 name: obsidian-skill-maintainer
-description: Obsidian Vaultの運用ルールに基づくagent-skillの作成・更新・整理を管理。運用ルールが変更された場合、このスキルを起動して他のスキルのreferenceを更新します。
+description: Manages creation, update, and organization of Obsidian Vault agent-skills based on vault operational rules. USE FOR: creating new Obsidian skills, updating skills after vault rule changes, reviewing skill inventory, or maintaining skill cross-references. DO NOT USE FOR: general coding tasks, Obsidian note management, or skill quality evaluation.
 ---
 
 # Obsidian Skill Maintainer
