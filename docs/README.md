@@ -14,6 +14,7 @@
   - [REQ-0007: Knowledge Pipeline](requirements/REQ-0007.md)
   - [REQ-0008: Skill Quality Framework](requirements/REQ-0008.md)
   - [REQ-0009: Template System](requirements/REQ-0009.md)
+  - [REQ-0010: AI駆動開発フロー改善：安全性・Pattern拡張・品質向上](requirements/REQ-0010.md)
 
 ## Specifications
 

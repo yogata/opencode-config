@@ -13,3 +13,4 @@
 | REQ-0007 | Knowledge Pipeline                   | knowledge         |
 | REQ-0008 | Skill Quality Framework              | skill             |
 | REQ-0009 | Template System                      | templates         |
+| REQ-0010 | AI駆動開発フロー改善：安全性・Pattern拡張・品質向上 | workflow/safety   |
