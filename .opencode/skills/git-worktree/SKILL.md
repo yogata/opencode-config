@@ -38,8 +38,10 @@ worktree とブランチの命名規則を統一する。
 
 ### 2. worktree作成コマンド
 
+`origin/main` を明示的に指定してブランチを作成する。ローカルの `main` は他のworktree作業等で古くなっている可能性があるため、常にリモートの最新状態を起点とする。
+
 ```bash
-git worktree add ".worktrees/{N}-{type}" -b "{type}/issue-{N}"
+git worktree add ".worktrees/{N}-{type}" -b "{type}/issue-{N}" origin/main
 ```
 
 ### 3. 重要事項
@@ -51,8 +53,8 @@ git worktree add ".worktrees/{N}-{type}" -b "{type}/issue-{N}"
 ### 4. 作成例
 
 ```bash
-# issue-516 を fix パターンで処理
-git worktree add ".worktrees/516-fix" -b "fix/issue-516"
+# issue-516 を fix パターンで処理（origin/main を明示的に指定）
+git worktree add ".worktrees/516-fix" -b "fix/issue-516" origin/main
 
 # 確認
 git worktree list

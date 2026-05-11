@@ -30,9 +30,13 @@ load_skills:
 3. ADR閾値以上の技術判断が発生した場合 → `adr-guidelines` に従ってADR判断を記録（ADRファイルの作成は issue-save-req で実行）
 4. 要件doc形式で生成 → テンプレート: `.opencode/commands/issue/templates/doc_requirement.md` を Read tool で読み込み、目的/要件/適用範囲の構造に従って内容を構造化
    **テンプレート準拠要件**: テンプレートの【必須】セクション（目的、要件、適用範囲）が全て要件docに含まれること。必須セクションが欠落している場合、生成をやり直すこと。
-5. パターン判定:
+5. 既存REQ照合: `docs/requirements/` 内の既存REQファイルを読み込み、現在の要件と比較する:
+   - 類似・重複するREQが存在する場合 → 操作分類を `UPDATE`（または `APPEND`）とし、該当REQ番号を `target-req` に記録
+   - 一致するREQが存在しない場合 → 操作分類を `CREATE` とする
+   - この分類結果は `draft-meta` の `req-operation` と `target-req` に反映する
+6. パターン判定:
     - ラベルに基づいて Pattern 判定: `bug`, `critical` → Pattern A, `enhancement`, `feature` → Pattern B
-6. スケール判断（Pattern B のみ実行）:
+7. スケール判断（Pattern B のみ実行）:
     - Pattern B であっても、`issue-guide-phases` の並列実行パターンにおけるスケール判断条件を用いて `standard` または `large` を判定:
       - **large**: 以下のいずれか1つ以上の条件を満たす場合
         - 複数モジュールにまたがる (e.g., UI + API + DB)
@@ -44,7 +48,7 @@ load_skills:
       - 分解計画を次の形式で整理: `decomposition: [{scope, modules, description}]`
       - スケール判断結果と分解計画をユーザーに提示し、承認を求める
     - **standard と判定された場合**: 分解不要、そのまま単一Issueで進むことを提示し承認を求める
-7. ドラフト保存:
+8. ドラフト保存:
     - **パターンB（機能追加）**: `.sisyphus/drafts/req-draft-{topic-slug}.md` にドラフトを保存。ドラフトは doc_requirement.md テンプレート構造（目的/要件/適用範囲）に以下のメタデータセクションを追加:
       ```markdown
       ## draft-meta（issue-save-req 用）
@@ -57,12 +61,13 @@ load_skills:
       - **topic-slug**: {ファイル名に使用するスラッグ}
       - **scale**: standard | large
       - **decomposition**: [{scope, modules, description}]（scale が large の場合のみ）
+      - **status**: draft（初期値。issue-save-req → saved, issue-create → issued, issue-close → closed）
       ```
     - **パターンA（バグ修正・軽微変更）**: ドラフト保存不要。セッション内で要件docを完結させる
-8. 承認ゲート: 生成した要件doc（パターンB: ドラフト内容、パターンA: セッション内要件doc）をユーザーに提示し、承認を求める
+9. 承認ゲート: 生成した要件doc（パターンB: ドラフト内容、パターンA: セッション内要件doc）をユーザーに提示し、承認を求める
     - **承認**: 次のステップへ進む
     - **差し戻し**: 壁打ちを継続（Step 1に戻る）
-9. 完了報告 → `issue-guide-reports` の完了報告フォーマットに従って出力（壁打ち結論ハイライトの表示を必ず含めること）:
+10. 完了報告 → `issue-guide-reports` の完了報告フォーマットに従って出力（壁打ち結論ハイライトの表示を必ず含めること）:
     - パターンB: `次のステップ: /issue/issue-save-req`
     - パターンA: `次のステップ: /issue/issue-create`
 
