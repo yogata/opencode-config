@@ -44,23 +44,28 @@ load_skills:
 6. **[Epic flow] Step 3c**: Epic Issueを作成:
    - ラベル: `enhancement`, `feature`, `epic`
    - `gh-cli-best-practices` に従って `--body-file` 使用
+   - 書き込み完了後、`gh-cli-best-practices` の VERIFY操作（Section 5-8）に従って内容を検証すること。
    - 作成されたIssue番号を `{epic_number}` として記録
-7. **[Epic flow] Step 3d**: 各子Issueを作成（decompositionの順に処理）:
+  7. **[Epic flow] Step 3d**: 各子Issueを作成（decompositionの順に処理）:
    - テンプレート `issue_desc_child.md` を Read tool で読み込む
     **テンプレート準拠要件**: テンプレートの `【必須】` セクションが全て子Issue本文に含まれること。必須セクションが欠落している場合、生成をやり直すこと。
    - 子Issue本文を生成: `Parent: #{epic_number}` を先頭行に配置
    - `{summary}`, `{scope}`, `{solution}`, `{test_strategy}` をdecomposition内容から生成
    - ラベル: `enhancement`, `feature`（`epic` は付与しない）
    - `gh-cli-best-practices` に従って `--body-file` 使用
-   - 作成されたIssue番号を記録
+    - 書き込み完了後、`gh-cli-best-practices` の VERIFY操作（Section 5-8）に従って内容を検証すること。
+    - 作成されたIssue番号を記録
 8. **[Epic flow] Step 3e**: Epic Issue本文を更新:
    - 分解テーブルの `#{TBD}` を実際の子Issue番号に置換
    - ステータス追跡テーブルの件数を更新
    - `gh issue edit` でEpic本文を更新（`--body-file` 使用）
+    - 書き込み完了後、`gh-cli-best-practices` の VERIFY操作（Section 5-8）に従って内容を検証すること。
 9. **[Standard flow]** `docs/adr/README.md` を読み込み、要件と関連するADRを「対象領域」と「決定内容」でマッチングして特定する。関連ADRがあれば個別に読み込む（Epic flowでもStep 3bの内容反映に活用）
 10. **[Standard flow]** ラベル付与 → `issue-guide-phases` のラベル体系に従って選定
 11. **[Standard flow]** GitHub Issueを作成（`gh issue create`） → `gh-cli-best-practices` に従って `--body-file` 使用
+    - 書き込み完了後、`gh-cli-best-practices` の VERIFY操作（Section 5-8）に従って内容を検証すること。
 12. Issue作成後にコメント追加 → テンプレート: `.opencode/commands/issue/templates/issue_comment_bug_analysis.md`（パターンA）または `.opencode/commands/issue/templates/issue_comment_feature_technical.md`（パターンB）を Read tool で読み込む（Epic flowではEpic Issueにコメント追加）
+    - 書き込み完了後、`gh-cli-best-practices` の VERIFY操作（Section 5-8）に従って内容を検証すること。
    **テンプレート準拠要件**: テンプレートの `【必須】` セクションが全てコメント本文に含まれること。必須セクションが欠落している場合、生成をやり直すこと。
 13. ドラフトの `## draft-meta` セクションの `status` を `issued` に更新する（ドラフトが存在する場合のみ）
 14. 完了報告 → `issue-guide-reports` の完了報告フォーマットで結果出力:
