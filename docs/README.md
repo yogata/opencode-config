@@ -15,6 +15,7 @@
   - [REQ-0008: Skill Quality Framework](requirements/REQ-0008.md)
   - [REQ-0009: Template System](requirements/REQ-0009.md)
   - [REQ-0010: Issue Command実装改善：安全性・品質・状態管理](requirements/REQ-0010.md)
+  - [REQ-0011: Issue/PR書き込み後の内容品質自動検証](requirements/REQ-0011.md)
 
 ## Specifications
 
