@@ -23,7 +23,7 @@ load_skills:
 
 ## Steps
 
-1. **期間解釈**: ユーザーの自然言語による期間指定を解釈し、GitHub CLIの検索クエリ用日付範囲（`since` / `until`）に変換する。現在日付は2026-05-09。
+1. **期間解釈**: ユーザーの自然言語による期間指定を解釈し、GitHub CLIの検索クエリ用日付範囲（`since` / `until`）に変換する。現在日付は実行時のシステム日付を使用する。
 
 2. **データ取得**: `gh` CLIを使用して、指定期間内にクローズされたissueとPRを取得する:
    - Issues: `gh issue list --state closed --search "closed:>=YYYY-MM-DD" --limit 100 --json number,title,body,state,closedAt,labels,comments`

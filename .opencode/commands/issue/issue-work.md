@@ -116,8 +116,10 @@ Issueに対して計画立案から実装・コミットまでを一気通貫で
 
 各Waveの各Issueについて以下を実行する。
 
+> **フォールバック**: サブエージェントが使用できない場合、Sequential Wave（親エージェントがWave内でIssueを1件ずつ順次処理）に切り替え
+
 **サブエージェント起動**:
-- 親エージェントが `call_omo_agent(subagent_type="sisyphus", run_in_background=true)` でサブエージェントを起動
+- 親エージェントが `task(category="unspecified-high", load_skills=[], run_in_background=true, prompt="...")` でサブエージェントを起動
 - サブエージェントのプロンプトに以下を含める:
   - Issue番号
   - 「Phase A (Steps 1-5) + Phase B (Steps 6-7) + Phase C Steps 8-9 のみ実行せよ」
@@ -127,7 +129,6 @@ Issueに対して計画立案から実装・コミットまでを一気通貫で
 - **Wave開始前のEpicステータス一括更新**: 親エージェントが各Wave開始前に、該当Wave内の全子Issueの親Epicステータスを一括更新（`epic-status-tracker` スキル参照）。サブエージェントによる同時更新の競合を回避するため、親エージェントが一括処理する
 - 全サブエージェント完了を待機（`background_output`）
 - **失敗Issue処理**: 失敗したIssueはスキップし、成功Issueのみ次フェーズへ進める
-- **フォールバック**: サブエージェントが使用できない場合、Sequential Wave（親エージェントがWave内でIssueを1件ずつ順次処理）に切り替え
 
 ### Phase A: 準備（Steps 1-5）
 
@@ -142,6 +143,7 @@ Issueに対して計画立案から実装・コミットまでを一気通貫で
 **Step 4**: Pattern判定 → `issue-guide-phases` の Pattern Registry に従って Pattern A/B を判定し、以降のStepの分岐を決定
 
 **Step 5**: Worktree作成・ブランチ準備 → `git-worktree` スキルに従って実行
+- worktree作成時は `origin/main` をベースとして明示的に指定し、ローカルmainの古さに引きずられないこと
 - **べき等チェック**: worktreeが既に存在する場合（`git worktree list` で確認）、作成をスキップして既存worktreeを使用
 - ブランチも既に存在する場合はcheckoutのみ実行
 
@@ -269,12 +271,11 @@ Issueに対して計画立案から実装・コミットまでを一気通貫で
 ## Guardrails
 
 - バイブス禁止（②構造的実行フェーズ — 実装のみ）
-- 要件docの受け入れ基準を尊重しつつ、実装結果を優先する（vibe-coding: 実装先行、REQは事後反映）
+- 実装で判明した制約はREQを黙って変更せず、乖離として報告しユーザー承認後に反映する
 - 乖離の自動修正禁止（ユーザー決定）
 - 全ファイル操作はworktree内で実行
 - Issue番号省略は同一セッション内で作成済みの場合のみ
 - Issue番号の解決に gh issue list / gh issue status 等、gh/gitコマンドでopen issue一覧を取得することは禁止。番号はユーザー入力またはセッション内会話からのみ取得可能
-- サブエージェントの最終出力はverbatimで出力する（再フォーマット禁止）
 - 実装結果をspecsに反映すること（パターンBの場合）— Step 10で `system.md` / `patterns.md` を更新
 - gh CLI出力を読み取る際は `gh-cli-best-practices` の安全な読み取り手順に従うこと（一時ファイル経由でRead tool使用）
 - Pattern分岐の判定基準と固有ルールは `issue-guide-phases` → Pattern Registry を参照
@@ -285,7 +286,9 @@ Issueに対して計画立案から実装・コミットまでを一気通貫で
 - G13: specs更新は親エージェントのみ実行（サブエージェントはspecs更新禁止）
 - G14: 単一Issue時は現行 Steps 1-12 と同一フロー（多重Issueモードのオーバーヘッドなし）
 - G15: サブエージェント出力は verbatim で出力（再フォーマット・要約禁止）
+- vibe-coding（実装先行）の場合も乖離報告を省略しない
 - G16: 失敗Issueは兄弟Issueの実行をブロックしない（部分続行）
 - G17: closed/存在しないIssueは警告付きスキップ（全体を中止しない）
+- G18: サブエージェントのraw reportは折りたたみ保持する。親エージェントはsummaryを作成可能だが、rawの改変は禁止する
 - PR本文の生成時に `pr_desc.md` テンプレートの【必須】セクション（概要、実装内容、テスト結果、品質メトリクス、Closes）が全て含まれていることを確認すること。セクション名はテンプレートと完全一致させること（例: `## Summary` は不可、`## 概要` であること）
 - 乖離検出報告の生成時に `report_spec_compliance.md` テンプレートの【必須】セクションが全て含まれていることを確認すること
