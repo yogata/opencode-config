@@ -47,6 +47,14 @@ issue-*系コマンドのフェーズ定義・SSoT遷移・コマンド関連を
 | ②構造的実行          | Issue本文 + Work Plan          | 要件doc + 実行計画                                         |
 | ③レビュー完了        | PR + レビュー結果              | コードレビュー結果とマージ状態                             |
 
+### draft の定位
+
+draft（`.sisyphus/drafts/req-draft-*.md`）は**①フェーズ内の一時ハンドオフ**であり、②以降のSSoTはIssue本文とWork Planである。
+
+- **ライフサイクル**: `draft` → `saved`（issue-save-req完了）→ `issued` + 削除（issue-create完了）
+- **①フェーズの役割**: issue-req → issue-save-req 間の要件引き継ぎ
+- **②フェーズ以降**: draftは存在しない（issue-create完了時に削除）。SSoTはIssue本文 + Work Planに完全移行
+
 ---
 
 ## フェーズ境界ルール
