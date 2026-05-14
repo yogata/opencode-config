@@ -23,3 +23,21 @@
 
 - [System Specification](specs/system.md) — コマンドシステムの構成
 - [Implementation Patterns](specs/patterns.md) — コード規約と実装パターン
+
+## ADR
+
+アーキテクチャ決定記録。
+
+- [ADR Index](adr/README.md) — 設計判断の記録一覧
+
+## Tips
+
+学び・ナレッジの蓄積。
+
+- [Tips](tips/inbox.md) — 学びの収集・分析・昇華
+
+## Quality Specs
+
+品質仕様。
+
+- [Quality Specifications](specs/quality-specs.md) — 品質基準・検証ルール
