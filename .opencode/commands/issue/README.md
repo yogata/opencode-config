@@ -18,7 +18,9 @@ description: issue コマンドセットの使用ガイド
 
 **ショートカット経路**: `/issue/issue-backlog` — ①バイブス壁打ちから直接バックログ抽出を実行
 
-## スキル一覧
+## 主要スキル
+
+※ 各コマンドの load_skills が SSoT（Single Source of Truth）。以下は主要スキルの抜粋。
 
 ロジックと知識ベースを提供するスキル群。コマンドはこれらの薄いdispatcher。
 
