@@ -48,7 +48,9 @@ load_skills:
     b) **draft ファイル確認**: `glob` で `.sisyphus/drafts/req-draft-*.md` の存在を確認
        - 存在する場合: ファイル名の topic-slug とセッションの要件内容の一致を確認
        - トピック不一致 → draft を無視（セッションコンテキスト優先）
-       - トピック一致 → draft を「Step 7 完了」のシグナルとして扱う
+       - トピック一致 → draft の `status` 値でルーティング:
+         - `saved` → issue-save-req 完了状態。issue-create 待ち
+         - `draft` → issue-save-req 未実行。issue-save-req 待ち
     
     c) **推論サマリー表示**: ルーティング前に以下の形式で推論結果をユーザーに表示（**陈述形式、質問ではない**）:
        ```
@@ -115,7 +117,7 @@ load_skills:
       - **topic-slug**: {ファイル名に使用するスラッグ}
       - **scale**: standard | large
       - **decomposition**: [{scope, modules, description}]（scale が large の場合のみ）
-      - **status**: draft（初期値。issue-save-req → saved, issue-create → issued, issue-close → closed）
+       - **status**: draft（初期値。issue-save-req → saved, issue-create → issued + 削除）
       ```
     - **パターンA（バグ修正・軽微変更）**: ドラフト保存不要。セッション内で要件docを完結させる
 9. 承認ゲート: 生成した要件doc（パターンB: ドラフト内容、パターンA: セッション内要件doc）をユーザーに提示し、承認を求める
