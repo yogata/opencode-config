@@ -23,6 +23,7 @@
 
 - [System Specification](specs/system.md) — コマンドシステムの構成
 - [Implementation Patterns](specs/patterns.md) — コード規約と実装パターン
+- [Design Principles](specs/design-principles.md) — 設計原則
 
 ## ADR
 

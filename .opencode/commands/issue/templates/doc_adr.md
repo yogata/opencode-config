@@ -23,3 +23,11 @@ updated: "YYYY-MM-DD"
 ## Consequences
 
 {結果・影響}
+
+## Related Decisions
+
+{関連するADR（番号・タイトル・関係性）}
+
+## Post-implementation Notes
+
+{実装後に判明した事実・追加の考慮事項}
