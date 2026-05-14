@@ -40,4 +40,4 @@
 
 品質仕様。
 
-- [Quality Specifications](quality-specs/) — 品質基準・検証ルール
+- [Quality Specifications](specs/quality-specs.md) — 品質基準・検証ルール
