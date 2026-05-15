@@ -29,15 +29,15 @@ REQ-{req_number}
 <!-- 【必須】 -->
 | # | Issue | ステータス | 内容 |
 |---|-------|-----------|------|
-| {seq} | #{child_issue} | ☐ | {child_1_title} |
-| {seq} | #{child_issue} | ☐ | {child_2_title} |
+| {seq} | #{child_issue} | ☐ 未着手 | {child_1_title} |
+| {seq} | #{child_issue} | ☐ 未着手 | {child_2_title} |
 
 ## ステータス追跡
 
 <!-- 【必須】 -->
 | 状態 | 件数 |
 |------|------|
-| ☐ | {total} |
+| ☐ 未着手 | {total} |
 | 🔄 進行中 | 0 |
 | ✅ 完了 | 0 |
 | ❌ 対処不要 | 0 |
