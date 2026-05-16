@@ -52,6 +52,16 @@ tips-*コマンドは3つのコマンドで構成され、学びの3層パイプ
 
 **データフロー**: 1ドラフト → 1 REQ → Epic + N子Issue（REQ分割なし）
 
+### Issueテンプレートの完了条件セクション
+
+Issueテンプレート（`issue_desc_*.md`）に`完了条件`セクションを【必須】項目として配置する。位置は`受け入れ条件`セクションの直前とする。
+
+**適用テンプレート**: `issue_desc_feature.md`, `issue_desc_bug.md`, `issue_desc_child.md`, `issue_desc_backlog_child.md`
+
+**Epicテンプレートの扱い**: `issue_desc_epic.md`, `issue_desc_backlog_epic.md`には`完了条件`セクションを追加せず、既存の`受け入れ条件`にEpic全体の完了判定条件としての明確化コメントを付与する。
+
+**コマンドへの反映**: `issue-create`のguardrailで`完了条件`を必須セクションとして確認する。`issue-work`のStep 7で完了条件品質ゲートを実施し、完了判定はPlanではなく`完了条件`を参照する。
+
 ### Epic自動クローズ
 
 `issue-close` Step 8 で親Epic本文更新後、Epic内の全子Issue状態を確認し、全完了時にEpicを自動クローズする。子Issue残存時はスキップし完了報告に状況を表示する。
