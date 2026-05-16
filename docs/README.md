@@ -11,7 +11,7 @@
   - [REQ-0004: 要件・ADRドキュメントシステム](requirements/REQ-0004.md)
   - [REQ-0005: Epic Issue 管理](requirements/REQ-0005.md)
   - [REQ-0006: Sisyphus プラン基盤](requirements/REQ-0006.md)
-  - [REQ-0007: ナレッジパイプライン](requirements/REQ-0007.md)
+  - [REQ-0007: ナレッジパイプライン高度化](requirements/REQ-0007.md)
   - [REQ-0008: スキル品質フレームワーク](requirements/REQ-0008.md)
   - [REQ-0009: テンプレートシステム](requirements/REQ-0009.md)
   - [REQ-0010: Issue Command実装改善：安全性・品質・状態管理](requirements/REQ-0010.md)

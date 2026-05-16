@@ -10,7 +10,7 @@
 | REQ-0004 | 要件・ADRドキュメントシステム   | requirements/adr  |
 | REQ-0005 | Epic Issue 管理                | epic              |
 | REQ-0006 | Sisyphus プラン基盤         | sisyphus          |
-| REQ-0007 | ナレッジパイプライン                   | knowledge         |
+| REQ-0007 | ナレッジパイプライン高度化                   | knowledge/tips         |
 | REQ-0008 | スキル品質フレームワーク              | skill             |
 | REQ-0009 | テンプレートシステム                      | templates         |
 | REQ-0010 | Issue Command実装改善：安全性・品質・状態管理 | workflow/safety/quality |
