@@ -17,6 +17,7 @@
   - [REQ-0010: Issue Command実装改善：安全性・品質・状態管理](requirements/REQ-0010.md)
   - [REQ-0011: Issue/PR書き込み後の内容品質自動検証](requirements/REQ-0011.md)
   - [REQ-0012: 自然言語ポリシー](requirements/REQ-0012.md)
+  - [REQ-0013: issue-backlog 承認フロー分割と解消済み確認機能](requirements/REQ-0013.md)
 
 ## Specifications
 
