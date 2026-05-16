@@ -15,3 +15,4 @@
 | REQ-0009 | Template System                      | templates         |
 | REQ-0010 | Issue Command実装改善：安全性・品質・状態管理 | workflow/safety/quality |
 | REQ-0011 | Issue/PR書き込み後の内容品質自動検証 | quality-assurance/encoding |
+| REQ-0012 | 自然言語ポリシー | language/japanese |
