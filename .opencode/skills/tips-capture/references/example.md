@@ -1,43 +1,136 @@
 # Example Workflow
 
-**シナリオ**: SupabaseのRLSポリシーでエラーが発生し、解決した
+**シナリオ1**: CI で lint エラーが発生し、テンプレート逸脱を修正した
+**シナリオ2**: git worktree 削除時の force 指定が必要だった
+
+---
+
+## シナリオ1: CI失敗 + テンプレート逸脱
 
 ### Step 1: 学びの検知
 
-- RLSポリシーの設定ミスが原因
-- `USING (auth.uid() = user_id)` の書き方を学んだ
-- 将来同じミスを防ぐために記録すべき
+- CIパイプラインでlintエラーが発生
+- 原因はコミットメッセージがConventional Commits規約に違反していた
+- エージェントが自動修正し、CI再実行で通過
+- テンプレート逸脱としても記録すべき
 
-### Step 2: 学びの抽出
+### Step 2: 学びの抽出（13フィールド形式）
 
-```
-## Supabase RLSポリシーのauth.uid()比較
+```markdown
+## CI lint失敗: コミットメッセージのConventional Commits規約違反
 
-**状況**: SupabaseでRLSポリシーを設定した際、SELECTで権限エラー
-**原因**: `auth.uid()` と `user_id` の比較で、カラム名を間違えていた
-**解決策**: テーブルのカラム名と一致しているか確認。`auth.uid()` は UUID を返す
-**教訓**: RLSポリシー作成時は、カラム名と型を確認する
-**タグ**: #supabase #rls #バグ修正
+- **問題事象**: PR作成後のCI実行で、commitlintによるコミットメッセージ検証が失敗した
+- **発生局面**: CI
+- **検知方法**: CI パイプラインの commitlint ステップでの失敗
+- **根本原因**: エージェントが生成したコミットメッセージが `type(scope): description` 形式に準拠していなかった
+- **自律対応内容**: `git commit --amend` でメッセージを規約準拠形式に修正し、CI再実行で通過を確認
+- **ユーザー確認有無**: なし
+- **ADR/REQ/spec影響**: なし
+- **横展開観点**: コミットメッセージ生成時は常に conventional-commits スキルを参照すべき。他のコマンドでもコミット生成箇所があるため同様のリスクあり
+- **再発条件**: `conventional-commits` スキルをロードせずにコミットメッセージを生成する場合
+- **予防策候補**: issue-work や issue-close のコミット生成ステップに conventional-commits スキルのロードを必須化する
+- **想定反映先**: `conventional-commits` スキル、`issue-work` コマンド
+- **関連**: `.opencode/skills/conventional-commits/SKILL.md`, `.opencode/commands/issue/issue-work.md`
+- **タグ**: `#ci` `#コミットメッセージ` `#テンプレート逸脱`
 ```
 
 ### Step 3: ユーザー確認
 
-> 今回のRLS対応で学びがありました。追加しますか？
+> 今回のCI対応で学びを抽出しました。追加しますか？
 >
-> ## Supabase RLSポリシーのauth.uid()比較
-> ...
+> ## CI lint失敗: コミットメッセージのConventional Commits規約違反
+>
+> - **問題事象**: ...
+> （全13フィールド表示）
 >
 > - はい / いいえ
 
 ### Step 4: 学びの追加
 
-ユーザーが「はい」と回答：
+ユーザーが「はい」と回答。エージェントが直接 `docs/tips/inbox.md` に13フィールド形式で追記する。
 
-```
-/tips-add "Supabase RLSポリシーのauth.uid()比較" --tags "supabase,rls,バグ修正"
+---
+
+## シナリオ2: gh/git ワークアラウンド
+
+### Step 1: 学びの検知
+
+- `git worktree remove` で権限エラーが発生
+- Windows環境では `-f` (force) フラグが必要
+- エージェントが自動的に force 指定で再実行し成功
+
+### Step 2: 学びの抽出（13フィールド形式）
+
+```markdown
+## Windows環境でのgit worktree削除時にforceフラグが必要
+
+- **問題事象**: `git worktree remove` 実行時にファイルロックエラーが発生した
+- **発生局面**: 実装（issue-closeのブランチ削除ステップ）
+- **検知方法**: git コマンドの終了コードとエラーメッセージ
+- **根本原因**: Windowsのファイルシステムロックにより、worktreeディレクトリが完全に解放される前に削除を試行した
+- **自律対応内容**: `git worktree remove -f` で強制削除し、成功を確認
+- **ユーザー確認有無**: なし
+- **ADR/REQ/spec影響**: なし
+- **横展開観点**: Windows環境でのすべてのファイルシステム操作（rm、mv含む）で同様のリスクあり
+- **再発条件**: Windows環境で worktree を削除する場合
+- **予防策候補**: issue-close の worktree 削除ステップで最初から `-f` フラグを使用するようテンプレートを更新
+- **想定反映先**: `issue-close` コマンドテンプレート
+- **関連**: `.opencode/commands/issue/issue-close.md`, Issue #89
+- **タグ**: `#git` `#windows` `#ワークアラウンド`
 ```
 
-これで `inbox.md` に学びが追加されます。
+### Step 3: ユーザー確認
+
+> 今回のworktree操作で学びを抽出しました。追加しますか？
+>
+> ## Windows環境でのgit worktree削除時にforceフラグが必要
+>
+> - **問題事象**: ...
+> （全13フィールド表示）
+>
+> - はい / いいえ
+
+### Step 4: 学びの追加
+
+ユーザーが「はい」と回答。エージェントが直接 `docs/tips/inbox.md` に追記。
+
+---
+
+## シナリオ3: ユーザー確認あり + ADR/REQ/spec影響
+
+### Step 1: 学びの検知
+
+- 実装中に仕様の矛盾を発見
+- ユーザーに確認した結果、REQファイルの更新が必要と判明
+- ADRにも影響の可能性
+
+### Step 2: 学びの抽出（13フィールド形式）
+
+```markdown
+## 実装中の仕様矛盾発見によるREQ更新の必要
+
+- **問題事象**: Issue #150 の実装中、REQ-0005とspecs/design-principles.mdで定義されているエラー処理方針が矛盾していることを発見した
+- **発生局面**: 実装
+- **検知方法**: spec-compliance スキルによる実装前チェック
+- **根本原因**: REQ-0005作成時に design-principles.md の既存方針との整合性確認が漏れていた
+- **自律対応内容**: 矛盾点を整理し、ユーザーに確認してREQ-0005の該当セクションを修正
+- **ユーザー確認有無**: あり
+- **ADR/REQ/spec影響**: REQ-0005 セクション3の更新が必要。ADR-0003（エラー処理方針）への追記も検討すべき
+- **横展開観点**: REQ作成時は常に既存specs/ADRとの整合性確認を必須とすべき
+- **再発条件**: 新規REQ作成時に既存ドキュメントとの整合性チェックをスキップする場合
+- **予防策候補**: issue-save-req の実行ステップに specs/ADR 整合性チェックを追加する
+- **想定反映先**: `issue-save-req` コマンド、`req-analysis` スキル
+- **関連**: `docs/requirements/REQ-0005.md`, `docs/specs/design-principles.md`, Issue #150
+- **タグ**: `#仕様矛盾` `#REQ更新` `#ADR影響`
+```
+
+### Step 3: ユーザー確認
+
+> 実装中に仕様矛盾を発見しました。学びを追加しますか？
+>
+> （全13フィールド表示）
+>
+> - はい / いいえ
 
 ---
 
@@ -45,13 +138,27 @@
 
 ### Layer 1: Capture Phase (学びの記録)
 
-```
-/tips-add "Supabase RLSポリシーのauth.uid()比較" --tags "supabase,rls,バグ修正"
-/tips-add "Next.jsのISRでキャッシュ更新" --tags "nextjs,キャッシュ"
-/tips-add "TypeScriptの型推論" --tags "typescript,型システム"
-```
+エージェントが13フィールド形式で `docs/tips/inbox.md` に直接追記：
 
-→ `inbox.md` にエントリが追加される
+```markdown
+## CI lint失敗: コミットメッセージのConventional Commits規約違反
+
+- **問題事象**: ...
+- **発生局面**: CI
+（全13フィールド）
+
+## Windows環境でのgit worktree削除時にforceフラグが必要
+
+- **問題事象**: ...
+- **発生局面**: 実装
+（全13フィールド）
+
+## 実装中の仕様矛盾発見によるREQ更新の必要
+
+- **問題事象**: ...
+- **発生局面**: 実装
+（全13フィールド）
+```
 
 ### Layer 2: Analysis Phase (セマンティック分析と整理)
 
@@ -60,15 +167,11 @@
 ```
 
 → 実行内容:
-  - inbox.md のエントリをセマンティック分析でクラスタリング
-  - evaluation-report.md にクラスタごとの重みとエントリを記録
-  - ユーザー承認後、inbox.md の全エントリを archive.md に追記（append-only）
+  - inbox.md + archive.md のエントリを問題クラス分類（根本原因+再発条件+予防策が同じ単位）
+  - 8軸評価スコアを算出し evaluation-report.md を生成
+  - （任意）archive.md の古い単発レアケースを refactor 時 prune
+  - ユーザー承認後、inbox.md の全エントリを archive.md（生きている tips プール）に移動
   - inbox.md をクリア
-
-→ 出力例 (evaluation-report.md):
-  - **クラスタ1**: テーマ「Supabase/RLS」 (3エントリ) - 重み: 高
-  - **クラスタ2**: テーマ「Next.js/キャッシュ」 (2エントリ) - 重み: 中
-  - **クラスタ3**: テーマ「TypeScript/型システム」 (4エントリ) - 重み: 高
 
 ### Layer 3: Elevation Phase (昇華判定とスタブ生成)
 
@@ -77,26 +180,8 @@
 ```
 
 → 実行内容:
-  - evaluation-report.md のクラスタを分析
-  - 各クラスタをスキル化/コマンド化/ワークフロー組み込み/保留の4段階で判定
-  - ユーザー承認後、staging領域にスタブファイルを生成
-
-→ 出力例 (elevation-staging/supabase-rls-skill-stub.md):
-  ```markdown
-  # Supabase RLS スキルスタブ
-
-  ## 動機
-  以下の学びから昇華:
-  - 2026-05-08: Supabase RLSポリシーのauth.uid()比較
-  - 2026-05-07: RLSポリシーのデバッグ方法
-  - 2026-05-06: RLSポリシーのパフォーマンス影響
-
-  ## Description（草案）
-  SupabaseのRLSポリシー設計・実装・デバッグに関するナレッジ
-
-  ## TODO
-  - [ ] 完全なSKILL.mdの作成
-  - [ ] トリガー条件の定義
-  - [ ] ステップの具体化
-  - [ ] Guardrailsの定義
-  ```
+  - evaluation-report.md の問題クラスを主入力として分析
+  - 各クラスタを11処分区分 + duplicate で判定
+  - 既存 command/skill/template/docs に同種対策が存在するか照合
+  - ユーザー承認後、staging領域にスタブファイルを生成（7つの必須フィールド）
+  - staged/rejected/duplicate エントリを archive.md から elevate 時 prune
