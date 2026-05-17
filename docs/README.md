@@ -19,6 +19,7 @@
   - [REQ-0012: 自然言語ポリシー](requirements/REQ-0012.md)
   - [REQ-0013: issue-backlog 承認フロー分割と解消済み確認機能](requirements/REQ-0013.md)
   - [REQ-0014: issue-work 自律修正ループと責務分離の明確化](requirements/REQ-0014.md)
+  - [REQ-0015: 関連ドキュメントの要件達成対象化](requirements/REQ-0015.md)
 
 ## Specifications
 

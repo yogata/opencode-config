@@ -18,3 +18,4 @@
 | REQ-0012 | 自然言語ポリシー | language/japanese |
 | REQ-0013 | issue-backlog 承認フロー分割と解消済み確認機能 | commands/backlog/workflow |
 | REQ-0014 | issue-work 自律修正ループと責務分離の明確化 | workflow/self-healing/ci-cd |
+| REQ-0015 | 関連ドキュメントの要件達成対象化 | workflow/issue-commands/documentation/scope/verification |
