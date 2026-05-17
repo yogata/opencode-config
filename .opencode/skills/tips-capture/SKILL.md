@@ -73,25 +73,9 @@ description: Agent-first extraction and capture of learnings from problems auton
 
 ### Step 2: 学びの抽出（エージェント主体）
 
-学びがあると**エージェントが判断**した場合、**エージェントが**以下の13フィールド形式でエントリを生成する。全13フィールド SHALL を含めること：
+学びがあると**エージェントが判断**した場合、**エージェントが**テンプレート正本に従って13フィールド形式でエントリを生成する。全13フィールド SHALL を含めること：
 
-```markdown
-## [タイトル]
-
-- **問題事象**: [何が起きたか]
-- **発生局面**: [いつ/どこで発生したか。例: 実装、CI、レビュー、デプロイ]
-- **検知方法**: [どう検知したか。例: CI失敗、lint警告、レビュー指摘、手動確認]
-- **根本原因**: [なぜ起きたか]
-- **自律対応内容**: [エージェントがどう修正・回避・対応したか]
-- **ユーザー確認有無**: [ユーザー確認が関与したか。あり/なし]
-- **ADR/REQ/spec影響**: [ADR/REQ/specへの影響可能性。なし、または具体的な影響先]
-- **横展開観点**: [同種の状況への適用方法]
-- **再発条件**: [どのような条件で再発するか]
-- **予防策候補**: [将来の予防方法]
-- **想定反映先**: [反映先。例: コマンド/スキル/テンプレート/docs]
-- **関連**: [関連ファイルパス、Issue番号等]
-- **タグ**: `#タグ1` `#タグ2`
-```
+> **テンプレート正本**: [references/capture-entry-template.md](references/capture-entry-template.md) — エージェント SHALL は推論でフォーマットを組み立てず、このテンプレート正本から取得すること。
 
 > **注意**: `**タグ**` フィールドは人間の可読性のため保持している。セマンティック分析（`/tips-refactor`）ではタグに依存せず、LLMが内容からテーマを判定する。
 
@@ -125,15 +109,7 @@ description: Agent-first extraction and capture of learnings from problems auton
 
 ### Step 4: 学びの追加
 
-ユーザーが承認した場合、エージェント SHALL は `docs/tips/inbox.md` に13フィールド形式のエントリを直接追記する。
-
-```
-## [タイトル]
-
-- **問題事象**: ...
-- **発生局面**: ...
-（全13フィールド）
-```
+ユーザーが承認した場合、エージェント SHALL は [テンプレート正本](references/capture-entry-template.md) に従って `docs/tips/inbox.md` に13フィールド形式のエントリを直接追記する。
 
 > **注意**: `/tips-add` コマンドは旧形式（4フィールド）のインターフェースである。13フィールド形式のエントリを追加する場合は、直接 `docs/tips/inbox.md` に追記すること。
 
@@ -148,7 +124,8 @@ inbox.mdのエントリ数（`## ` で始まる行）をカウントする。
 
 ## Example Workflow
 
-See [references/example.md](references/example.md) for a complete workflow example with the 13-field format.
+- **テンプレート正本（一次参照）**: [references/capture-entry-template.md](references/capture-entry-template.md) — 13フィールド形式の空テンプレート。フォーマット取得は必ずこちらから行うこと。
+- **実例集（二次参照）**: [references/example.md](references/example.md) — 複数シナリオでの記入例。テンプレートの適用イメージを確認する際に参照すること。
 
 ---
 
