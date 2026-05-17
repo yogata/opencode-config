@@ -6,7 +6,7 @@ load_skills:
   - adr-file-manager
   - adr-guidelines
   - issue-lifecycle
-  - issue-reporting
+  - issue-completion-reporting
   - conventional-commits
 ---
 

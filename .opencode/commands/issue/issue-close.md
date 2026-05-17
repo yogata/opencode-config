@@ -3,7 +3,7 @@ description: PRをマージし、対応記録を追記し、Issueをクローズ
 agent: sisyphus
 load_skills:
   - issue-lifecycle
-  - issue-reporting
+  - issue-completion-reporting
   - tips-capture
   - archive-completed-plan
   - gh-cli-best-practices

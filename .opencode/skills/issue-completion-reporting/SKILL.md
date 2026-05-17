@@ -1,9 +1,9 @@
 ---
-name: issue-reporting
+name: issue-completion-reporting
 description: Defines completion report formats, checkbox update rules, and sub-agent verbatim output policies for issue-* commands. USE FOR: generating command completion reports, updating Issue checkboxes, formatting sub-agent output, or applying report templates. DO NOT USE FOR: workflow phase definitions, pattern classification, or architecture decisions.
 ---
 
-# Issue Reporting スキル
+# Issue Completion Reporting スキル
 
 issue-*系コマンドの完了報告フォーマット・チェックボックス更新ルール・サブエージェント出力ポリシーを提供する。
 

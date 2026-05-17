@@ -37,7 +37,7 @@
 | `req-analysis` | 壁打ちメソッドロジー・深掘り | 機能/非機能要件展開、Given-When-Then形式の受け入れ基準、チェックボックス品質基準 |
 | `adr-guidelines` | ADR閾値判定 | 技術判断がADR閾値以上かの判定。判断の記録のみ（ファイル作成は不可） |
 | `issue-lifecycle` | パターン判定 | Pattern Registry（パターンA/Bの判定基準、固有ルール） |
-| `issue-reporting` | 完了報告フォーマット | 壁打ち結論ハイライト付きの完了報告 |
+| `issue-completion-reporting` | 完了報告フォーマット | 壁打ち結論ハイライト付きの完了報告 |
 
 #### テンプレート使用状況
 
@@ -90,7 +90,7 @@
 | `adr-file-manager` | ADR作成 | ADR番号採番、テンプレート適用、ファイル配置 |
 | `adr-guidelines` | ADR必要性確認 | ADR作成の必要性判定基準・ライフサイクル |
 | `issue-lifecycle` | パターン判定 | パターンB以外の実行禁止ガード |
-| `issue-reporting` | 完了報告フォーマット | 保存結果の報告 |
+| `issue-completion-reporting` | 完了報告フォーマット | 保存結果の報告 |
 | `conventional-commits` | コミットメッセージ | Conventional Commits v1.0.0準拠のコミットメッセージ生成 |
 
 #### テンプレート使用状況
@@ -144,7 +144,7 @@
 | スキル | 用途 | 活用内容 |
 |--------|------|----------|
 | `issue-lifecycle` | フェーズ管理・ラベル付与 | ラベル体系に基づくラベル選定 |
-| `issue-reporting` | 完了報告フォーマット | Issue作成結果の報告 |
+| `issue-completion-reporting` | 完了報告フォーマット | Issue作成結果の報告 |
 | `gh-cli-best-practices` | gh CLI安全実行 | `--body-file` 使用の強制 |
 | `req-file-manager` | REQ参照 | REQファイルの読み取り・バリデーション |
 | `req-analysis` | 要件品質確認 | チェックボックス品質基準の検証 |
@@ -203,7 +203,7 @@
 | `req-analysis` | 要件検証 | チェックボックス品質基準による受け入れ基準検証 |
 | `spec-compliance` | 乖離検出 | 要件と実装の乖離検出・報告 |
 | `issue-lifecycle` | パターン判定・フェーズ管理 | パターンA/Bの判定、specs更新要否 |
-| `issue-reporting` | 完了報告フォーマット | PR作成結果の報告 |
+| `issue-completion-reporting` | 完了報告フォーマット | PR作成結果の報告 |
 | `issue-review-routing` | レビューNG対応 | レビューNG時の対応フロー知識（参照のみ） |
 | `git-worktree` | worktree管理 | worktree作成・ブランチ準備 |
 | `req-file-manager` | REQ参照 | REQファイルの読み取り |
@@ -271,7 +271,7 @@
 | スキル | 用途 | 活用内容 |
 |--------|------|----------|
 | `issue-lifecycle` | フェーズ判定 | 現在のフェーズを判定（フェーズ変更はしない） |
-| `issue-reporting` | 完了報告フォーマット | 更新結果の報告 |
+| `issue-completion-reporting` | 完了報告フォーマット | 更新結果の報告 |
 | `issue-review-routing` | レビューNG対応 | NG理由分類と対応フロー |
 | `gh-cli-best-practices` | gh CLI安全実行 | `--body-file` 使用の強制 |
 | `req-file-manager` | REQ操作 | APPEND/UPDATE判定、frontmatter更新、ステータス遷移検証 |
@@ -334,7 +334,7 @@
 | スキル | 用途 | 活用内容 |
 |--------|------|----------|
 | `issue-lifecycle` | パターン判定 | パターンA/Bでdocs/検証要否を判定 |
-| `issue-reporting` | 完了報告フォーマット | フロー完了報告 |
+| `issue-completion-reporting` | 完了報告フォーマット | フロー完了報告 |
 | `tips-capture` | 学び検知・抽出 | エージェント主体で学び有無を判断・生成 |
 | `archive-completed-plan` | planアーカイブ | `.sisyphus/` 配下の関連ファイル一括アーカイブ |
 | `gh-cli-best-practices` | gh CLI安全実行 | `--body-file` 使用の強制 |
@@ -610,7 +610,7 @@ docs/ 検証（パターンBの場合）:
 | req-analysis | ● | | ● | ● | ● | | ● |
 | adr-guidelines | ● | ● | | | | | |
 | issue-lifecycle | ● | ● | ● | ● | ● | ● | ● |
-| issue-reporting | ● | ● | ● | ● | ● | ● | |
+| issue-completion-reporting | ● | ● | ● | ● | ● | ● | |
 | req-file-manager | | ● | ● | ● | ● | ● | |
 | adr-file-manager | | ● | ● | ● | | | |
 | conventional-commits | | ● | | ● | | | |
