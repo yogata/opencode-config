@@ -27,7 +27,7 @@ description: issue コマンドセットの使用ガイド
 | スキル | 役割 |
 |---|---|
 | `issue-lifecycle` | フェーズ定義・SSoT遷移・パターン判定・コマンド関連・docs構造 |
-| `issue-reporting` | 完了報告フォーマット・チェックボックス更新・サブエージェント出力ポリシー |
+| `issue-completion-reporting` | 完了報告フォーマット・チェックボックス更新・サブエージェント出力ポリシー |
 | `issue-review-routing` | レビューNG対応フロー・issue-next推論ルール |
 | `req-analysis` | 要件分析手法（機能・非機能の分析・品質基準） |
 | `req-file-manager` | REQファイル管理（作成・追記・更新・バリデーション） |
@@ -41,14 +41,14 @@ L2薄化形式（Input/Output/Steps+スキル参照/Guardrails）。詳細は各
 
 | コマンド | 役割 | スキル参照 |
 |---|---|---|
-| `/issue/issue-req` | 要件定義（壁打ち） | req-analysis, req-file-manager, adr-guidelines, issue-lifecycle, issue-reporting |
-| `/issue/issue-save-req` | REQ/ADR保存 | req-file-manager, adr-file-manager, adr-guidelines, issue-lifecycle, issue-reporting, conventional-commits |
-| `/issue/issue-create` | Issue登録 | issue-lifecycle, issue-reporting, gh-cli-best-practices, req-file-manager, req-analysis, adr-file-manager |
-| `/issue/issue-work` | 実装パイプライン（3フェーズ構成: 準備→実装→提出）。複数Issueの並列実行に対応 | req-analysis, spec-compliance, issue-lifecycle, issue-reporting, issue-review-routing, git-worktree, gh-cli-best-practices, req-file-manager, adr-file-manager, conventional-commits, epic-status-tracker |
-| `/issue/issue-update` | Issue更新 | issue-lifecycle, issue-reporting, issue-review-routing, gh-cli-best-practices, req-file-manager, req-analysis, spec-compliance |
-| `/issue/issue-close` | 完了処理 | issue-lifecycle, issue-reporting, tips-capture, archive-completed-plan, gh-cli-best-practices, git-worktree, req-file-manager, epic-status-tracker |
+| `/issue/issue-req` | 要件定義（壁打ち） | req-analysis, req-file-manager, adr-guidelines, issue-lifecycle, issue-completion-reporting |
+| `/issue/issue-save-req` | REQ/ADR保存 | req-file-manager, adr-file-manager, adr-guidelines, issue-lifecycle, issue-completion-reporting, conventional-commits |
+| `/issue/issue-create` | Issue登録 | issue-lifecycle, issue-completion-reporting, gh-cli-best-practices, req-file-manager, req-analysis, adr-file-manager |
+| `/issue/issue-work` | 実装パイプライン（3フェーズ構成: 準備→実装→提出）。複数Issueの並列実行に対応 | req-analysis, spec-compliance, issue-lifecycle, issue-completion-reporting, issue-review-routing, git-worktree, gh-cli-best-practices, req-file-manager, adr-file-manager, conventional-commits, epic-status-tracker |
+| `/issue/issue-update` | Issue更新 | issue-lifecycle, issue-completion-reporting, issue-review-routing, gh-cli-best-practices, req-file-manager, req-analysis, spec-compliance |
+| `/issue/issue-close` | 完了処理 | issue-lifecycle, issue-completion-reporting, tips-capture, archive-completed-plan, gh-cli-best-practices, git-worktree, req-file-manager, epic-status-tracker |
 | `/issue/issue-next` | 次コマンド推論（セッションコンテキストのみ参照） | issue-lifecycle, issue-review-routing |
-| `/issue/issue-backlog` | バックログ抽出（ショートカット経路） | issue-lifecycle, issue-reporting, gh-cli-best-practices |
+| `/issue/issue-backlog` | バックログ抽出（ショートカット経路） | issue-lifecycle, issue-completion-reporting, gh-cli-best-practices |
 
 ## 基本フロー
 

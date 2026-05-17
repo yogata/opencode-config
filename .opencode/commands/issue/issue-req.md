@@ -6,7 +6,7 @@ load_skills:
   - req-file-manager
   - adr-guidelines
   - issue-lifecycle
-  - issue-reporting
+  - issue-completion-reporting
 ---
 
 # 要件定義

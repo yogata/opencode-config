@@ -3,7 +3,7 @@ description: 要件定義をもとにGitHub Issueを作成する
 agent: sisyphus
 load_skills:
   - issue-lifecycle
-  - issue-reporting
+  - issue-completion-reporting
   - gh-cli-best-practices
   - req-file-manager
   - req-analysis
