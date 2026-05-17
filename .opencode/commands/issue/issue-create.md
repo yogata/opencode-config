@@ -28,7 +28,7 @@ load_skills:
 2. 要件docからIssue本文を生成:
    - `docs/requirements/REQ-{NNNN}.md` が存在する場合: REQ内容（目的/要件/適用範囲）を読み取り、Issue本文に反映
    - 存在しない場合: セッション内の要件docから直接生成
-   - テンプレート: `.opencode/commands/issue/templates/issue_desc_feature.md` または `.opencode/commands/issue/templates/issue_desc_bug.md` を Read tool で読み込む
+   - テンプレート: `.opencode/skills/issue-template-manager/templates/issue_desc_feature.md` または `.opencode/skills/issue-template-manager/templates/issue_desc_bug.md` を Read tool で読み込む
    **テンプレート準拠要件**: テンプレートの `【必須】` セクションが全てIssue本文に含まれること。`【任意】` セクションは内容がある場合のみ含める。必須セクションが欠落している場合、生成をやり直すこと。
 3. **規模判定によるフロー分岐**（Step 2の直後に実行）:
    - draft-metaの `scale` フィールドを確認
@@ -64,7 +64,7 @@ load_skills:
 10. **[Standard flow]** ラベル付与 → `issue-lifecycle` のラベル体系に従って選定
 11. **[Standard flow]** GitHub Issueを作成（`gh issue create`） → `gh-cli-best-practices` に従って `--body-file` 使用
     - 書き込み完了後、`gh-cli-best-practices` の VERIFY操作（Section 5-8）に従って内容を検証すること。
-12. Issue作成後にコメント追加 → テンプレート: `.opencode/commands/issue/templates/issue_comment_bug_analysis.md`（パターンA/C/D）または `.opencode/commands/issue/templates/issue_comment_feature_technical.md`（パターンB）を Read tool で読み込む（Epic flowではEpic Issueにコメント追加）
+12. Issue作成後にコメント追加 → テンプレート: `.opencode/skills/issue-template-manager/templates/issue_comment_bug_analysis.md`（パターンA/C/D）または `.opencode/skills/issue-template-manager/templates/issue_comment_feature_technical.md`（パターンB）を Read tool で読み込む（Epic flowではEpic Issueにコメント追加）
     - 書き込み完了後、`gh-cli-best-practices` の VERIFY操作（Section 5-8）に従って内容を検証すること。
    **テンプレート準拠要件**: テンプレートの `【必須】` セクションが全てコメント本文に含まれること。必須セクションが欠落している場合、生成をやり直すこと。
 13. ドラフトの `## draft-meta` セクションの `status` を `issued` に更新する（ドラフトが存在する場合のみ） → 更新後、`.sisyphus/drafts/req-draft-{topic-slug}.md` を削除

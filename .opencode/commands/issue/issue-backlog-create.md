@@ -43,7 +43,7 @@ load_skills:
 4. **解消済み項目の除外**: 解消チェック結果が `解消済み` の項目をIssue作成対象から除外する（draft内で既にマークされている）。
 
 5. **Epic Issue作成**: `issue_desc_backlog_epic.md` テンプレートを適用してEpic Issueを作成する:
-   - テンプレート: `.opencode/commands/issue/templates/issue_desc_backlog_epic.md`
+   - テンプレート: `.opencode/skills/issue-template-manager/templates/issue_desc_backlog_epic.md`
    - テンプレート変数を分類結果で置換して本文を生成
    **テンプレート準拠要件**: テンプレートの `【必須】` セクションが全てEpic Issue本文に含まれること。必須セクションが欠落している場合、生成をやり直すこと。
    - タイトル: `バックログ: {期間} の残課題（{N}件）`
@@ -52,7 +52,7 @@ load_skills:
    - `gh-cli-best-practices` の VERIFY操作（書き込み内容検証）を実行すること
 
 6. **子Issue作成**: 各残課題（解消済み以外）をEpic配下の子Issueとして作成する:
-   - テンプレート: `.opencode/commands/issue/templates/issue_desc_backlog_child.md`
+   - テンプレート: `.opencode/skills/issue-template-manager/templates/issue_desc_backlog_child.md`
    - テンプレート変数を各残課題の内容で置換して本文を生成
    **テンプレート準拠要件**: テンプレートの `【必須】` セクションが全て子Issue本文に含まれること。必須セクションが欠落している場合、生成をやり直すこと。
    - `Parent: #{epic_number}` でEpicとの親子関係を記載

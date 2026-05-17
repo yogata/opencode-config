@@ -71,7 +71,7 @@ L2薄化形式（Input/Output/Steps+スキル参照/Guardrails）。詳細は各
 
 ## テンプレート
 
-`templates/` ディレクトリに配置。詳細は `issue-lifecycle` スキルを参照。
+`templates/` ディレクトリに配置。詳細は `issue-template-manager` スキルを参照。
 
 | テンプレート | 用途 | ラベル |
 |---|---|---|

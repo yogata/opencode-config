@@ -60,7 +60,8 @@ load_skills:
    - 確認対象:
      - `.opencode/commands/` 配下の全コマンド
      - `.opencode/skills/` 配下の全スキル
-     - `.opencode/commands/issue/templates/` 配下のテンプレート
+     - `.opencode/skills/issue-template-manager/templates/` 配下のIssue/コメントテンプレート
+     - `.opencode/skills/req-file-manager/templates/`, `.opencode/skills/adr-file-manager/templates/`, `.opencode/skills/spec-compliance/templates/` 配下のドキュメント・レポートテンプレート
      - `docs/specs/` 配下の仕様書
      - `docs/adr/` 配下のADR
      - `docs/requirements/` 配下のREQ
@@ -158,7 +159,7 @@ load_skills:
    | 既存 skill へ反映 | `.opencode/skills/{target-skill}/SKILL.md` |
    | 新規 skill 化 | `.opencode/skills/{new-skill}/SKILL.md` |
    | 新規 command 化 | `.opencode/commands/{new-command}.md` |
-   | template 反映 | `.opencode/commands/issue/templates/{template}.md` |
+   | template 反映 | `.opencode/skills/issue-template-manager/templates/{template}.md` |
    | ADR 候補 | `docs/adr/ADR-{NNNN}-{name}.md` |
    | spec 候補 | `docs/specs/{spec-name}.md` |
    | REQ 候補 | `docs/requirements/REQ-{NNNN}-{name}.md` |
