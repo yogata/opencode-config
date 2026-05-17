@@ -6,7 +6,7 @@ load_skills:
   - spec-compliance
   - issue-lifecycle
   - issue-completion-reporting
-  - issue-review-routing
+  - issue-post-review-routing
   - git-worktree
   - gh-cli-best-practices
   - req-file-manager

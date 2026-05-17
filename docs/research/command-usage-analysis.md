@@ -204,7 +204,7 @@
 | `spec-compliance` | 乖離検出 | 要件と実装の乖離検出・報告 |
 | `issue-lifecycle` | パターン判定・フェーズ管理 | パターンA/Bの判定、specs更新要否 |
 | `issue-completion-reporting` | 完了報告フォーマット | PR作成結果の報告 |
-| `issue-review-routing` | レビューNG対応 | レビューNG時の対応フロー知識（参照のみ） |
+| `issue-post-review-routing` | レビューNG対応 | レビューNG時の対応フロー知識（参照のみ） |
 | `git-worktree` | worktree管理 | worktree作成・ブランチ準備 |
 | `req-file-manager` | REQ参照 | REQファイルの読み取り |
 | `adr-file-manager` | ADR参照 | ADRファイルの読み取り |
@@ -272,7 +272,7 @@
 |--------|------|----------|
 | `issue-lifecycle` | フェーズ判定 | 現在のフェーズを判定（フェーズ変更はしない） |
 | `issue-completion-reporting` | 完了報告フォーマット | 更新結果の報告 |
-| `issue-review-routing` | レビューNG対応 | NG理由分類と対応フロー |
+| `issue-post-review-routing` | レビューNG対応 | NG理由分類と対応フロー |
 | `gh-cli-best-practices` | gh CLI安全実行 | `--body-file` 使用の強制 |
 | `req-file-manager` | REQ操作 | APPEND/UPDATE判定、frontmatter更新、ステータス遷移検証 |
 | `req-analysis` | 要件品質確認 | チェックボックス品質基準 |
@@ -406,7 +406,7 @@
 | スキル | 用途 | 活用内容 |
 |--------|------|----------|
 | `issue-lifecycle` | フェーズ推論・コマンド選択 | フェーズ体系、SSoT遷移、コマンド関連マップ |
-| `issue-review-routing` | レビューNG時推論 | レビューNG時の対応フロー・次アクション判定 |
+| `issue-post-review-routing` | レビューNG時推論 | レビューNG時の対応フロー・次アクション判定 |
 | `spec-compliance` | 乖離判定 | ループバック判定基準（重大/軽微の閾値） |
 | `req-analysis` | 要件品質確認 | 分析観点の参照 |
 
@@ -617,7 +617,7 @@ docs/ 検証（パターンBの場合）:
 | gh-cli-best-practices | | | ● | | ● | ● | |
 | git-worktree | | | | ● | | ● | |
 | spec-compliance | | | | ● | ● | | ● |
-| issue-review-routing | | | | ● | ● | | ● |
+| issue-post-review-routing | | | | ● | ● | | ● |
 | tips-capture | | | | | | ● | |
 | archive-completed-plan | | | | | | ● | |
 
