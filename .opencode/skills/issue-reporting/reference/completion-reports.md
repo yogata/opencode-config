@@ -2,6 +2,10 @@
 
 各コマンド完了時の報告フォーマットを定義する。
 
+## 必須フォーマット宣言
+
+全issue-*コマンドは完了報告時に**必ず**本ファイルの該当セクションのフォーマットを使用すること。独自フォーマットの使用は禁止する（SHALL）。各セクションのコードブロック内の変数（`{...}`）のみを実際の値に置換して出力すること。
+
 ## 完了報告出力順序ルール
 
 全issue-*コマンドの完了報告ステップにおいて、以下の順序を**必ず**守ること。
@@ -10,7 +14,7 @@
 2. **完了報告テキスト（後）**: 本スキルの完了報告フォーマットに従ったテキストを出力する
 3. **中間出力の禁止**: TodoWrite更新と完了報告テキストの間に、他の中間出力（ログ・進捗報告・確認メッセージ等）を挟まない
 
-**適用対象**: issue-req, issue-save-req, issue-create, issue-work, issue-close, issue-update, issue-backlog の全完了報告ステップ
+**適用対象**: issue-req, issue-save-req, issue-create, issue-work, issue-close, issue-update, issue-backlog, issue-backlog-create の全完了報告ステップ
 
 **理由**: 完了報告テキストがユーザーに最後に表示されることで、最終結果の視認性が向上する
 
@@ -76,11 +80,12 @@ Epic Issueを作成した場合は以下の報告を出力する。
 ## issue-work 完了時
 
 ```
-✅ PRを作成しました: {PR_URL}
-  Issue: #{N}（パターン{X}）
+✅ issue-work 完了
+  PR: {PR_URL}
   現在の状態: レビュー待ち
-
-  レビューが通ったら: /issue/issue-close
+  head: {branch_name}
+  base: {base_branch}
+  次のステップ: レビューが通ったら /issue/issue-close
 ```
 
 ## issue-update 完了時
@@ -126,3 +131,28 @@ Epic Issueを作成した場合は以下の報告を出力する。
   {Epic自動クローズの場合: - Epic #{epic_N} を自動クローズ（全子Issue完了）}
   {Epicスキップの場合: - Epic #{epic_N}: N件未完了のためスキップ}
 ```
+
+## issue-backlog 完了時
+
+```
+✅ バックログ抽出が完了しました。
+  対象期間: {period}
+  抽出件数: {N}件
+  分類結果: {category_1}: {N1}件, {category_2}: {N2}件
+  ドラフト: .sisyphus/drafts/{draft_file}
+  次のステップ: /issue/issue-backlog-create
+```
+
+**注意**: issue-backlogはバックログ抽出コマンドであり、品質メトリクス収集・乖離検出レポートの自動生成は行わない。
+
+## issue-backlog-create 完了時
+
+```
+✅ バックログIssueを作成しました。
+  Epic: {epic_URL}
+  子Issue: #{child1}, #{child2}, ...（{count}件）
+  ステータス追跡: ☐ 未着手 {count}件
+  次のステップ: /issue/issue-work {child1} {child2} ...
+```
+
+**注意**: issue-backlog-createはバックログからのIssue作成コマンドであり、品質メトリクス収集・乖離検出レポートの自動生成は行わない。
