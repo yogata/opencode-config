@@ -4,7 +4,7 @@ agent: sisyphus
 load_skills:
   - issue-lifecycle
   - issue-completion-reporting
-  - issue-review-routing
+  - issue-post-review-routing
   - gh-cli-best-practices
   - req-file-manager
   - req-analysis

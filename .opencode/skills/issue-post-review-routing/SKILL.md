@@ -1,9 +1,9 @@
 ---
-name: issue-review-routing
+name: issue-post-review-routing
 description: Provides review rejection handling flows and issue-next inference rules for post-review scenarios. USE FOR: handling review NG results, determining next command after review rejection, classifying rejection types (spec-bug, impl-bug, scope-creep), or resolving Epic-related command inference. DO NOT USE FOR: general command execution, requirement analysis, or implementation planning.
 ---
 
-# Issue Review Routing スキル
+# Issue Post-Review Routing スキル
 
 issue-*系コマンドのレビューNG時の対応フロー・issue-next推論ルールを提供する。
 
