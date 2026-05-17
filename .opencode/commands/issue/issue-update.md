@@ -79,4 +79,5 @@ load_skills:
 - gh CLI出力を読み取る際は `gh-cli-best-practices` の安全な読み取り手順に従うこと（一時ファイル経由でRead tool使用）
  - Pattern分岐の判定基準と固有ルールは `issue-lifecycle` → Pattern Registry を参照
  - `--body` 更新時はIssue作成時と同じテンプレート構造を維持すること。【必須】セクションが欠落しないよう確認すること
- - コメント/レビューNGコメントのテンプレート【必須】セクションが全て含まれていることを確認してから投稿すること
+  - コメント/レビューNGコメントのテンプレート【必須】セクションが全て含まれていることを確認してから投稿すること
+  - CI/CD修正・自律修正ループは issue-update の管轄外とする（issue-work の責務）。issue-update はREQ更新・レビューNG時のコメント追加・Issue本文更新のみを責務とする
