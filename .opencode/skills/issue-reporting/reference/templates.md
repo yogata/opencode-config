@@ -2,6 +2,20 @@
 
 issue-*コマンドで使用するテンプレートの適用タイミングと方法を定義する。
 
+テンプレートの配置先・選定ルール・セクション規約は `issue-template-manager` スキルを参照。
+
+## テンプレート配置先
+
+| テンプレート | 配置先 |
+|---|---|
+| Issue/コメント系（12種） | `.opencode/skills/issue-template-manager/templates/` |
+| `doc_requirement.md` | `.opencode/skills/req-file-manager/templates/` |
+| `doc_adr.md` | `.opencode/skills/adr-file-manager/templates/` |
+| `report_spec_compliance.md` | `.opencode/skills/spec-compliance/templates/` |
+| `pr_desc.md` | `.opencode/commands/issue/templates/` |
+
+## テンプレート適用タイミング
+
 | テンプレート | 使用コマンド | 使用タイミング | 適用方法 |
 |---|---|---|---|
 | `pr_desc.md` | `issue-work` | Step 11（PR作成時） | テンプレートを読み込み、変数を置換してPR本文として生成 |

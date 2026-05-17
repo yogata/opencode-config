@@ -233,7 +233,7 @@ proposed → deprecated
 
 ADRテンプレートは以下のパスで参照可能:
 
-@.opencode/commands/issue/templates/doc_adr.md
+@.opencode/skills/adr-file-manager/templates/doc_adr.md
 
 **テンプレートの構成**:
 - Context（背景・文脈）

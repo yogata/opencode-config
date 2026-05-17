@@ -176,12 +176,12 @@ Issueに対して計画立案から実装・コミットまでを一気通貫で
 
 **べき等性**: PRが既に存在する場合、Steps 8-10をスキップし、Step 11のデプロイ検証（11c）のみ再実行後にStep 12（完了報告）を実行。ただしPRのCIが既に通過済みの場合はデプロイ検証もスキップしてStep 12のみ実行。
 
-**Step 8**: 実装完了後、乖離検出 → `spec-compliance` の検出観点に従ってチェック。品質メトリクス収集も併せて実行（`docs/specs/quality-specs.md` 参照）。報告時は `.opencode/commands/issue/templates/report_spec_compliance.md` テンプレートを使用
+**Step 8**: 実装完了後、乖離検出 → `spec-compliance` の検出観点に従ってチェック。品質メトリクス収集も併せて実行（`docs/specs/quality-specs.md` 参照）。報告時は `.opencode/skills/spec-compliance/templates/report_spec_compliance.md` テンプレートを使用
 - 乖離検出でエラーが発生した場合、検出済みの結果を保持し、ユーザーに再試行またはスキップの選択を提示
 - 品質メトリクス収集結果は乖離検出報告に併記する
 - **テンプレート準拠要件**: テンプレートの `【必須】` セクションが全て報告に含まれること。必須セクションが欠落している場合、生成をやり直すこと。
 
-**Step 9**: 乖離があれば報告 → `spec-compliance` の報告フォーマット + `.opencode/commands/issue/templates/report_spec_compliance.md` テンプレートでユーザーに提示
+**Step 9**: 乖離があれば報告 → `spec-compliance` の報告フォーマット + `.opencode/skills/spec-compliance/templates/report_spec_compliance.md` テンプレートでユーザーに提示
 - 乖離がある場合、ユーザーの指示を待機（自動修正禁止）
 - ユーザーが「継続」を選択した場合のみ次Stepへ進む
 - **テンプレート準拠要件**: テンプレートの `【必須】` セクションが全て報告に含まれること。必須セクションが欠落している場合、生成をやり直すこと。

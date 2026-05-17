@@ -35,7 +35,7 @@ load_skills:
 2. 現在のIssue状態を取得 → `issue-lifecycle` のフェーズ体系で現在フェーズを判定
 3. 更新内容に応じて分岐:
    - **`--body`**: Issue作成時に使用されたテンプレート（`issue_desc_bug.md` / `issue_desc_feature.md` / `issue_desc_epic.md` / `issue_desc_child.md` / `issue_desc_backlog_*.md`）に従って更新。該当テンプレートの【必須】セクションが全て本文に含まれること → `gh issue edit`
-   - **`--comment`**: テンプレート `.opencode/commands/issue/templates/issue_comment_update.md` を Read tool で読み込み → `gh issue comment`
+   - **`--comment`**: テンプレート `.opencode/skills/issue-template-manager/templates/issue_comment_update.md` を Read tool で読み込み → `gh issue comment`
      - **テンプレート準拠要件**: テンプレートの `【必須】` セクションが全てコメント本文に含まれること。必須セクションが欠落している場合、生成をやり直すこと。
    - **`--req`**: REQファイル更新（詳細フロー以下）:
       1. Issue番号から関連REQファイルを特定（Issue本文のREQ番号参照 or `docs/requirements/` から該当ファイル検索）
@@ -51,7 +51,7 @@ load_skills:
          - `impl-bug`（実装バグ）→ レビューNGコメント投稿のみ（REQ変更不要）
          - `scope-creep`（スコープ外逸脱）→ REQ UPDATE（スコープ明確化）+ レビューNGコメント投稿
          - テスト不足・品質基準未達 → レビューNGコメント投稿のみ
-      3. テンプレート `.opencode/commands/issue/templates/issue_comment_review_ng.md` を Read tool で読み込み・適用
+      3. テンプレート `.opencode/skills/issue-template-manager/templates/issue_comment_review_ng.md` を Read tool で読み込み・適用
          **テンプレート準拠要件**: テンプレートの `【必須】` セクションが全てコメント本文に含まれること。必須セクションが欠落している場合、生成をやり直すこと。
       4. spec-compliance結果をテンプレートの「Deviation Check 結果」セクションに展開
       5. NG理由分類のチェックボックスを自動選択
